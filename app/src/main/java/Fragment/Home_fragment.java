@@ -75,6 +75,7 @@ import Model.Store_model;
 import Model.Top_Selling_model;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.CustomSlider;
+import gogrocer.tcc.LoginActivity;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.My_Order_activity;
 import gogrocer.tcc.R;
@@ -189,7 +190,7 @@ private Master_category_adapter master_adapter;
 
         last_order_rv = (RecyclerView) view.findViewById(R.id.last_order_rv);
         last_order_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        Session_management sessionManagement = new Session_management(getActivity());
+        final Session_management sessionManagement = new Session_management(getActivity());
         SharedPreferences editors = getActivity().getSharedPreferences("rating_store",MODE_PRIVATE);
 
         String israted = editors.getString("rating","null");
@@ -205,7 +206,7 @@ private Master_category_adapter master_adapter;
             }else {
                 last_order_rv.setVisibility(View.INVISIBLE);
             }
-            membership(user_id_for_last_order);
+            membership("85");
             rl_address.setVisibility(View.VISIBLE);
             String city= sessionManagement.getUserDetails().get(BaseURL.KEY_SOCITY_NAME);
             String area= sessionManagement.getUserDetails().get(BaseURL.KEY_AREA_NAME);
@@ -237,6 +238,21 @@ private Master_category_adapter master_adapter;
 
 
 
+        membership_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sessionManagement.isLoggedIn()){
+                    Fragment fm = new Membership_fragment();
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                            .addToBackStack(null).commit();
+
+                }else {
+                    Intent inten=new Intent(getActivity(), LoginActivity.class);
+                    startActivity(inten);
+                }
+            }
+        });
 
         view.setFocusableInTouchMode(true);
         view.requestFocus();
@@ -978,14 +994,12 @@ private Master_category_adapter master_adapter;
 
                             membership_tv.setText("Membership Active");
                             Toast.makeText(getActivity(), "yes", Toast.LENGTH_SHORT).show();
+                            membership_tv.setEnabled(false);
 
 
 
                         }else {
                             Toast.makeText(getActivity(), "no", Toast.LENGTH_SHORT).show();
-
-//                            Intent i=new Intent(getActivity(), Membership_fragment.class);
-//                            startActivity(i);
                         }
 
                     }
