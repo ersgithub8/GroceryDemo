@@ -67,6 +67,8 @@ public class BaseURL {
 
     public static String GET_CATEGORY_URL = BASE_URL + "index.php/api/get_categories";
     public static String GET_STARS = BASE_URL + "index.php/api/get_stars";
+    public static String GET_MEMBERSHIP = BASE_URL + "index.php/api/get_memberships";
+
     public static String GET_MASTER_CATEGORY_URL = "http://groomall-fontend.eparking.website/backend/index.php/api/get_master_categories";
     public static String GET_MASTER_SUB_CATEGORY_URL = "http://groomall-fontend.eparking.website/backend/index.php/api/get_subCategories";
 
