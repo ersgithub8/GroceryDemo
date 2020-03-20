@@ -1,5 +1,6 @@
 package Fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.ActivityNotFoundException;
@@ -134,7 +135,7 @@ private Master_category_adapter master_adapter;
 
 
     private ImageView iv_Call, iv_Whatspp, iv_reviews, iv_share_via;
-    private TextView timer,tv_address;
+    private TextView timer,tv_address,membership_tv;
     Button View_all_deals, View_all_TopSell,btn1,btn2,btn3,nextDay_delivery;
 
     private ImageView Top_Selling_Poster, Deal_Of_Day_poster;
@@ -157,6 +158,7 @@ private Master_category_adapter master_adapter;
         setHasOptionsMenu(true);
         ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.app_name));
         ((MainActivity) getActivity()).updateHeader();
+        membership_tv=view.findViewById(R.id.membership_tv);
         rl_address=view.findViewById(R.id.rl_address);
         tv_address=view.findViewById(R.id.address_tv_home1);
         btn1=(Button)view.findViewById(R.id.grocery_btn);
@@ -218,15 +220,6 @@ private Master_category_adapter master_adapter;
 
 
 
-//        last_order_rv.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent i = new Intent(getActivity(), My_Order_activity.class);
-//                startActivity(i);
-//                ((MainActivity) getActivity()).overridePendingTransition(0, 0);
-//
-//            }
-//        });
         last_order_rv.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rv_items, new RecyclerTouchListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -243,66 +236,7 @@ private Master_category_adapter master_adapter;
         }));
 
 
-        nextDay_delivery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Bundle args = new Bundle();
-//                Fragment fm = new Product_fragment();
-//                args.putString("Store_id","233");
-//                //args.putString("type","Grocery");
-//                fm.setArguments(args);
-//                FragmentManager fragmentManager = getFragmentManager();
-//                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-//                        .addToBackStack(null).commit();
-                fm = new StoreFragment();
-                FragmentManager fragmentManager = getFragmentManager();
-                Bundle args = new Bundle();
-                args.putString("1","232");
-                fm.setArguments(args);
-                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                        .addToBackStack(null).commit();
-            }
-        });
 
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                fm = new StoreFragment();
-                FragmentManager fragmentManager = getFragmentManager();
-                Bundle args = new Bundle();
-                args.putString("1", "Grocery");
-                fm.setArguments(args);
-                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                        .addToBackStack(null).commit();
-            }
-        });
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fm = new StoreFragment();
-                Bundle args = new Bundle();
-                args.putString("1", "Vegetable");
-                FragmentManager fragmentManager = getFragmentManager();
-                fm.setArguments(args);
-                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                        .addToBackStack(null).commit();
-
-            }
-        });
-        btn3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fm = new StoreFragment();
-                Bundle args = new Bundle();
-                args.putString("1", "Fruit");
-                fm.setArguments(args);
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                        .addToBackStack(null).commit();
-
-            }
-        });
 
         view.setFocusableInTouchMode(true);
         view.requestFocus();
@@ -322,6 +256,7 @@ private Master_category_adapter master_adapter;
             makeGetBannerSliderRequest();
             makeGetCategoryRequest();
 //            makeGetstoreRequest();
+
             makeGetFeaturedSlider();
             make_menu_items();
             make_deal_od_the_day();
@@ -423,45 +358,6 @@ private Master_category_adapter master_adapter;
         rv_headre_icons.setDrawingCacheEnabled(true);
         rv_headre_icons.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_LOW);
 
-
-//        //Call And Whatsapp
-//        iv_Call = (ImageView) view.findViewById(R.id.iv_call);
-//        iv_Whatspp = (ImageView) view.findViewById(R.id.iv_whatsapp);
-//        iv_reviews = (ImageView) view.findViewById(R.id.reviews);
-//        iv_share_via = (ImageView) view.findViewById(R.id.share_via);
-//
-//        iv_Call.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                if(isPermissionGranted()){
-////                    call_action();
-////                }
-//            }
-//        });
-//        iv_Whatspp.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String smsNumber = "9889887711";
-//                Intent sendIntent = new Intent("android.intent.action.MAIN");
-//                sendIntent.setComponent(new ComponentName("com.whatsapp","com.whatsapp.Conversation"));
-//                sendIntent.putExtra("jid",     PhoneNumberUtils.stripSeparators(smsNumber)+"@s.whatsapp.net");//phone number without "+" prefix
-//                startActivity(sendIntent);
-//
-//            }
-//        });
-//        iv_reviews.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                reviewOnApp();
-//            }
-//        });
-//        iv_share_via.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                shareApp();
-//
-//            }
-//        });
 
 
         //Recycler View Shop By Catogary
@@ -870,20 +766,7 @@ private Master_category_adapter master_adapter;
                                 textSliderView.getBundle().putString("extra", name.get("sub_cat"));
                                 featuredslider.addSlider(textSliderView);
                                 final String sub_cat = (String) textSliderView.getBundle().get("extra");
-//                                textSliderView.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
-//                                    @Override
-//                                    public void onSliderClick(BaseSliderView slider) {
-//                                        //   Toast.makeText(getActivity(), "" + sub_cat, Toast.LENGTH_SHORT).show();
-//                                        Bundle args = new Bundle();
-//                                        Fragment fm = new Product_fragment();
-//                                        args.putString("id", sub_cat);
-//                                        fm.setArguments(args);
-//                                        FragmentManager fragmentManager = getFragmentManager();
-//                                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-//                                                .addToBackStack(null).commit();
-//                                    }
-//                                });
-
+//
                             }
 
                         } catch (JSONException e) {
@@ -955,53 +838,7 @@ private Master_category_adapter master_adapter;
 
     }
 
-//    private void makeGetstoreRequest() {
-//        String tag_json_obj = "json_store_req";
-//        isSubcat = false;
-//        Map<String, String> params = new HashMap<String, String>();
-//        params.put("parent", "");
-//        isSubcat = true;
-//       /* if (parent_id != null && parent_id != "") {
-//        }*/
-//
-//        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
-//                BaseURL.GET_Store_URL, params, new Response.Listener<JSONObject>() {
-//
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                Log.d(TAG, response.toString());
-//                try {
-//                    if (response != null && response.length() > 0) {
-//                        Boolean status = response.getBoolean("responce");
-//                        if (status) {
-//                            Gson gson = new Gson();
-//                            Type listType = new TypeToken<List<Category_model>>() {
-//                            }.getType();
-//                            store_modelList = gson.fromJson(response.getString("data"), listType);
-//                            stores_adapter = new Stores_adapter(store_modelList);
-//                            rv_store.setAdapter(stores_adapter);
-//                            stores_adapter.notifyDataSetChanged();
-//                        }
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                VolleyLog.d(TAG, "Error: " + error.getMessage());
-//                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-//                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-//
-//        // Adding request to request queue
-//        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-//
-//    }
+
 
 
     private void make_deal_od_the_day() {
@@ -1127,17 +964,28 @@ private Master_category_adapter master_adapter;
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.CHECK_MEMBERSHIP, params, new Response.Listener<JSONObject>() {
 
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onResponse(JSONObject response) {
                 Log.d(TAG, response.toString());
 
                 try {
                     if (response != null && response.length() > 0) {
-                        Boolean status = response.getBoolean("responce");
+                        Boolean status = response.getBoolean("response");
                         if (status) {
+
+                            membership_tv.setBackgroundResource(R.color.yelow);
+
+                            membership_tv.setText("Membership Active");
+                            Toast.makeText(getActivity(), "yes", Toast.LENGTH_SHORT).show();
+
+
+
                         }else {
-                            Intent i=new Intent(getActivity(), Membership_fragment.class);
-                            startActivity(i);
+                            Toast.makeText(getActivity(), "no", Toast.LENGTH_SHORT).show();
+
+//                            Intent i=new Intent(getActivity(), Membership_fragment.class);
+//                            startActivity(i);
                         }
 
                     }
