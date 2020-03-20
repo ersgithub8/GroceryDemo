@@ -54,7 +54,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import Adapter.Area_Adapter;
 import Adapter.Bestselling;
 import Adapter.Deal_OfDay_Adapter;
 import Adapter.Home_Icon_Adapter;
@@ -79,7 +78,6 @@ import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.My_Order_activity;
 import gogrocer.tcc.R;
 import util.ConnectivityReceiver;
-import util.CustomVolleyJsonArrayRequest;
 import util.CustomVolleyJsonRequest;
 import util.RecyclerTouchListener;
 import util.Session_management;
@@ -197,12 +195,7 @@ private Master_category_adapter master_adapter;
 
 
         user_id_for_last_order=sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
-//        if(user_id_for_last_order!="0"){
 //
-//
-//        }else{
-//            Toast.makeText(getActivity(), "no last order yet", Toast.LENGTH_SHORT).show();
-//        }
         if(sessionManagement.isLoggedIn()){
             if (israted.equalsIgnoreCase("null")){
                 makeGetOrderRequest(user_id_for_last_order);
@@ -210,6 +203,7 @@ private Master_category_adapter master_adapter;
             }else {
                 last_order_rv.setVisibility(View.INVISIBLE);
             }
+            membership(user_id_for_last_order);
             rl_address.setVisibility(View.VISIBLE);
             String city= sessionManagement.getUserDetails().get(BaseURL.KEY_SOCITY_NAME);
             String area= sessionManagement.getUserDetails().get(BaseURL.KEY_AREA_NAME);
@@ -378,11 +372,7 @@ private Master_category_adapter master_adapter;
         featuredslider = (SliderLayout) view.findViewById(R.id.featured_img_slider);
         //shop by store
 //
-//        rv_store=(RecyclerView) view.findViewById(R.id.rv_store);
-//        GridLayoutManager gridLayoutManage = new GridLayoutManager(getActivity(), 3);
-//        rv_store.setLayoutManager(gridLayoutManage);
-//        rv_store.setItemAnimator(new DefaultItemAnimator());
-//        rv_store.setNestedScrollingEnabled(false);
+
 
 
         //Catogary Icons
@@ -394,11 +384,7 @@ private Master_category_adapter master_adapter;
 
         //DealOf the Day
         rv_deal_of_day = (RecyclerView) view.findViewById(R.id.rv_deal);
-//        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getActivity(), 2);
-//        rv_deal_of_day.setLayoutManager(gridLayoutManager1);
-//        rv_deal_of_day.setItemAnimator(new DefaultItemAnimator());
-//        rv_deal_of_day.setNestedScrollingEnabled(false);
-//        rv_deal_of_day.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(1), true));
+
         LinearLayoutManager layoutManager3 = new LinearLayoutManager(getActivity());
         layoutManager3.setOrientation(LinearLayoutManager.HORIZONTAL);
         rv_deal_of_day.setLayoutManager(layoutManager3);
@@ -406,11 +392,7 @@ private Master_category_adapter master_adapter;
 
         //Top Selling Products
         rv_top_selling = (RecyclerView) view.findViewById(R.id.top_selling_recycler);
-//        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getActivity(), 3);
-//        rv_top_selling.setLayoutManager(gridLayoutManager2);
-//        rv_top_selling.setItemAnimator(new DefaultItemAnimator());
-//        rv_top_selling.setNestedScrollingEnabled(false);
-//        rv_top_selling.addItemDecoration(new GridSpacingItemDecoration(3, dpToPx(0), true));
+
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(getActivity());
         layoutManager2.setOrientation(LinearLayoutManager.HORIZONTAL);
         rv_top_selling.setLayoutManager(layoutManager2);
@@ -578,10 +560,7 @@ private Master_category_adapter master_adapter;
             @Override
             public void onItemClick(View view, int position) {
                 getid = top_selling_models.get(position).getProduct_id();
-//                String img=product_modelss.get(position).getStore_image();
-//                String storename =product_modelss.get(position).getStore_name();
-
-//                Toast.makeText(getActivity(),storename, Toast.LENGTH_SHORT).show();
+//
 
                 String StoreidForTopSelling = top_selling_models.get(position).getStoreid();
                 Bundle args = new Bundle();
@@ -589,9 +568,6 @@ private Master_category_adapter master_adapter;
                 args.putString("Store_id", StoreidForTopSelling);
 
 
-//                args.putString("Store_name",storename);
-//                args.putString("store_img",img);
-                // args.putString("store_type",getStore_type);
                 fm.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
@@ -599,14 +575,6 @@ private Master_category_adapter master_adapter;
 
 
 
-
-//                Bundle args = new Bundle();
-//                Fragment fm = new StoreFragment();
-//                args.putString("1", "All");
-//               fm.setArguments(args);
-//                FragmentManager fragmentManager = getFragmentManager();
-//                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-//                        .addToBackStack(null).commit();
 
             }
 
@@ -639,7 +607,7 @@ private Master_category_adapter master_adapter;
 
 
                 String StoreidForrecomendedSelling = product_models.get(position).getStoreid();
-              //  Toast.makeText(getActivity(), StoreidForrecomendedSelling, Toast.LENGTH_SHORT).show();
+
 
                 Bundle args = new Bundle();
                 Fragment fm = new Product_fragment();
@@ -647,22 +615,13 @@ private Master_category_adapter master_adapter;
 
                 args.putString("Store_name",storename);
                 args.putString("store_img",storeimg);
-                // args.putString("store_type",getStore_type);
-                fm.setArguments(args);
+                 fm.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
                         .addToBackStack(null).commit();
 
 
 
-
-//                Bundle args = new Bundle();
-//                Fragment fm = new StoreFragment();
-//                args.putString("1", "All");
-//               fm.setArguments(args);
-//                FragmentManager fragmentManager = getFragmentManager();
-//                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-//                        .addToBackStack(null).commit();
 
             }
 
@@ -693,18 +652,6 @@ private Master_category_adapter master_adapter;
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
                         .addToBackStack(null).commit();
-
-
-
-
-//                Bundle args = new Bundle();
-//                Fragment fm = new StoreFragment();
-//                args.putString("1", "All");
-//               fm.setArguments(args);
-//                FragmentManager fragmentManager = getFragmentManager();
-//                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-//                        .addToBackStack(null).commit();
-
             }
 
             @Override
@@ -719,55 +666,13 @@ private Master_category_adapter master_adapter;
 
 
 
-//    private void makeGetOrderRequest(String userid) {
-//        String tag_json_obj = "json_socity_req";
-//
-//        Map<String, String> params = new HashMap<String, String>();
-//        params.put("user_id", userid);
-//       // Toast.makeText(getActivity(), userid, Toast.LENGTH_SHORT).show();
-//
-//        CustomVolleyJsonArrayRequest jsonObjReq = new CustomVolleyJsonArrayRequest(Request.Method.POST,
-//                BaseURL.GET_ORDER_URL, params, new Response.Listener<JSONArray>() {
-//
-//            @Override
-//            public void onResponse(JSONArray response) {
-//                Log.d(TAG, response.toString());
-//
-//
-//                Gson gson = new Gson();
-//                Type listType = new TypeToken<List<My_Pending_order_model>>() {
-//                }.getType();
-//
-//                my_order_modelList = gson.fromJson(response.toString(), listType);
-//                my_last_order_adapter my_last_order_adapter = new my_last_order_adapter(my_order_modelList);
-//                last_order_rv.setAdapter(my_last_order_adapter);
-//                my_last_order_adapter.notifyDataSetChanged();
-//
-//                if (my_order_modelList.isEmpty()) {
-//                    Toast.makeText(getActivity(), getResources().getString(R.string.no_rcord_found), Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                VolleyLog.d(TAG, "Error: " + error.getMessage());
-//                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-//                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-//
-//        // Adding request to request queue
-//        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-//
-//    }
+
 
     private void makeGetOrderRequest(String userid) {
         String tag_json_obj = "json_socity_req";
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("user_id", userid);
-        // Toast.makeText(getActivity(), Store_id, Toast.LENGTH_SHORT).show();
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.GET_ORDER_URL, params, new Response.Listener<JSONObject>() {
@@ -1208,6 +1113,51 @@ private Master_category_adapter master_adapter;
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+    private void membership(String userid) {
+
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("user_id",userid);
+
+       /* if (parent_id != null && parent_id != "") {
+        }*/
+
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.CHECK_MEMBERSHIP, params, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, response.toString());
+
+                try {
+                    if (response != null && response.length() > 0) {
+                        Boolean status = response.getBoolean("responce");
+                        if (status) {
+                        }else {
+                            Intent i=new Intent(getActivity(), Membership_fragment.class);
+                            startActivity(i);
+                        }
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq);
 
     }
 

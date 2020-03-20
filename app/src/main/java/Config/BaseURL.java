@@ -91,6 +91,7 @@ public class BaseURL {
     public static String GET_BEST_SELLING_PRODUCTS = BASE_URL + "index.php/api/get_random_products";
     public static String GET_ALL_TOP_SELLING_PRODUCTS = BASE_URL + "index.php/api/get_all_top_selling_product";
 
+    public static String CHECK_MEMBERSHIP = BASE_URL + "index.php/api/check_memberships";
 
     public static String GET_PRODUCT_URL = BASE_URL + "index.php/api/get_products";
     public static String GET_NEW_PRODUCT_URL = BASE_URL + "index.php/api/get_stores_products";

@@ -1,30 +1,26 @@
 <resources>
 
-    <string-array name="text">
-        <item>Like the video</item>
-        <item>Subscribe to the channel</item>
-    </string-array>
-
     <string name="app_name" translatable="false">GroMall</string>
+
     <string name="name" translatable="false">SameCiti - Customer</string>
     <string name="currency" translatable="false">\u20B9</string>
     <string name="title_activity_main" translatable="false">MainActivity</string>
     <string name="txtCredits" translatable="false"><a href="http://www.google.com">Google</a></string>
-
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
-    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
 
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
     <string name="action_settings" translatable="false">Settings</string>
 
     <string name="nav_terms" translatable="false">Terms &amp; Policy</string>
+
     <string name="offer" translatable="false">Offer</string>
     <string name="start_time" translatable="false">Start Time :</string>
     <string name="end_time" translatable="false">End Time :</string>
     <string name="wallet" translatable="false">Wallet Used</string>
     <string name="coupon_used" translatable="false">Coupon Used</string>
     <string name="apply" translatable="false">Apply</string>
-    <!-- string.xml -->
     <string name="nav_home" translatable="false">Shop Now</string>
+    <!-- string.xml -->
     <string name="nav_chat" translatable="false">Chat With Us</string>
     <string name="nav_user" translatable="false">User</string>
     <string name="nav_order" translatable="false">My Orders</string>
@@ -44,16 +40,16 @@
     <string name="rech_wallet" translatable="false">Recharge Wallet</string>
     <string name="continue_bt" translatable="false">Continue</string>
     <string name="wall_am" translatable="false">My Wallet Amount</string>
-    <!-- activity_login.xml -->
     <string name="et_login_phone_hint" translatable="false">Mobile Number</string>
+    <!-- activity_login.xml -->
     <string name="tv_login_email" translatable="false">Your Email</string>
     <string name="tv_login_password" translatable="false">Password</string>
     <string name="btn_login" translatable="false">Login</string>
     <string name="btn_send" translatable="false">Send</string>
     <string name="tv_login_note" translatable="false">Before continue with application you must verify your mobile number. Our system will sent you OTP code on registered mobile number</string>
+    <string name="tv_reg" translatable="false">Register</string>
 
     <!-- activity_register.xml -->
-    <string name="tv_reg" translatable="false">Register</string>
     <string name="tv_reg_name_hint">Name</string>
     <string name="tv_reg_pincode">Pincode/Area Code/Zip</string>
     <string name="tv_reg_socity">Society/Flat</string>
@@ -74,8 +70,8 @@
     <string name="confirm_order" translatable="false">Confirm</string>
     <string name="pickup" translatable="false">Cash On Delivery</string>
     <string name="cash" translatable="false">Cash On Delivery</string>
-    <!-- fragment_cart.xml -->
     <string name="tv_cart_title">Cart</string>
+    <!-- fragment_cart.xml -->
     <string name="debit" translatable="false">Debit / Credit Card</string>
     <string name="net" translatable="false">Net Banking</string>
     <string name="membership" translatable="false"><font color="#ffee05">Introducing</font></string>
@@ -89,8 +85,8 @@
     <string name="coupon" translatable="false">Coupon</string>
     <string name="sure_del" translatable="false">Are you sure!
     you want to delete all cart product</string>
-    <!-- fragment_delivery_time.xml -->
     <string name="tv_del_title">Delivery Date/Time</string>
+    <!-- fragment_delivery_time.xml -->
     <string name="tv_del_address">Delivery Address:</string>
     <string name="et_del_address_hint">Enter Delivery address..</string>
     <string name="tv_del_continue">Continue</string>
@@ -99,13 +95,13 @@
     <string name="tv_del_date_time">Delivery Date:</string>
     <string name="tv_total_item_amount">Total Items And Amount:</string>
     <string name="tv_total_total">Total Amount </string>
+    <string name="tv_home_cat">Products</string>
 
     <!-- fragment_home.xml -->
-    <string name="tv_home_cat">Products</string>
     <string name="tv_home_view">View all ></string>
     <string name="checkout" translatable="false">Complete</string>
-    <!-- fragment_Wallet.xml -->
     <string name="tv_app_name">Wallet</string>
+    <!-- fragment_Wallet.xml -->
     <string name="tv_product_name" translatable="false">Products</string>
     <string name="selling_product" translatable="false">Top Selling Products</string>
     <string name="deals" translatable="false">Deals of the Day</string>
@@ -115,43 +111,43 @@
     <string name="shop_now" translatable="false">Shop Now</string>
     <string name="feature" translatable="false">Featured Brand</string>
     <string name="condition" translatable="false">Condition</string>
-    <!-- fragment_Reward.xml -->
     <string name="tv_toolbar_name" translatable="false">Rewards</string>
-    <!-- row_product_rv.xml -->
+    <!-- fragment_Reward.xml -->
     <string name="tv_pro_add">Add</string>
+    <!-- row_product_rv.xml -->
     <string name="tv_pro_update">Update</string>
     <string name="tv_pro_price">Price per\u0020</string>
-
     <string name="tv_toolbar_price" translatable="false">Price :</string>
+
     <string name="tv_toolbar_redeem" translatable="false">Redeem</string>
     <string name="tv_out" translatable="false">Out of Stock</string>
     <string name="tv_rech" translatable="false">Enter Wallet Amount</string>
     <string name="tv_rech_wall" translatable="false">Recharge</string>
     <string name="tv_mywall" translatable="false">Recharge Wallet</string>
-
     <string name="tv_pro_rs">\u0020Rs.\u0020</string>
-    <string name="tv_pro_total">Total: </string>
 
-    <!-- fragment_confirm_order.xml -->
+    <string name="tv_pro_total">Total: </string>
     <string name="tv_conf_order_title">Payment Details</string>
 
-    <!-- fragment_my_order_detail.xml -->
+    <!-- fragment_confirm_order.xml -->
     <string name="tv_order_cancle">Cancel Order</string>
+
+    <!-- fragment_my_order_detail.xml -->
     <string name="tv_order_summery">Summary</string>
     <string name="tv_order_total">Total: Rs.</string>
     <string name="tv_order_qty">Qty</string>
     <string name="tv_order_rs">Rs.</string>
-    <!-- fragment_order_thanks.xml -->
     <string name="tv_thanks_title" translatable="false">Thank you for your order.</string>
+    <!-- fragment_order_thanks.xml -->
     <string name="tv_thanks_home" translatable="false">Continue home</string>
     <string name="tv_thanks_order" translatable="false">Track my order</string>
     <string name="thanks" translatable="false">Thanks Order</string>
     <string name="paytm" translatable="false">Paytm</string>
-    <!-- Forgot password -->
     <string name="forgot">Forgot Password ?</string>
+    <!-- Forgot password -->
+    <string name="my_order" translatable="false">My Order</string>
 
     <!-- Code message and concat  string -->
-    <string name="my_order" translatable="false">My Order</string>
     <string name="edit_profile" translatable="false">Edit Profile</string>
     <string name="delivery" translatable="false">Delivery</string>
     <string name="delivery_date" translatable="false">"Delivery Date: </string>
@@ -202,8 +198,8 @@
     <string name="cancle" translatable="false">Cancel</string>
     <string name="date">Date:\u0020</string>
     <string name="time">Time:\u0020</string>
-    <!--Method String-->
     <string name="method_one">PickUP</string>
+    <!--Method String-->
     <string name="method_two">COD</string>
     <string name="method_three">Cards</string>
     <string name="method_four">NetBanking</string>
@@ -225,27 +221,31 @@
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
     <string name="description">Description:</string>
+    <string name="tv_deli_socity">Society:</string>
 
     <!-- row_delivery_time.xml -->
-    <string name="tv_deli_socity">Society:</string>
     <string name="tv_deli_mobile">Mobile No :</string>
     <string name="tv_deli_pin">Pincode:</string>
+    <string name="tv_deli_pay_ontime">On time :\u0020</string>
 
     <!-- delivery_payment_detail_fragment.java -->
-    <string name="tv_deli_pay_ontime">On time :\u0020</string>
     <string name="tv_deli_pay_address">Address:\u0020</string>
+    <string name="reciver_name">Receiver Name:\u0020</string>
 
     <!-- delivery_get_address_adapter.java -->
-    <string name="reciver_name">Receiver Name:\u0020</string>
     <string name="reciver_mobile">Receiver Mobile No.:\u0020</string>
     <string name="pincode">Pincode:\u0020</string>
     <string name="house_no">House No.:\u0020</string>
     <string name="socity">Society:\u0020</string>
-
     <string name="status_stop">Powered By <font color="#FF4500">GroMall</font></string>
+
     <string name="agree_With" translatable="false">I agree with <font color="#FF4500">Terms&amp;Conditions</font></string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">Map</string>
+    <string-array name="text">
+        <item>Like the video</item>
+        <item>Subscribe to the channel</item>
+    </string-array>
 </resources>
