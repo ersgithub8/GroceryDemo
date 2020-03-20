@@ -1,0 +1,77 @@
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:id="@+id/card_view_top"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+    card_view:cardCornerRadius="12dp"
+    card_view:cardPreventCornerOverlap="false"
+    android:elevation="2dp"
+    card_view:cardUseCompatPadding="true">
+
+
+    <LinearLayout
+        android:layout_width="110dp"
+
+        android:layout_height="130dp">
+
+        <RelativeLayout
+            android:paddingTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingRight="3dp"
+            android:paddingLeft="3dp"
+            android:background="@drawable/topsellback"
+            android:layout_gravity="top"
+
+        >
+
+
+            <ImageView
+                android:padding="10dp"
+
+                android:id="@+id/iv_icon"
+                android:layout_width="match_parent"
+                android:layout_centerHorizontal="true"
+                android:scaleType="fitXY"
+                android:layout_height="75dp"
+                android:src="@mipmap/ic_launcher" />
+
+
+            <TextView
+                android:id="@+id/product_prize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_below="@+id/iv_icon"
+
+                android:layout_centerInParent="true"
+                android:layout_marginTop="-3dp"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                android:text="Product Price"
+                android:textColor="@color/color_1"
+                android:textSize="@dimen/text_size_large"
+                android:textStyle="bold" />
+
+            <Fonts.LatoBLack
+                android:id="@+id/product_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_below="@+id/product_prize"
+                android:gravity="center"
+                android:text="Product Name"
+
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="@dimen/space_3"
+                android:textColor="#020202"
+                android:textSize="13sp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>
+
+

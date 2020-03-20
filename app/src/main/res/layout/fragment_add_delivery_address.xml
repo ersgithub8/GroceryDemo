@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/space_10">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Fonts.LatoBLack
+                    android:id="@+id/tv_add_adres_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_reg_name_hint"
+                    android:textColor="#000"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/iconnemail"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/iconn" />
+
+            </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/et_add_adres_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_4"
+                android:layout_marginBottom="@dimen/space_5"
+                android:background="@drawable/xml_textbox_bg"
+                android:ems="10"
+                android:inputType="text"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Fonts.LatoBLack
+                    android:id="@+id/tv_add_adres_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_deli_mobile"
+                    android:textColor="#000"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/iconm"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/iconn" />
+
+            </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/et_add_adres_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_4"
+                android:layout_marginBottom="@dimen/space_5"
+                android:background="@drawable/xml_textbox_bg"
+                android:ems="10"
+                android:inputType="number"
+                android:maxLength="15"
+                android:textSize="@dimen/space_14" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Fonts.LatoBLack
+                    android:id="@+id/tv_add_adres_pin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_reg_pincode"
+                    android:textColor="#000"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/iconpass"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/iconn" />
+
+            </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/et_add_adres_pin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_4"
+                android:layout_marginBottom="@dimen/space_5"
+                android:background="@drawable/xml_textbox_bg"
+                android:ems="10"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:textSize="@dimen/space_14" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Fonts.LatoBLack
+                    android:id="@+id/tv_add_adres_socity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="City"
+                    android:textColor="#000"
+                    android:textSize="14sp" />
+
+                <ImageView
+
+                    android:layout_width="16dp"
+                    android:layout_height="3dp"
+                    android:src="@drawable/iconn" />
+
+            </LinearLayout>
+
+
+            <Fonts.LatoBLack
+                android:id="@+id/btn_add_adres_socity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_4"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/xml_textbox_bg"
+                android:drawableEnd="@drawable/arrow_right"
+                android:drawableRight="@drawable/arrow_right"
+                android:gravity="start|center_vertical"
+                android:text="Choose City"
+                android:textColor="#000"
+                android:textSize="@dimen/space_14" />
+            <Fonts.LatoBLack
+                android:id="@+id/btn_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_4"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/xml_textbox_bg"
+                android:drawableEnd="@drawable/arrow_right"
+                android:drawableRight="@drawable/arrow_right"
+                android:gravity="start|center_vertical"
+                android:text="Choose Area"
+                android:textColor="#000"
+                android:textSize="@dimen/space_14" />
+            <Fonts.LatoBLack
+                android:id="@+id/btn_apartment"
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_4"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/xml_textbox_bg"
+                android:drawableEnd="@drawable/arrow_right"
+                android:drawableRight="@drawable/arrow_right"
+                android:gravity="start|center_vertical"
+                android:text="Choose Apartment"
+                android:textColor="#000"
+                android:textSize="@dimen/space_14" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <Fonts.LatoBLack
+                android:id="@+id/tv_Address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Flat no. and Plot no ."
+                android:textColor="#000"
+                android:textSize="14sp" />
+                <ImageView
+
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/iconn" />
+
+            </LinearLayout>
+            <EditText
+                android:id="@+id/et_Address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_4"
+                android:layout_marginBottom="@dimen/space_5"
+                android:background="@drawable/xml_textbox_bg"
+                android:ems="10"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:textSize="@dimen/space_14" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"><Fonts.LatoBLack
+                android:id="@+id/tv_Address2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Floor no."
+                android:textColor="#000"
+                android:textSize="14sp" />
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/iconn" />
+            </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/et_Address2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_4"
+                android:layout_marginBottom="@dimen/space_5"
+                android:background="@drawable/xml_textbox_bg"
+                android:ems="10"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:textSize="@dimen/space_14" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"><Fonts.LatoBLack
+                android:id="@+id/tv_Address23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Building Name &amp; Colony Name"
+                android:textColor="#000"
+                android:textSize="14sp" />
+                <ImageView
+                    android:id="@+id/area"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/iconn" /></LinearLayout>
+
+            <EditText
+                android:id="@+id/et_Address3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_4"
+                android:layout_marginBottom="@dimen/space_5"
+                android:background="@drawable/xml_textbox_bg"
+                android:ems="10"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:textSize="@dimen/space_14" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Fonts.LatoBLack
+                    android:id="@+id/tv_add_adres_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add Pick Up Location"
+                    android:textColor="#000"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/aresa"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/iconn" />
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/et_add_adres_home"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginTop="@dimen/space_4"
+                android:layout_marginBottom="@dimen/space_5"
+                android:background="@drawable/location_red_icon"
+                android:gravity="top|left"
+                android:inputType="text"
+                android:text="  Click"
+                android:lines="8"
+                android:maxLines="10"
+                android:textSelectHandleLeft="@drawable/location_picked"/>
+
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/giff"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_height="150dp"
+                android:src="@drawable/location_picked"
+                android:scaleType="fitXY"
+                />
+
+            <RelativeLayout
+                android:id="@+id/btn_add_adres_edit"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="12dp"
+                android:background="@drawable/bg_rounded_button"
+                android:padding="12dp">
+
+                <Fonts.LatoBLack
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/add_del"
+                    android:textColor="#fff"
+                    android:textSize="@dimen/text_size_small" />
+
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

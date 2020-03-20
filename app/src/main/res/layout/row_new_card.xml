@@ -1,0 +1,88 @@
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view_top"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+    card_view:cardCornerRadius="10dp"
+    card_view:cardPreventCornerOverlap="false"
+    android:layout_margin="3dp"
+
+
+    card_view:cardUseCompatPadding="true">
+
+
+    <LinearLayout
+        android:layout_width="110dp"
+
+        android:padding="1dp"
+        android:background="@drawable/shadow"
+        android:layout_height="135dp">
+
+        <RelativeLayout
+            android:paddingTop="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingRight="3dp"
+
+            android:paddingLeft="3dp"
+
+            android:layout_gravity="top"
+
+            >
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+
+                android:id="@+id/iv_icon"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:padding="3dp"
+
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/product_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_below="@id/iv_icon"
+                android:text="Product Name"
+
+                android:fontFamily="@font/r8"
+                android:layout_marginTop="@dimen/space_3"
+                android:gravity="center_horizontal"
+                android:layout_centerInParent="true"
+                android:textColor="#000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/product_prize"
+                android:layout_width="41dp"
+                android:layout_height="31dp"
+                android:visibility="gone"
+                android:layout_below="@id/iv_icon"
+
+
+
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="-3dp"
+                android:layout_marginRight="5dp"
+                android:layout_toRightOf="@id/product_name"
+                android:gravity="center"
+                android:text="Product Price"
+                android:textColor="#fff"
+                android:textSize="15sp"
+                />
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>
+
+

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="gogrocer.tcc.RatingActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/space_20"
+        android:paddingRight="@dimen/space_20"
+
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/green"
+            android:text="Review to Store:"
+            android:fontFamily="@font/gotham"
+            android:layout_marginTop="20dp"
+            android:textSize="@dimen/space_18"
+
+            android:layout_marginBottom="@dimen/space_20"/>
+
+        <RatingBar
+            android:id="@+id/ratingbarstore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:numStars="5"
+
+            android:stepSize="1"
+            android:theme="@style/RatingBar" />
+
+        <TextView
+            android:id="@+id/rattv_store"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/space_15"
+            android:layout_gravity="center_horizontal"
+
+            android:layout_marginTop="@dimen/space_12"
+            android:textColor="@color/green"/>
+
+        <EditText
+            android:id="@+id/ratdescription_store"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:padding="@dimen/space_5"
+            android:gravity="top"
+            android:hint="Describe your experience(optional)"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/etbg"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/space_20"
+        android:layout_marginBottom="60dp"
+        android:paddingRight="@dimen/space_20"
+
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/green"
+            android:text="Review to Delivery Boy:"
+            android:textSize="18dp"
+            android:fontFamily="@font/gotham"
+
+
+            android:layout_marginBottom="@dimen/space_20"/>
+        <RatingBar
+            android:id="@+id/ratingbar_db"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:theme="@style/RatingBar"
+
+            android:layout_gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:numStars="5"
+            android:stepSize="1"/>
+
+        <TextView
+            android:id="@+id/rattv_db"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/space_15"
+            android:layout_gravity="center_horizontal"
+
+            android:layout_marginTop="@dimen/space_12"
+            android:textColor="@color/green"/>
+
+        <EditText
+            android:id="@+id/ratdescription_db"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:padding="@dimen/space_5"
+            android:gravity="top"
+            android:hint="Describe your experience(optional)"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/etbg"/>
+
+    </LinearLayout>
+    </LinearLayout>
+    </ScrollView>
+    <Button
+        android:id="@+id/subrat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/green"
+        android:text="Submit"
+        android:fontFamily="@font/gotham"
+        android:layout_alignParentBottom="true"
+        android:textColor="#ffffff"
+        android:layout_gravity="center_horizontal"
+        />
+</RelativeLayout>
