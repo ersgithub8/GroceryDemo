@@ -1,6 +1,7 @@
 package Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import Model.Area;
 import Model.get_membership_model;
+import gogrocer.tcc.Paytm;
 import gogrocer.tcc.R;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -43,7 +45,7 @@ public class Get_membership_adapter extends RecyclerView.Adapter<Get_membership_
 
     public Get_membership_adapter(List<get_membership_model> modelList) {
         this.modelList = modelList;
-        this.mFilteredList = modelList;
+
     }
 
     @Override
@@ -61,18 +63,23 @@ public class Get_membership_adapter extends RecyclerView.Adapter<Get_membership_
         get_membership_model mList = modelList.get(position);
         holder.name.setText(mList.getMembership());
         holder.typpe.setText(mList.getType());
-        holder.ammount.setText(mList.getAmount());
+        holder.ammount.setText(mList.getAmount()+context.getResources().getString(R.string.currency));
         holder.discount.setText(mList.getDiscount()+"% OFF");
         preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
 
+        holder.Buy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(context, Paytm.class);
+                context.startActivity(i);
+            }
+        });
+
     }
-
-
-
 
     @Override
     public int getItemCount() {
-        return mFilteredList.size();
+        return modelList.size();
     }
 
 }

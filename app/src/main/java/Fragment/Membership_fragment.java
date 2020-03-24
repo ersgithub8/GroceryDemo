@@ -53,7 +53,8 @@ public class Membership_fragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         rv_items.setLayoutManager(gridLayoutManager);
         rv_items.setItemAnimator(new DefaultItemAnimator());
-        rv_items.setNestedScrollingEnabled(true);
+        makeGetCategoryRequest();
+
 
         return view;
     }
@@ -73,7 +74,7 @@ public class Membership_fragment extends Fragment {
             public void onResponse(JSONObject response) {
 
                 try {
-                    if (response != null && response.length() > 0) {
+
                         Boolean status = response.getBoolean("response");
                         if (status) {
 
@@ -84,8 +85,10 @@ public class Membership_fragment extends Fragment {
                     membership_adapter = new Get_membership_adapter(membership_models);
                     rv_items.setAdapter(membership_adapter);
                     membership_adapter.notifyDataSetChanged();
+                        }else {
+                            Toast.makeText(getActivity(), "No Record Found", Toast.LENGTH_SHORT).show();
                         }
-                                        }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
