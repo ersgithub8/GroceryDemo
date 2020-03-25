@@ -76,6 +76,7 @@ public class Membership_fragment extends Fragment {
                 try {
 
                         Boolean status = response.getBoolean("response");
+
                         if (status) {
 
                     Gson gson = new Gson();

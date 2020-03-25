@@ -49,7 +49,7 @@ public class BaseURL {
 
     public static final String STORE_ID = "STORE_ID";
 
-    public static String BASE_URL = "http://groomall-fontend.eparking.website/backend/";
+    public static String BASE_URL = "https://gromal.finalyearprojects.website/backend/";
 
     public static String IMG_SLIDER_URL = BASE_URL + "uploads/sliders/";
     public static String IMG_CATEGORY_URL = BASE_URL + "uploads/category/";
@@ -69,15 +69,15 @@ public class BaseURL {
     public static String GET_STARS = BASE_URL + "index.php/api/get_stars";
     public static String GET_MEMBERSHIP = BASE_URL + "index.php/api/get_memberships";
 
-    public static String GET_MASTER_CATEGORY_URL = "http://groomall-fontend.eparking.website/backend/index.php/api/get_master_categories";
-    public static String GET_MASTER_SUB_CATEGORY_URL = "http://groomall-fontend.eparking.website/backend/index.php/api/get_subCategories";
+    public static String GET_MASTER_CATEGORY_URL = "https://gromal.finalyearprojects.website/backend/index.php/api/get_master_categories";
+    public static String GET_MASTER_SUB_CATEGORY_URL = "https://gromal.finalyearprojects.website/backend/index.php/api/get_subCategories";
 
     public static String GET_SUBSUB_CATEGORY_URL = BASE_URL + "index.php/api/get_sub_subCategories";
     public static String GET_Store_URL = BASE_URL +"index.php/api/get_stores";
 
-    public static String GET_MASTERImages_URL = "http://groomall-fontend.eparking.website/backend/uploads/master_images/";
-    public static String GET_STOREImages_URL = "http://groomall-fontend.eparking.website/backend/uploads/profile/";
-    public static String GET_SUBCATImages_URL = "http://groomall-fontend.eparking.website/backend/uploads/category/";
+    public static String GET_MASTERImages_URL = "https://gromal.finalyearprojects.website/backend/uploads/master_images/";
+    public static String GET_STOREImages_URL = "https://gromal.finalyearprojects.website/backend/uploads/profile/";
+    public static String GET_SUBCATImages_URL = "https://gromal.finalyearprojects.website/backend/uploads/category/";
     public static String GET_SLIDER_CATEGORY_URL = BASE_URL + "index.php/api/get_sub_cat";
     public static String GET_CATEGORY_ICON_URL = BASE_URL + "index.php/api/icon";
     public static String COUPON_CODE = BASE_URL + "index.php/api/get_coupons";
