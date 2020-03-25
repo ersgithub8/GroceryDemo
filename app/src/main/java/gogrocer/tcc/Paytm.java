@@ -90,7 +90,7 @@ public class Paytm extends Activity {
 
     private void initOrderId() {
         Random r = new Random(System.currentTimeMillis());
-        orderId = "ORDER" + (1 + r.nextInt(2)) * 10000
+        orderId = "membership" + (1 + r.nextInt(2)) * 10000
                 + r.nextInt(10000);
         order_id_txt = (TextView) findViewById(R.id.order_id);
         order_id_txt.setText(orderId);

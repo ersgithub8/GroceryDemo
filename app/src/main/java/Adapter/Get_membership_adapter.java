@@ -59,8 +59,8 @@ public class Get_membership_adapter extends RecyclerView.Adapter<Get_membership_
 
 
     @Override
-    public void onBindViewHolder(Get_membership_adapter.MyViewHolder holder, int position) {
-        get_membership_model mList = modelList.get(position);
+    public void onBindViewHolder(final Get_membership_adapter.MyViewHolder holder, int position) {
+        final get_membership_model mList = modelList.get(position);
         holder.name.setText(mList.getMembership());
         holder.typpe.setText(mList.getType());
         holder.ammount.setText(mList.getAmount()+context.getResources().getString(R.string.currency));
@@ -71,6 +71,7 @@ public class Get_membership_adapter extends RecyclerView.Adapter<Get_membership_
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(context, Paytm.class);
+                i.putExtra("total",mList.getAmount());
                 context.startActivity(i);
             }
         });

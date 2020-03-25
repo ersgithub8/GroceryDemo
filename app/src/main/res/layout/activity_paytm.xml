@@ -72,7 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Your Order Id :"
+                android:text="Your Membership Id :"
                 android:textColor="@color/dark_gray"
                 android:textSize="@dimen/text_size_normal" />
 
