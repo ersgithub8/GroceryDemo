@@ -206,7 +206,7 @@ private Master_category_adapter master_adapter;
             }else {
                 last_order_rv.setVisibility(View.INVISIBLE);
             }
-            membership("85");
+            membership(user_id_for_last_order);
             rl_address.setVisibility(View.VISIBLE);
             String city= sessionManagement.getUserDetails().get(BaseURL.KEY_SOCITY_NAME);
             String area= sessionManagement.getUserDetails().get(BaseURL.KEY_AREA_NAME);
