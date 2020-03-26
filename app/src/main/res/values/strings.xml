@@ -243,7 +243,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps" translatable="false">Map</string>
     <string-array name="text">
         <item>Like the video</item>
         <item>Subscribe to the channel</item>
