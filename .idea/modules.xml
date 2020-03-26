@@ -4,7 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FORTSDKv1.5/FORTSDKv1.5.iml" filepath="$PROJECT_DIR$/FORTSDKv1.5/FORTSDKv1.5.iml" group="GroceryDemo/FORTSDKv1.5" />
       <module fileurl="file://$PROJECT_DIR$/GroceryDemo.iml" filepath="$PROJECT_DIR$/GroceryDemo.iml" group="GroceryDemo" />
+      <module fileurl="file://$PROJECT_DIR$/FORTSDKv1.5/GroceryDemo-FORTSDKv1.5.iml" filepath="$PROJECT_DIR$/FORTSDKv1.5/GroceryDemo-FORTSDKv1.5.iml" group="GroceryDemo/FORTSDKv1.5" />
+      <module fileurl="file://$PROJECT_DIR$/app/GroceryDemo-app.iml" filepath="$PROJECT_DIR$/app/GroceryDemo-app.iml" group="GroceryDemo/app" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="GroceryDemo/app" />
+      <module fileurl="file://$PROJECT_DIR$/projects-GroceryDemo.iml" filepath="$PROJECT_DIR$/projects-GroceryDemo.iml" group="GroceryDemo" />
     </modules>
   </component>
 </project>
