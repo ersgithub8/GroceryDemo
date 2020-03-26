@@ -3,6 +3,7 @@ package gogrocer.tcc;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +34,7 @@ import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
 import Config.BaseURL;
+import Fragment.Home_fragment;
 import util.Session_management;
 
 /**
@@ -90,7 +92,7 @@ public class Paytm extends Activity {
 
     private void initOrderId() {
         Random r = new Random(System.currentTimeMillis());
-        orderId = "membership" + (1 + r.nextInt(2)) * 10000
+        orderId = "ORDER" + (1 + r.nextInt(2)) * 10000
                 + r.nextInt(10000);
         order_id_txt = (TextView) findViewById(R.id.order_id);
         order_id_txt.setText(orderId);
@@ -243,6 +245,9 @@ public class Paytm extends Activity {
 
                             String response = inResponse.getString("RESPMSG");
                             if (response.equals("Txn Successful.")) {
+                                Intent i=new Intent(Paytm.this,MainActivity.class);
+                                startActivity(i);
+
                                 Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();

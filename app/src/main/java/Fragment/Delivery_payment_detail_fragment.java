@@ -1,10 +1,12 @@
 package Fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +14,26 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.NoConnectionError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import Config.BaseURL;
 import Config.SharedPref;
+import gogrocer.tcc.AppController;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.R;
 import util.ConnectivityReceiver;
+import util.CustomVolleyJsonRequest;
 import util.DatabaseHandler;
 import util.Session_management;
 
@@ -30,7 +47,7 @@ public class Delivery_payment_detail_fragment extends Fragment {
 
     private static String TAG = Delivery_payment_detail_fragment.class.getSimpleName();
 
-    private TextView tv_timeslot, tv_address, tv_total;
+    private TextView tv_timeslot, tv_address, tv_total,tv_grandtotal,tv_discount;
     private LinearLayout btn_order;
 
     private String getlocation_id = "";
@@ -43,6 +60,7 @@ public class Delivery_payment_detail_fragment extends Fragment {
     String time;
     String date;
     Double total;
+    LinearLayout layout1,layout2;
 SharedPreferences preferences;
     String unit;
     private DatabaseHandler db_cart;
@@ -69,14 +87,20 @@ SharedPreferences preferences;
         sessionManagement = new Session_management(getActivity());
 
         tv_timeslot = (TextView) view.findViewById(R.id.textTimeSlot);
+        tv_discount = (TextView) view.findViewById(R.id.tvdiscount);
         tv_address = (TextView) view.findViewById(R.id.txtAddress);
         //tv_item = (TextView) view.findViewById(R.id.textItems);
         //tv_total = (TextView) view.findViewById(R.id.textPrice);
         tv_total = (TextView) view.findViewById(R.id.txtTotal);
 
+        tv_grandtotal = (TextView) view.findViewById(R.id.txtgrandTotal);
         btn_order = (LinearLayout) view.findViewById(R.id.btn_order_now);
+        layout1 = (LinearLayout) view.findViewById(R.id.layout1);
+        layout2 = (LinearLayout) view.findViewById(R.id.layout2);
 
         getdate = getArguments().getString("getdate");
+         String user_id=sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
+        membership(user_id);
 
         preferences = getActivity().getSharedPreferences("lan", MODE_PRIVATE);
         String language=preferences.getString("language","");
@@ -155,93 +179,64 @@ SharedPreferences preferences;
         return view;
     }
 
-//    private void attemptOrder() {
-//        // retrive data from cart database
-//        ArrayList<HashMap<String, String>> items = db_cart.getCartAll();
-//        if (items.size() > 0) {
-//            JSONArray passArray = new JSONArray();
-//            for (int i = 0; i < items.size(); i++) {
-//                HashMap<String, String> map = items.get(i);
-//                JSONObject jObjP = new JSONObject();
-//                try {
-//                    jObjP.put("product_id", map.get("product_id"));
-//                    jObjP.put("qty", map.get("qty"));
-//                    jObjP.put("unit_value", map.get("unit_value"));
-//                    jObjP.put("unit", map.get("unit"));
-//                    jObjP.put("price", map.get("price"));
-//
-//                    passArray.put(jObjP);
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            getuser_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
-//
-//            if (ConnectivityReceiver.isConnected()) {
-//
-//                Log.e(TAG, "from:" + gettime + "\ndate:" + getdate +
-//                        "\n" + "\nuser_id:" + getuser_id + "\n" + getlocation_id + "\ndata:" + passArray.toString());
-//
-//                makeAddOrderRequest(getdate, gettime, getuser_id, getlocation_id, passArray);
-//            }
-//        }
-//    }
+     private void membership(String userid) {
 
-    /**
-     * Method to make json object request where json response starts wtih
-     */
-//    private void makeAddOrderRequest(String date, String gettime, String userid, String location, JSONArray passArray) {
-//        String tag_json_obj = "json_add_order_req";
-//        Map<String, String> params = new HashMap<String, String>();
-//        params.put("date", date);
-//        params.put("time", gettime);
-//        params.put("user_id", userid);
-//        params.put("location", location);
-//        params.put("data", passArray.toString());
-//        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
-//                BaseURL.ADD_ORDER_URL, params, new Response.Listener<JSONObject>() {
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                Log.d(TAG, response.toString());
-//
-//                try {
-//                    Boolean status = response.getBoolean("responce");
-//                    if (status) {
-//
-//                        String msg = response.getString("data");
-//
-////                        db_cart.clearCart();
-////                        ((MainActivity) getActivity()).setCartCounter("" + db_cart.getWishlistCount());
-//                      //  Double total = Double.parseDouble(db_cart.getTotalAmount()) + deli_charges;
-//                        Bundle args = new Bundle();
-//                        Fragment fm = new Payment_fragment();
-//                        args.putString("msg", msg);
-//
-//                        args.putString("total", String.valueOf(total));
-//                        fm.setArguments(args);
-//                        FragmentManager fragmentManager = getFragmentManager();
-//                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-//                                .addToBackStack(null).commit();
-//
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                VolleyLog.d(TAG, "Error: " + error.getMessage());
-//                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-//                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-//
-//        // Adding request to request queue
-//        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-//    }
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("user_id",userid);
+
+       /* if (parent_id != null && parent_id != "") {
+        }*/
+
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.CHECK_MEMBERSHIP, params, new Response.Listener<JSONObject>() {
+
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, response.toString());
+
+                try {
+                    if (response != null && response.length() > 0) {
+                        Boolean status = response.getBoolean("response");
+                        if (status) {
+                            JSONArray jsonArray = response.getJSONArray("data");
+                            for (int i=0;i<jsonArray.length();i++) {
+                                JSONObject object = jsonArray.getJSONObject(i);
+                               tv_discount.setText( object.getString("discount")+"%");
+                               int discount=Integer.parseInt(String.valueOf(total*Integer.parseInt(object.getString("discount"))/100));
+                               int a= (int) (total-discount);
+                               tv_grandtotal.setText("Grand Total :"+total+"-"+discount+"="+a+getResources().getString(R.string.currency));
+
+
+                            }
+
+
+                        }else {
+                            layout1.setVisibility(View.INVISIBLE);
+                            layout2.setVisibility(View.VISIBLE);
+                        }
+
+                    }
+                } catch (Exception  e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq);
+
+    }
+
 
 }
