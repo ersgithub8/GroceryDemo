@@ -532,8 +532,9 @@ public class Product_fragment extends Fragment {
                         rv_cat.setAdapter(adapter_product);
                         adapter_product.notifyDataSetChanged();
 
-                        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("storename",MODE_PRIVATE);
-                        String abc=sharedPreferences.getString("sn","");
+//                        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("storename",MODE_PRIVATE);
+//                        String abc=sharedPreferences.getString("sn","");
+                        String abc=product_modelList.get(0).getStorename();
 
                         storename.setText(abc);
 

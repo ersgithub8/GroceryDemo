@@ -290,8 +290,8 @@
 
         <ImageView
             android:id="@+id/iv_subcat_minus"
-            android:layout_width="14dp"
-            android:layout_height="22dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/space_8"
             android:background="@color/green"
             app:layout_constraintBottom_toBottomOf="@+id/iv_subcat_plus"

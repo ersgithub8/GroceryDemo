@@ -138,6 +138,7 @@ public class RatingActivity extends AppCompatActivity {
             editor.apply();
             Intent i=new Intent(RatingActivity.this,MainActivity.class);
             startActivity(i);
+            finishAffinity();
         }
     });
 

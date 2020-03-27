@@ -425,7 +425,7 @@ public class Payment_fragment extends Fragment {
                     if(status) {
                         Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
                         db_cart.clearCart();
-                        SharedPreferences.Editor editors = (SharedPreferences.Editor) getActivity().getSharedPreferences("rating_store",MODE_PRIVATE);
+                        SharedPreferences.Editor editors = (SharedPreferences.Editor) getActivity().getSharedPreferences("rating_store",MODE_PRIVATE).edit();
 
                         editors.putString("rating","null");
 
