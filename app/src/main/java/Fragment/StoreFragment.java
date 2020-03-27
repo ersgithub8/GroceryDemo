@@ -21,8 +21,11 @@ import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -45,7 +48,9 @@ import Model.ShopNow_model;
 import Model.Store_model;
 import Model.Sub_Categories;
 import gogrocer.tcc.AppController;
+import gogrocer.tcc.CustomSlider;
 import gogrocer.tcc.R;
+import util.ConnectivityReceiver;
 import util.CustomVolleyJsonRequest;
 import util.RecyclerTouchListener;
 
@@ -60,6 +65,7 @@ public class StoreFragment extends Fragment {
     private List<Model.Anime> lstAnime ;
     public RecyclerView recyclerView ;
     public TextView tollbar;
+    private SliderLayout imgSlider;
     public String StoreName,cityname;
     private Stores_adapter store_adapter;
     private static String TAG = StoreFragment.class.getSimpleName();
@@ -77,6 +83,7 @@ public class StoreFragment extends Fragment {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_store, container, false);
 
+        imgSlider = (SliderLayout) view.findViewById(R.id.home_img_slider3);
         requestQueue = Volley.newRequestQueue(getActivity());
         lstAnime = new ArrayList<>() ;
         recyclerView =(RecyclerView)view.findViewById(R.id.recycler);
@@ -86,6 +93,9 @@ public class StoreFragment extends Fragment {
         String cat_id=getArguments().getString("subsubcat_id");
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
 
+        if (ConnectivityReceiver.isConnected()) {
+            makeGetSliderRequest();
+        }
 
         jsonrequest(cat_id);
 
@@ -265,5 +275,63 @@ public class StoreFragment extends Fragment {
     }
 
 
+    private void makeGetSliderRequest() {
+        JsonArrayRequest req = new JsonArrayRequest(BaseURL.GET_SLIDER_URL,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d(TAG, response.toString());
+                        try {
+                            ArrayList<HashMap<String, String>> listarray = new ArrayList<>();
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject jsonObject = (JSONObject) response.get(i);
+                                HashMap<String, String> url_maps = new HashMap<String, String>();
+                                url_maps.put("slider_title", jsonObject.getString("slider_title"));
+                                url_maps.put("sub_cat", jsonObject.getString("sub_cat"));
+                                url_maps.put("slider_image", BaseURL.IMG_SLIDER_URL + jsonObject.getString("slider_image"));
+                                listarray.add(url_maps);
+                            }
+                            for (HashMap<String, String> name : listarray) {
+                                CustomSlider textSliderView = new CustomSlider(getActivity());
+                                textSliderView.description(name.get("")).image(name.get("slider_image")).setScaleType(BaseSliderView.ScaleType.Fit);
+                                textSliderView.bundle(new Bundle());
+                                textSliderView.getBundle().putString("extra", name.get("slider_title"));
+                                textSliderView.getBundle().putString("extra", name.get("sub_cat"));
+                                imgSlider.addSlider(textSliderView);
+                                final String sub_cat = (String) textSliderView.getBundle().get("extra");
+                                textSliderView.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+                                    @Override
+                                    public void onSliderClick(BaseSliderView slider) {
+                                        //   Toast.makeText(getActivity(), "" + sub_cat, Toast.LENGTH_SHORT).show();
+                                        Bundle args = new Bundle();
+                                        Fragment fm = new Product_fragment();
+                                        args.putString("id", sub_cat);
+                                        fm.setArguments(args);
+                                        FragmentManager fragmentManager = getFragmentManager();
+                                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                                                .addToBackStack(null).commit();
+                                    }
+                                });
 
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getActivity(),
+                                    "Error: " + e.getMessage(),
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        AppController.getInstance().addToRequestQueue(req);
+
+    }
 }

@@ -2,8 +2,37 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/slider_one_height"
+        android:elevation="0dp">
 
+        <com.daimajia.slider.library.SliderLayout
+            android:id="@+id/home_img_slider2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/space_5" />
+
+        <!--<com.daimajia.slider.library.Indicators.PagerIndicator-->
+        <!--android:id="@+id/custom_indicator"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center" />-->
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Sub Categories"
+        android:textSize="@dimen/space_20"
+        android:textColor="@color/white"
+        android:background="@color/green"
+        android:textStyle="bold"
+        android:layout_marginBottom="@dimen/space_5"
+        android:paddingTop="@dimen/space_5"
+        android:paddingBottom="@dimen/space_5"/>
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

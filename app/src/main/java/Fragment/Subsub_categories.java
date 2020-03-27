@@ -18,9 +18,13 @@ import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,7 +38,9 @@ import Adapter.Master_Subcat;
 import Config.BaseURL;
 import Model.Sub_Categories;
 import gogrocer.tcc.AppController;
+import gogrocer.tcc.CustomSlider;
 import gogrocer.tcc.R;
+import util.ConnectivityReceiver;
 import util.CustomVolleyJsonRequest;
 import util.RecyclerTouchListener;
 
@@ -43,21 +49,25 @@ public class Subsub_categories extends Fragment {
     private static String TAG = Subcategory_fragment.class.getSimpleName();
     private List<Sub_Categories> subcat_models = new ArrayList<>();
     Fragment fm = null;
+    private SliderLayout imgSlider;
     RecyclerView rv_subsubcategories;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.subsub_categories, container, false);
 
-
         rv_subsubcategories=view.findViewById(R.id.subsubcat_id);
 
+        imgSlider = (SliderLayout) view.findViewById(R.id.home_img_slider1);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
         rv_subsubcategories.setLayoutManager(gridLayoutManager);
         rv_subsubcategories.setItemAnimator(new DefaultItemAnimator());
         rv_subsubcategories.setNestedScrollingEnabled(true);
         String cat_id=getArguments().getString("subcat_id");
         makeGetCategoryRequest(cat_id);
+        if (ConnectivityReceiver.isConnected()) {
+            makeGetSliderRequest();
+        }
         rv_subsubcategories.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rv_subsubcategories, new RecyclerTouchListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -133,6 +143,69 @@ public class Subsub_categories extends Fragment {
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+
+
+
+
+    private void makeGetSliderRequest() {
+        JsonArrayRequest req = new JsonArrayRequest(BaseURL.GET_SLIDER_URL,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d(TAG, response.toString());
+                        try {
+                            ArrayList<HashMap<String, String>> listarray = new ArrayList<>();
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject jsonObject = (JSONObject) response.get(i);
+                                HashMap<String, String> url_maps = new HashMap<String, String>();
+                                url_maps.put("slider_title", jsonObject.getString("slider_title"));
+                                url_maps.put("sub_cat", jsonObject.getString("sub_cat"));
+                                url_maps.put("slider_image", BaseURL.IMG_SLIDER_URL + jsonObject.getString("slider_image"));
+                                listarray.add(url_maps);
+                            }
+                            for (HashMap<String, String> name : listarray) {
+                                CustomSlider textSliderView = new CustomSlider(getActivity());
+                                textSliderView.description(name.get("")).image(name.get("slider_image")).setScaleType(BaseSliderView.ScaleType.Fit);
+                                textSliderView.bundle(new Bundle());
+                                textSliderView.getBundle().putString("extra", name.get("slider_title"));
+                                textSliderView.getBundle().putString("extra", name.get("sub_cat"));
+                                imgSlider.addSlider(textSliderView);
+                                final String sub_cat = (String) textSliderView.getBundle().get("extra");
+                                textSliderView.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+                                    @Override
+                                    public void onSliderClick(BaseSliderView slider) {
+                                        //   Toast.makeText(getActivity(), "" + sub_cat, Toast.LENGTH_SHORT).show();
+                                        Bundle args = new Bundle();
+                                        Fragment fm = new Product_fragment();
+                                        args.putString("id", sub_cat);
+                                        fm.setArguments(args);
+                                        FragmentManager fragmentManager = getFragmentManager();
+                                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                                                .addToBackStack(null).commit();
+                                    }
+                                });
+
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getActivity(),
+                                    "Error: " + e.getMessage(),
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        AppController.getInstance().addToRequestQueue(req);
 
     }
 }
