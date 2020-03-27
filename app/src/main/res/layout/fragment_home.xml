@@ -65,10 +65,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="8dp"
                     android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginBottom="8dp"
                     android:background="@drawable/back_border"
                     android:orientation="horizontal">
 
@@ -94,9 +94,9 @@
                             android:layout_marginTop="@dimen/space_4"
                             android:layout_toRightOf="@id/lens"
                             android:gravity="top"
-                            android:textColorHint="#000000"
                             android:hint="Search For Stores"
                             android:textColor="@color/white"
+                            android:textColorHint="#000000"
                             android:textSize="12sp" />
                     </RelativeLayout>
                 </LinearLayout>
@@ -105,22 +105,23 @@
             </RelativeLayout>
 
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/collapsing_recycler"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="10dp"
+                android:visibility="gone">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/collapsing_recycler"
-                    android:visibility="gone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="10dp">
+            </android.support.v7.widget.RecyclerView>
 
-                </android.support.v7.widget.RecyclerView>
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/last_order_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/slider_one_height"
@@ -139,6 +140,7 @@
                 <!--android:layout_height="wrap_content"-->
                 <!--android:gravity="center" />-->
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/slider_one_height"
@@ -152,35 +154,37 @@
                     android:gravity="center" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/membership"
-                    android:layout_marginLeft="50dp"
                     android:id="@+id/intro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/membership"
                     android:textSize="23sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="20dp"/>
+                    android:textStyle="bold" />
+
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="New Smart Bachat Club"
-                    android:layout_marginLeft="50dp"
                     android:id="@+id/intro1"
-                    android:layout_below="@+id/intro"
-                    android:textColor="#ffffff"
-                    android:textSize="20sp"
-                    android:layout_centerVertical="true"/>
-                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Save More With Exclusive Membership  "
+                    android:layout_below="@+id/intro"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="50dp"
+                    android:text="New Smart Bachat Club"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
+
+                <TextView
                     android:id="@+id/intro2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_below="@+id/intro1"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="50dp"
+                    android:text="Save More With Exclusive Membership  "
                     android:textColor="#ffee05"
                     android:textSize="23sp"
-                    android:textStyle="bold"
-                    android:layout_centerVertical="true"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/membership_tv"
@@ -200,19 +204,16 @@
             </RelativeLayout>
 
 
-
-
-
             <TextView
                 android:id="@+id/best_selling"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="15dp"
+                android:gravity="center"
                 android:text="Best Selling Products"
-                android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/text_size_normal" />
+                android:textSize="@dimen/text_size_normal"
+                android:textStyle="bold" />
 
 
             <android.support.v7.widget.RecyclerView
@@ -242,12 +243,13 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="New Offers"
-                    android:textStyle="bold"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_normal" />
+                    android:textSize="@dimen/text_size_normal"
+                    android:textStyle="bold" />
 
 
             </LinearLayout>
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_deal"
                 android:layout_width="match_parent"
@@ -257,7 +259,6 @@
                 android:layout_marginTop="3dp"
                 android:scrollbars="none"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
 
 
             <LinearLayout
@@ -276,100 +277,97 @@
                     android:weightSum="3">
 
 
-                        <Button
-                            android:id="@+id/grocery_btn"
-                            android:layout_centerVertical="true"
+                    <Button
+                        android:id="@+id/grocery_btn"
+                        android:layout_width="0dp"
 
-                            android:background="@drawable/backgr"
-                            android:layout_width="0dp"
-                            android:paddingTop="50dp"
-                            android:scaleType="centerCrop"
-                            android:layout_weight="1"
-                            android:layout_height="140dp"
-                            android:drawableTop="@drawable/kkk"
-                            android:text="Kirana" />
+                        android:layout_height="140dp"
+                        android:layout_centerVertical="true"
+                        android:layout_weight="1"
+                        android:background="@drawable/backgr"
+                        android:drawableTop="@drawable/kkk"
+                        android:paddingTop="50dp"
+                        android:scaleType="centerCrop"
+                        android:text="Kirana" />
 
-                        <Button
-                            android:id="@+id/vegetable_btn"
-                            android:layout_width="0dp"
-                            android:layout_height="140dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/backgr"
-                            android:paddingTop="50dp"
-                            android:layout_toRightOf="@+id/grocery_btn"
-                            android:layout_centerVertical="true"
-                            android:drawableTop="@drawable/vvvv"
-                            android:text="Vegetable"/>
-                        <Button
-                            android:id="@+id/fruits_btn"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/backgr"
-                            android:paddingTop="50dp"
-                            android:layout_toRightOf="@+id/vegetable_btn"
-                            android:layout_centerVertical="true"
-                            android:layout_height="140dp"
-                            android:drawableTop="@drawable/ffff"
+                    <Button
+                        android:id="@+id/vegetable_btn"
+                        android:layout_width="0dp"
+                        android:layout_height="140dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/grocery_btn"
+                        android:layout_weight="1"
+                        android:background="@drawable/backgr"
+                        android:drawableTop="@drawable/vvvv"
+                        android:paddingTop="50dp"
+                        android:text="Vegetable" />
 
-                            android:text="fruits"/>
+                    <Button
+                        android:id="@+id/fruits_btn"
+                        android:layout_width="0dp"
+                        android:layout_height="140dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/vegetable_btn"
+                        android:layout_weight="1"
+                        android:background="@drawable/backgr"
+                        android:drawableTop="@drawable/ffff"
+                        android:paddingTop="50dp"
+
+                        android:text="fruits" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
                     android:orientation="horizontal"
-                    android:padding="10dp">
+                    android:padding="10dp"
+                    android:visibility="gone">
 
                     <Button
                         android:id="@+id/nextday_delivery"
                         android:layout_width="match_parent"
-                        android:visibility="gone"
                         android:layout_height="150dp"
-                        android:background="@drawable/next_day_banner"></Button>
+                        android:background="@drawable/next_day_banner"
+                        android:visibility="gone"></Button>
                 </LinearLayout>
 
                 <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <Fonts.LatoBLack
-                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/space_12"
-                    android:layout_marginTop="@dimen/space_2"
-                    android:text="@string/feature"
-                    android:textColor="#000"
-                    android:textSize="@dimen/text_size_normal" />
+                    android:orientation="vertical">
 
-                <Fonts.LatoBLack
-                    android:visibility="gone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/space_15"
-                    android:layout_marginTop="@dimen/space_4"
-                    android:text="@string/sponsered"
-                    android:textColor="#000"
-                    android:textSize="@dimen/text_size_small" />
+                    <Fonts.LatoBLack
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/space_12"
+                        android:layout_marginTop="@dimen/space_2"
+                        android:text="@string/feature"
+                        android:textColor="#000"
+                        android:textSize="@dimen/text_size_normal"
+                        android:visibility="gone" />
 
-
-
-
-
-
+                    <Fonts.LatoBLack
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/space_15"
+                        android:layout_marginTop="@dimen/space_4"
+                        android:text="@string/sponsered"
+                        android:textColor="#000"
+                        android:textSize="@dimen/text_size_small"
+                        android:visibility="gone" />
 
 
                 </LinearLayout>
             </LinearLayout>
+
             <TextView
                 android:id="@+id/shop_by_category_tv"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:background="@drawable/shadow2"
                 android:gravity="center"
                 android:text="Shop By Category"
-                android:background="@drawable/shadow2"
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -380,8 +378,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="370dp"
                 android:layout_marginLeft="8dp"
-                android:background="@drawable/shadow3"
                 android:layout_marginRight="8dp"
+                android:background="@drawable/shadow3"
 
                 android:padding="3dp"
                 android:scrollbars="vertical" />
@@ -397,21 +395,20 @@
                 <com.daimajia.slider.library.SliderLayout
                     android:id="@+id/featured_img_slider"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    />
+                    android:layout_height="match_parent" />
             </RelativeLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:gravity="center_horizontal"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="5dp"
+                android:gravity="center_horizontal"
                 android:text="Previously Bought"
-                android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp"
-                />
+                android:textStyle="bold" />
 
             <android.support.v7.widget.RecyclerView
 
@@ -428,22 +425,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="center_horizontal"
                 android:text="Recomended For You"
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
                 android:textStyle="bold" />
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/new_offer"
 
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
-                android:background="@drawable/category_back"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/category_back"
 
                 android:padding="3dp"
                 android:scrollbars="none"
@@ -455,18 +453,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:layout_marginLeft="10dp"
-                android:padding="7.199dp"
-                android:visibility="gone"
                 android:layout_marginRight="10dp"
+                android:orientation="vertical"
+                android:padding="7.199dp"
 
-                android:orientation="vertical">
+                android:visibility="gone">
 
 
                 <FrameLayout
                     android:id="@+id/frame1"
                     android:layout_width="match_parent"
                     android:layout_height="190dp"
-
 
 
                     >
@@ -478,15 +475,14 @@
                         android:weightSum="2">
 
                         <LinearLayout
-                            android:padding="5dp"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="12dp"
                             android:layout_weight="2"
                             android:gravity="center_vertical"
-                            android:orientation="vertical">
-
+                            android:orientation="vertical"
+                            android:padding="5dp">
 
 
                         </LinearLayout>
@@ -501,14 +497,14 @@
                             <Button
                                 android:id="@+id/view_all_deals"
                                 android:layout_width="70dp"
-                                android:visibility="gone"
                                 android:layout_height="35dp"
                                 android:layout_marginRight="12dp"
+                                android:background="@color/colorPrimary"
                                 android:text="@string/view_all"
                                 android:textColor="#F7F2F2"
                                 android:textSize="10dp"
-                                android:background="@color/colorPrimary"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                android:visibility="gone" />
 
                         </LinearLayout>
 
@@ -516,13 +512,9 @@
                     </LinearLayout>
 
 
-
                 </FrameLayout>
 
             </FrameLayout>
-
-
-
 
 
             <LinearLayout
@@ -530,9 +522,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_gravity="center"
-                android:visibility="gone"
                 android:background="@color/pink"
-                android:gravity="center">
+                android:gravity="center"
+                android:visibility="gone">
 
                 <Fonts.LatoBLack
                     android:layout_width="match_parent"
@@ -551,21 +543,19 @@
                 android:layout_height="200dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:visibility="gone"
                 android:orientation="vertical"
-                android:padding="10dp">
-
-
+                android:padding="10dp"
+                android:visibility="gone">
 
 
                 <ImageView
 
                     android:id="@+id/deal_of_day_imageview"
                     android:layout_width="match_parent"
-                    android:visibility="gone"
                     android:layout_height="460dp"
+                    android:visibility="gone"
 
-                     />
+                    />
 
                 <FrameLayout
 
@@ -587,7 +577,6 @@
                             android:layout_weight="2"
                             android:gravity="center_vertical"
                             android:orientation="vertical">
-
 
 
                         </LinearLayout>
@@ -620,14 +609,13 @@
                 </FrameLayout>
 
 
-
             </FrameLayout>
+
             <LinearLayout
 
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/slider_two_height"
-                android:layout_marginTop="15dp"
-                >
+                android:layout_marginTop="15dp">
 
                 <com.daimajia.slider.library.SliderLayout
                     android:id="@+id/relative_banner"
@@ -644,31 +632,25 @@
             </LinearLayout>
 
 
-
-
-
-
-
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:visibility="gone"
                 android:layout_marginTop="12dp"
                 android:background="@color/colorPrimary"
                 android:orientation="horizontal"
+                android:visibility="gone"
 
 
                 android:weightSum="2">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
                     android:layout_gravity="center"
+                    android:text="Powerd By GroMall"
                     android:textAlignment="center"
-                    android:text="Powerd By GroMall"></TextView>
+                    android:textColor="@color/white"
+                    android:textSize="15sp"></TextView>
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -678,56 +660,56 @@
                     android:layout_weight=".5"
                     android:gravity="center">
 
-<!--                    <ImageView-->
-<!--                        android:id="@+id/iv_call"-->
-<!--                        android:layout_width="32dp"-->
-<!--                        android:layout_height="32dp"-->
-<!--                        android:src="@drawable/call_answer" />-->
+                    <!--                    <ImageView-->
+                    <!--                        android:id="@+id/iv_call"-->
+                    <!--                        android:layout_width="32dp"-->
+                    <!--                        android:layout_height="32dp"-->
+                    <!--                        android:src="@drawable/call_answer" />-->
 
-<!--                </LinearLayout>-->
+                    <!--                </LinearLayout>-->
 
-<!--                <LinearLayout-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_gravity="center"-->
-<!--                    android:layout_weight=".5"-->
-<!--                    android:gravity="center">-->
+                    <!--                <LinearLayout-->
+                    <!--                    android:layout_width="0dp"-->
+                    <!--                    android:layout_height="match_parent"-->
+                    <!--                    android:layout_gravity="center"-->
+                    <!--                    android:layout_weight=".5"-->
+                    <!--                    android:gravity="center">-->
 
-<!--                    <ImageView-->
-<!--                        android:id="@+id/iv_whatsapp"-->
-<!--                        android:layout_width="32dp"-->
-<!--                        android:layout_height="32dp"-->
-<!--                        android:src="@drawable/mywhatsapp" />-->
+                    <!--                    <ImageView-->
+                    <!--                        android:id="@+id/iv_whatsapp"-->
+                    <!--                        android:layout_width="32dp"-->
+                    <!--                        android:layout_height="32dp"-->
+                    <!--                        android:src="@drawable/mywhatsapp" />-->
 
-<!--                </LinearLayout>-->
+                    <!--                </LinearLayout>-->
 
-<!--                <LinearLayout-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_gravity="center"-->
-<!--                    android:layout_weight=".5"-->
-<!--                    android:gravity="center">-->
+                    <!--                <LinearLayout-->
+                    <!--                    android:layout_width="0dp"-->
+                    <!--                    android:layout_height="match_parent"-->
+                    <!--                    android:layout_gravity="center"-->
+                    <!--                    android:layout_weight=".5"-->
+                    <!--                    android:gravity="center">-->
 
-<!--                    <ImageView-->
-<!--                        android:id="@+id/reviews"-->
-<!--                        android:layout_width="42dp"-->
-<!--                        android:layout_height="42dp"-->
-<!--                        android:src="@drawable/reviews" />-->
+                    <!--                    <ImageView-->
+                    <!--                        android:id="@+id/reviews"-->
+                    <!--                        android:layout_width="42dp"-->
+                    <!--                        android:layout_height="42dp"-->
+                    <!--                        android:src="@drawable/reviews" />-->
 
-<!--                </LinearLayout>-->
+                    <!--                </LinearLayout>-->
 
-<!--                <LinearLayout-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_gravity="center"-->
-<!--                    android:layout_weight=".5"-->
-<!--                    android:gravity="center">-->
+                    <!--                <LinearLayout-->
+                    <!--                    android:layout_width="0dp"-->
+                    <!--                    android:layout_height="match_parent"-->
+                    <!--                    android:layout_gravity="center"-->
+                    <!--                    android:layout_weight=".5"-->
+                    <!--                    android:gravity="center">-->
 
-<!--                    <ImageView-->
-<!--                        android:id="@+id/share_via"-->
-<!--                        android:layout_width="32dp"-->
-<!--                        android:layout_height="32dp"-->
-<!--                        android:src="@drawable/share_via" />-->
+                    <!--                    <ImageView-->
+                    <!--                        android:id="@+id/share_via"-->
+                    <!--                        android:layout_width="32dp"-->
+                    <!--                        android:layout_height="32dp"-->
+                    <!--                        android:src="@drawable/share_via" />-->
 
                 </LinearLayout>
 

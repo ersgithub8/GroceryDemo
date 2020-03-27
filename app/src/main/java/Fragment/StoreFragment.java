@@ -84,7 +84,7 @@ public class StoreFragment extends Fragment {
         SharedPreferences prefs = getActivity().getSharedPreferences("city", MODE_PRIVATE);
 
         String cat_id=getArguments().getString("subsubcat_id");
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
 
 
         jsonrequest(cat_id);
