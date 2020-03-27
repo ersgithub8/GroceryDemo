@@ -96,10 +96,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
         }
         String storename= mList.getStorename();
 
-        SharedPreferences sharedPreferences =context.getSharedPreferences("storename",MODE_PRIVATE);
-        SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putString("sn",storename);
-        editor.apply();
+
 
 
         holder.tv_reward.setText(mList.getRewards());
