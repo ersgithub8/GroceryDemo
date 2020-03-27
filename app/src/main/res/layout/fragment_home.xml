@@ -120,6 +120,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/last_order_rv"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
             <RelativeLayout
@@ -212,8 +213,11 @@
                 android:layout_marginBottom="@dimen/space_10"
                 android:gravity="center"
                 android:text="Best Selling Products"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/text_size_normal"
+                android:textColor="@color/white"
+                android:background="@color/green"
+                android:paddingTop="@dimen/space_5"
+                android:paddingBottom="@dimen/space_5"
+                android:textSize="@dimen/space_18"
                 android:textStyle="bold" />
 
 
@@ -229,14 +233,7 @@
 
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"></android.support.v7.widget.RecyclerView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
 
-                android:layout_marginTop="@dimen/space_4"
-                android:background="@color/white"
-                android:gravity="center">
 
                 <TextView
                     android:id="@+id/firebase"
@@ -246,12 +243,12 @@
                     android:layout_marginTop="@dimen/space_10"
                     android:layout_marginBottom="@dimen/space_10"
                     android:text="New Offers"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_normal"
+                    android:padding="@dimen/space_5"
+                    android:textColor="@color/white"
+                    android:background="@color/green"
+                    android:textSize="@dimen/space_18"
                     android:textStyle="bold" />
 
-
-            </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_deal"
@@ -367,13 +364,16 @@
             <TextView
                 android:id="@+id/shop_by_category_tv"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
+                android:paddingTop="@dimen/space_5"
+                android:paddingBottom="@dimen/space_5"
                 android:text="Shop By Category"
                 android:layout_marginTop="@dimen/space_10"
                 android:layout_marginBottom="@dimen/space_10"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp"
+                android:background="@color/green"
+                android:textColor="@color/white"
+                android:textSize="@dimen/space_18"
                 android:textStyle="bold" />
 
             <android.support.v7.widget.RecyclerView
@@ -408,8 +408,11 @@
                 android:layout_marginBottom="5dp"
                 android:gravity="center_horizontal"
                 android:text="Previously Bought"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:background="@color/green"
+                android:paddingTop="@dimen/space_5"
+                android:paddingBottom="@dimen/space_5"
+                android:textSize="@dimen/space_18"
                 android:textStyle="bold" />
 
             <android.support.v7.widget.RecyclerView
@@ -431,8 +434,11 @@
                 android:layout_marginBottom="10dp"
                 android:gravity="center_horizontal"
                 android:text="Recomended For You"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:background="@color/green"
+                android:paddingTop="@dimen/space_5"
+                android:paddingBottom="@dimen/space_5"
+                android:textSize="@dimen/space_18"
                 android:textStyle="bold" />
 
             <android.support.v7.widget.RecyclerView
