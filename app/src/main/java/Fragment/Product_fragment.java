@@ -1,5 +1,6 @@
 package Fragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
@@ -490,6 +491,10 @@ public class Product_fragment extends Fragment {
     }
     private void makeGetProductRequest(String Store_id)
     {
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.show();
+
         String tag_json_obj = "json_product_req";
         Map<String, String> params = new HashMap<String, String>();
         params.put("storeid", Store_id);
@@ -507,6 +512,7 @@ public class Product_fragment extends Fragment {
 
                     Boolean status = response.getBoolean("responce");
                     if (status) {
+                        loading.dismiss();
                         Gson gson = new Gson();
                         product_modelList.clear();
                         Type listType = new TypeToken<List<Product_model>>() {
@@ -526,7 +532,7 @@ public class Product_fragment extends Fragment {
                         rv_cat.setAdapter(adapter_product);
                         adapter_product.notifyDataSetChanged();
 
-                        SharedPreferences sharedPreferences=getContext().getSharedPreferences("storename",MODE_PRIVATE);
+                        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("storename",MODE_PRIVATE);
                         String abc=sharedPreferences.getString("sn","");
 
                         storename.setText(abc);
