@@ -534,10 +534,11 @@ public class Product_fragment extends Fragment {
 
 //                        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("storename",MODE_PRIVATE);
 //                        String abc=sharedPreferences.getString("sn","");
-                        String abc=product_modelList.get(0).getStorename();
+                        if(product_modelList.size()>0) {
+                            String abc = product_modelList.get(0).getStorename();
 
-                        storename.setText(abc);
-
+                            storename.setText(abc);
+                        }
                         progressDialog.dismiss();
 
 
