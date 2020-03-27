@@ -3,6 +3,7 @@ package Fragment;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -30,6 +31,7 @@ import java.util.Map;
 import Config.BaseURL;
 import Config.SharedPref;
 import gogrocer.tcc.AppController;
+import gogrocer.tcc.LoginActivity;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.R;
 import util.ConnectivityReceiver;
@@ -47,7 +49,7 @@ public class Delivery_payment_detail_fragment extends Fragment {
 
     private static String TAG = Delivery_payment_detail_fragment.class.getSimpleName();
 
-    private TextView tv_timeslot, tv_address, tv_total,tv_grandtotal,tv_discount;
+    private TextView tv_timeslot, tv_address, tv_total,tv_grandtotal,tv_discount,membership_tv;
     private LinearLayout btn_order;
 
     private String getlocation_id = "";
@@ -59,7 +61,7 @@ public class Delivery_payment_detail_fragment extends Fragment {
     private int deli_charges;
     String time;
     String date;
-    Double total;
+    Double total,a;
     LinearLayout layout1,layout2;
 SharedPreferences preferences;
     String unit;
@@ -87,6 +89,7 @@ SharedPreferences preferences;
         sessionManagement = new Session_management(getActivity());
 
         tv_timeslot = (TextView) view.findViewById(R.id.textTimeSlot);
+        membership_tv = (TextView) view.findViewById(R.id.membership_tv);
         tv_discount = (TextView) view.findViewById(R.id.tvdiscount);
         tv_address = (TextView) view.findViewById(R.id.txtAddress);
         //tv_item = (TextView) view.findViewById(R.id.textItems);
@@ -97,6 +100,21 @@ SharedPreferences preferences;
         btn_order = (LinearLayout) view.findViewById(R.id.btn_order_now);
         layout1 = (LinearLayout) view.findViewById(R.id.layout1);
         layout2 = (LinearLayout) view.findViewById(R.id.layout2);
+        membership_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sessionManagement.isLoggedIn()){
+                    Fragment fm = new Membership_fragment();
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                            .addToBackStack(null).commit();
+
+                }else {
+                    Intent inten=new Intent(getActivity(), LoginActivity.class);
+                    startActivity(inten);
+                }
+            }
+        });
 
         getdate = getArguments().getString("getdate");
          String user_id=sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
@@ -157,7 +175,7 @@ SharedPreferences preferences;
                 if (ConnectivityReceiver.isConnected()) {
                     Fragment fm = new Payment_fragment();
                     Bundle args = new Bundle();
-                    args.putString("total", String.valueOf(total));
+                    args.putString("total", String.valueOf(a));
                     args.putString("getdate", date);
                     args.putString("delivery_method", delivery_method);
                     args.putString("gettime", time);
@@ -200,13 +218,14 @@ SharedPreferences preferences;
                     if (response != null && response.length() > 0) {
                         Boolean status = response.getBoolean("response");
                         if (status) {
+                            layout1.setVisibility(View.VISIBLE);
                             JSONArray jsonArray = response.getJSONArray("data");
                             for (int i=0;i<jsonArray.length();i++) {
                                 JSONObject object = jsonArray.getJSONObject(i);
                                tv_discount.setText( object.getString("discount")+"%");
-                               int discount=Integer.parseInt(String.valueOf(total*Integer.parseInt(object.getString("discount"))/100));
-                               int a= (int) (total-discount);
-                               tv_grandtotal.setText("Grand Total :"+total+"-"+discount+"="+a+getResources().getString(R.string.currency));
+                               Double discount=total*Integer.parseInt(object.getString("discount"))/100;
+                                a=  (total-discount);
+                               tv_grandtotal.setText("Grand Total : "+total+" - "+discount+" = "+a+getResources().getString(R.string.currency));
 
 
                             }
@@ -215,6 +234,7 @@ SharedPreferences preferences;
                         }else {
                             layout1.setVisibility(View.INVISIBLE);
                             layout2.setVisibility(View.VISIBLE);
+                            a=total;
                         }
 
                     }

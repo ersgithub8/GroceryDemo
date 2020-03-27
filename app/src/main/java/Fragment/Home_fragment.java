@@ -206,7 +206,7 @@ private Master_category_adapter master_adapter;
             }else {
                 last_order_rv.setVisibility(View.INVISIBLE);
             }
-            membership("85");
+            membership(user_id_for_last_order);
             rl_address.setVisibility(View.VISIBLE);
             String city= sessionManagement.getUserDetails().get(BaseURL.KEY_SOCITY_NAME);
             String area= sessionManagement.getUserDetails().get(BaseURL.KEY_AREA_NAME);
@@ -241,11 +241,18 @@ private Master_category_adapter master_adapter;
         membership_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+               String tec= (String) membership_tv.getText();
+
                 if (sessionManagement.isLoggedIn()){
-                    Fragment fm = new Membership_fragment();
-                    FragmentManager fragmentManager = getFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                            .addToBackStack(null).commit();
+                    if (tec.equals("Membership Active")){
+                        Toast.makeText(getActivity(), "Membership Active", Toast.LENGTH_SHORT).show();
+                    }else {
+                        Fragment fm = new Membership_fragment();
+                        FragmentManager fragmentManager = getFragmentManager();
+                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                                .addToBackStack(null).commit();
+                    }
 
                 }else {
                     Intent inten=new Intent(getActivity(), LoginActivity.class);
@@ -993,13 +1000,11 @@ private Master_category_adapter master_adapter;
                             membership_tv.setBackgroundResource(R.color.yelow);
 
                             membership_tv.setText("Membership Active");
-                            Toast.makeText(getActivity(), "yes", Toast.LENGTH_SHORT).show();
-                            membership_tv.setEnabled(false);
+
 
 
 
                         }else {
-                            Toast.makeText(getActivity(), "no", Toast.LENGTH_SHORT).show();
                         }
 
                     }

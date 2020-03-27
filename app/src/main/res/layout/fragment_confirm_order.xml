@@ -32,7 +32,7 @@
         <ScrollView
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/linearLayout2"
+            android:layout_above="@+id/btn_order_now"
             android:layout_below="@+id/txtPaymentdetails">
 
             <LinearLayout
@@ -143,12 +143,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/layout1"
+                        android:visibility="gone"
                         android:orientation="vertical"
                         >
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="23sp"
+                            android:textSize="20sp"
                             android:text="Congratulation"
                             android:id="@+id/tvtick"
                             android:layout_gravity="center"
@@ -164,10 +165,10 @@
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             android:textSize="18sp"
-                            android:text="Enjoy "
-                            android:gravity="end"
+                            android:text="You have got"
+                            android:gravity="center"
                             android:layout_gravity="center"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/color_3"
                             />
                             <TextView
                                 android:layout_width="0dp"
@@ -175,7 +176,7 @@
                                 android:layout_height="wrap_content"
                                 android:textSize="18sp"
                                 android:id="@+id/tvdiscount"
-                                android:text="10%"
+                                android:text="%"
                                 android:background="@drawable/medal"
                                 android:layout_gravity="center"
                                 android:gravity="center"
@@ -189,7 +190,7 @@
                                 android:text="Off For the membership"
 
                                 android:layout_gravity="center"
-                                android:textColor="@color/colorPrimary"
+                                android:textColor="@color/color_3"
                                 />
                         </LinearLayout>
 
@@ -198,42 +199,53 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:weightSum="3"
                         android:id="@+id/layout2"
                         android:visibility="gone"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
                         <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+
                             android:layout_height="wrap_content"
                             android:textSize="15sp"
-                            android:text="Buy Exclusive membershipto get"
+                            android:text="Buy Exclusive membership to get exclusive discount on every Shopping"
 
-                            android:layout_gravity="center"
+
                             android:textColor="@color/colorPrimary"
                             />
                         <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:textSize="18sp"
-                            android:id="@+id/tvdiscount1"
-                            android:text="10%"
-                            android:background="@drawable/medal"
-                            android:layout_gravity="center"
+                            android:id="@+id/membership_tv"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_below="@+id/intro2"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="9dp"
+                            android:background="#C9FBFB27"
+                            android:drawableEnd="@drawable/arrow"
                             android:gravity="center"
+                            android:text="Become A Member"
                             android:textColor="@color/colorPrimary"
+                            android:textSize="20sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" And Enjoy"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="18sp"
+                            android:layout_gravity="center"
                             />
                         <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="15sp"
-                            android:text="Off For the membership"
-
                             android:layout_gravity="center"
-                            android:textColor="@color/colorPrimary"
+                            android:background="@drawable/medal"
+                            android:text="10%off"
+                            android:textColor="@color/color_3"
+                            android:gravity="center"
                             />
+
+
                     </LinearLayout>
 
 
