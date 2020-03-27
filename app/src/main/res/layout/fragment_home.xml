@@ -368,7 +368,6 @@
                 android:id="@+id/shop_by_category_tv"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:background="@drawable/shadow2"
                 android:gravity="center"
                 android:text="Shop By Category"
                 android:layout_marginTop="@dimen/space_10"
