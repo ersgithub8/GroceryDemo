@@ -210,6 +210,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
         dialog.setContentView(R.layout.dialog_product_detail);
         dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         dialog.show();
+        Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
 
 
         asubunit = new ArrayList<>();
