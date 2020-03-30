@@ -225,7 +225,7 @@ public class my_last_order_adapter extends RecyclerView.Adapter<my_last_order_ad
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             SharedPreferences.Editor editor = context.getSharedPreferences("rating_store", MODE_PRIVATE).edit();
-                            editor.putString("rating","null");
+                            editor.putString("rating","added");
                         }
                     })
                     .setNeutralButton("Skip", new DialogInterface.OnClickListener() {
