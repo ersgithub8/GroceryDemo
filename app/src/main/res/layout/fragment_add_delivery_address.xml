@@ -196,7 +196,13 @@
 
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/iconn" />
+                    android:src="@drawable/iconn"
+                    android:visibility="gone"/>
+                <Fonts.LatoBLack
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/green"
+                    android:text="  (optional)"/>
 
             </LinearLayout>
             <EditText
@@ -222,8 +228,14 @@
                 android:textSize="14sp" />
                 <ImageView
                     android:layout_width="16dp"
+                    android:visibility="gone"
                     android:layout_height="16dp"
                     android:src="@drawable/iconn" />
+                <Fonts.LatoBLack
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/green"
+                    android:text="  (optional)"/>
             </LinearLayout>
 
 
@@ -252,7 +264,16 @@
                     android:id="@+id/area"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/iconn" /></LinearLayout>
+                    android:src="@drawable/iconn"
+                    android:visibility="gone"/>
+
+                <Fonts.LatoBLack
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/green"
+                    android:text="  (optional)"/>
+
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/et_Address3"
