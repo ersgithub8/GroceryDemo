@@ -18,7 +18,7 @@
         android:background="@drawable/dealofdayback"
         android:padding="1dp"
 
-        android:layout_height="145dp">
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:paddingTop="3dp"
@@ -51,16 +51,36 @@
                 android:text="Product Name"
                 android:paddingRight="@dimen/space_3"
                 android:fontFamily="@font/r8"
-                android:layout_marginTop="@dimen/space_3"
+                android:layout_marginTop="@dimen/space_10"
                 android:textStyle="bold"
                 android:textColor="#000"
                 android:textSize="18sp" />
+            <RelativeLayout
+                android:id="@+id/lll1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_icon"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@id/product_name">
 
+            <TextView
+                android:id="@+id/product_mrp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="5dp"
+                android:gravity="end"
+                android:text="Product Price"
+                android:textColor="#fff"
+                android:textSize="15sp"
+                />
+            </RelativeLayout>
             <TextView
                 android:id="@+id/product_prize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/iv_icon"
+                android:layout_below="@id/lll1"
                 android:layout_alignParentRight="true"
 
 
@@ -68,7 +88,7 @@
                 android:layout_marginTop="3dp"
                 android:layout_marginRight="5dp"
                 android:layout_toRightOf="@id/product_name"
-                android:gravity="center"
+                android:gravity="end"
                 android:text="Product Price"
                 android:textColor="#fff"
                     android:textSize="15sp"

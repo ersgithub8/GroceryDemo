@@ -2,6 +2,7 @@ package Adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +27,7 @@ private List<Product_model> modelList;
 private Context context;
         SharedPreferences preferences;
 public class MyViewHolder extends RecyclerView.ViewHolder {
-    public TextView product_nmae, product_prize;
+    public TextView product_nmae, product_prize,productmrp;
     public ImageView image;
 
     public MyViewHolder(View view) {
@@ -34,6 +35,8 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
         product_nmae = (TextView) view.findViewById(R.id.product_name);
         product_prize = (TextView) view.findViewById(R.id.product_prize);
         image = (ImageView) view.findViewById(R.id.iv_icon);
+        productmrp=(TextView)view.findViewById(R.id.product_mrp);
+        productmrp.setPaintFlags(product_prize.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
     }
 }
 
@@ -64,7 +67,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
                 .dontAnimate()
                 .into(holder.image);
         holder.product_prize.setText( mList.getPrice()+ context.getResources().getString(R.string.currency) );
-
+        holder.productmrp.setText(mList.getMrp()+ context.getResources().getString(R.string.currency));
         if (language.contains("english")) {
             holder.product_nmae.setText(mList.getProduct_name());
         }
