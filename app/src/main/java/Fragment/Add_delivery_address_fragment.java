@@ -348,7 +348,8 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
       //  Toast.makeText(getActivity(), gethouse, Toast.LENGTH_SHORT).show();
         String getsocity = sessionManagement.getUserDetails().get(BaseURL.KEY_SOCITY_ID);
         String getarea = sessionManagement.getUserDetails().get(BaseURL.AREA_ID);
-        String getapartment = sessionManagement.getUserDetails().get(BaseURL.APARTMENT_ID);
+        String getapartment="";
+                getapartment = sessionManagement.getUserDetails().get(BaseURL.APARTMENT_ID);
 
         boolean cancel = false;
         View focusView = null;
@@ -416,6 +417,8 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
         ) {
 //            tv_socity.setTextColor(getResources().getColor(R.color.colorPrimary));
 //            focusView = tv_apartment;
+
+//            getapartment="";
             cancel = false;
         }
 
