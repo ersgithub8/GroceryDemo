@@ -311,7 +311,7 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
         tv_pin.setText(getResources().getString(R.string.tv_reg_pincode));
         tv_name.setText(getResources().getString(R.string.receiver_name_req));
         tv_area.setText("area required...");
-        tv_apartment.setText("apartment required...");
+//        tv_apartment.setText("apartment required...");
        // tv_house.setText(getResources().getString(R.string.tv_reg_house));
        // tv_socity.setText(getResources().getString(R.string.tv_reg_socity));
 
@@ -327,9 +327,19 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
         String getAddress1=et_Address.getText().toString();
         String getAddress2=et_Address2.getText().toString();
         String getAddress3=et_Address3.getText().toString();
+        String getAddress="";
 
+        if(!et_Address.getText().toString().isEmpty()){
+            getAddress = "Flat no & Plot no. " + getAddress1 ;
+        }
+        if(!et_Address2.getText().toString().isEmpty()){
+            getAddress =getAddress+"," + "Floor no: " + getAddress2;
+        }
+        if(!et_Address3.getText().toString().isEmpty()){
+            getAddress =getAddress+"," + "Building name & Colony Name: " + getAddress3;
+        }
 
-        String getAddress = "Flat no & Plot no. " + getAddress1 + "," + "Floor no: " + getAddress2+"," + "Building name & Colony Name: " + getAddress3;
+        //getAddress = "Flat no & Plot no. " + getAddress1 + "," + "Floor no: " + getAddress2+"," + "Building name & Colony Name: " + getAddress3;
        // Toast.makeText(getActivity(), getAddress, Toast.LENGTH_SHORT).show();
         SharedPreferences prefs =getActivity().getSharedPreferences("7", MODE_PRIVATE);
         float lat = prefs.getFloat("8",1);
@@ -353,9 +363,9 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
             focusView = et_phone;
             cancel = true;
         } else if (TextUtils.isEmpty(getAddress)) {
-            tv_address.setTextColor(getResources().getColor(R.color.colorPrimary));
-            focusView = et_Address;
-            cancel = true;
+//            tv_address.setTextColor(getResources().getColor(R.color.colorPrimary));
+//            focusView = et_Address;
+            cancel = false;
         }
 
         if (TextUtils.isEmpty(getname)) {
@@ -370,19 +380,19 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
             cancel = true;
         }
         if (TextUtils.isEmpty(getAddress1)) {
-            tv_address.setTextColor(getResources().getColor(R.color.colorPrimary));
-            focusView = et_Address;
-            cancel = true;
+            //tv_address.setTextColor(getResources().getColor(R.color.colorPrimary));
+            //focusView = et_Address;
+            cancel = false;
         }if (TextUtils.isEmpty(getAddress2)) {
-            tv_address1.setTextColor(getResources().getColor(R.color.colorPrimary));
-            focusView = et_Address2;
-            cancel = true;
+//            tv_address1.setTextColor(getResources().getColor(R.color.colorPrimary));
+//            focusView = et_Address2;
+            cancel = false;
         }if (TextUtils.isEmpty(getAddress3)) {
-            tv_address2.setTextColor(getResources().getColor(R.color.colorPrimary));
-            tv_address3.setTextColor(getResources().getColor(R.color.colorPrimary));
-
-            focusView = et_Address2;
-            cancel = true;
+//            tv_address2.setTextColor(getResources().getColor(R.color.colorPrimary));
+//            tv_address3.setTextColor(getResources().getColor(R.color.colorPrimary));
+//
+//            focusView = et_Address2;
+            cancel = false;
         }
 
 //        if (TextUtils.isEmpty(gethouse)) {
@@ -401,10 +411,12 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
             focusView = tv_area;
             cancel = true;
         }
-        if (TextUtils.isEmpty(getapartment) && getapartment == null) {
-            tv_socity.setTextColor(getResources().getColor(R.color.colorPrimary));
-            focusView = tv_apartment;
-            cancel = true;
+        if (TextUtils.isEmpty(getapartment)
+        //        && getapartment == null
+        ) {
+//            tv_socity.setTextColor(getResources().getColor(R.color.colorPrimary));
+//            focusView = tv_apartment;
+            cancel = false;
         }
 
         if (cancel) {
