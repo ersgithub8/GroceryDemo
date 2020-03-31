@@ -212,6 +212,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
         dialog.show();
 
 
+
         asubunit = new ArrayList<>();
         bsubprice = new ArrayList<>();
 
