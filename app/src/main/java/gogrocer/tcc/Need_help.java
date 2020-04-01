@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.android.volley.NoConnectionError;
@@ -35,6 +37,7 @@ import util.Session_management;
 
 public class Need_help extends AppCompatActivity {
     RecyclerView rv_refund;
+    ImageButton back;
     private List<Refund_model> area_modelList = new ArrayList<>();
     private Refund_Adapter area_adapter;
     private Session_management sessionManagement;
@@ -42,7 +45,7 @@ public class Need_help extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_need_help);
-
+        back=findViewById(R.id.bbtn);
         rv_refund=findViewById(R.id.refund_order);
         rv_refund.setLayoutManager(new LinearLayoutManager(this));
         sessionManagement=new  Session_management(this);
@@ -54,7 +57,12 @@ public class Need_help extends AppCompatActivity {
             makeGetrefund(user_id);
 
         }
-
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
     private void makeGetrefund(String user_id)
     {
