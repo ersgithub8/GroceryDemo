@@ -63,9 +63,9 @@ public class Refund_Adapter extends RecyclerView.Adapter<Refund_Adapter.MyViewHo
 
 
         holder.tv_orderid.setText("Order ID: "+mList.getOrder_id());
-        holder.tv_price.setText("Return Amount : "+mList.getAmount());
-        holder.tv_date.setText(mList.getDate());
-        holder.tv_total_amount.setText("Total Amount : "+mList.getTotal_amount());
+        holder.tv_price.setText("Return Amount : "+mList.getAmount()+context.getResources().getString(R.string.currency));
+        holder.tv_date.setText("Date: "+mList.getDate());
+        holder.tv_total_amount.setText("Total Amount : "+mList.getTotal_amount()+context.getResources().getString(R.string.currency));
         holder.store_name.setText("Store Name : "+mList.getStore_name());
 
         String s=mList.getStatus();
