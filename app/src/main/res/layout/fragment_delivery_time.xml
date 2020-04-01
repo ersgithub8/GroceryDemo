@@ -39,7 +39,6 @@
                 android:orientation="vertical"
                 android:padding="@dimen/space_10">
                 <RadioGroup
-                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
@@ -81,17 +80,17 @@
                     android:padding="@dimen/space_5"/>
 
                 <Fonts.LatoBLack
-                    android:visibility="gone"
                     android:id="@+id/tv_deli_fromtime"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space_5"
                     android:background="@drawable/xml_textbox_blue_bg"
                     android:drawableLeft="@drawable/ic_timeslot_17"
                     android:gravity="center_vertical"
+                    android:padding="@dimen/space_5"
                     android:text="@string/tv_del_time"
-                    android:textColor="@color/white"
-                    android:padding="@dimen/space_5"/>
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 

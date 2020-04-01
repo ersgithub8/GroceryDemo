@@ -164,6 +164,7 @@ String language;
             public void onClick(View v) {
 
                 tv_date.setVisibility(View.INVISIBLE);
+                nextdaytext.setText("your order will be delivered within one hour");
             }
         });
         Calendar calendar = Calendar.getInstance();
@@ -389,28 +390,28 @@ String language;
 
             Bundle args = new Bundle();
             Fragment fm = new Delivery_payment_detail_fragment();
-//                if (FastRadioBtn.isChecked())
-//                {
-//                    args.putString("delivery_method","instantdelivery");
-//                    args.putString("getdate", formattedDate);
-//                    args.putString("time", currentTime1);
-//                }else
-//                {
-//                    args.putString("delivery_method","customdelivery");
-//                    args.putString("getdate", getdate );
-//                    args.putString("time", currentTime1);
-//                }
-            if (store_id.equals("232")) {
-                args.putString("delivery_method", "nextdaydelivery");
-                args.putString("getdate", tomorrowAsString);
-                args.putString("time", currentTime1);
-            } else {
-
-                args.putString("delivery_method", "fastdelivery");
-                args.putString("getdate", formattedDate);
-                args.putString("time", currentTime1);
-
-            }
+                if (FastRadioBtn.isChecked())
+                {
+                    args.putString("delivery_method","instantdelivery");
+                    args.putString("getdate", formattedDate);
+                    args.putString("time", currentTime1);
+                }else
+                {
+                    args.putString("delivery_method","customdelivery");
+                    args.putString("getdate", getdate );
+                    args.putString("time", currentTime1);
+                }
+//            if (store_id.equals("232")) {
+//                args.putString("delivery_method", "nextdaydelivery");
+//                args.putString("getdate", tomorrowAsString);
+//                args.putString("time", currentTime1);
+//            } else {
+//
+//                args.putString("delivery_method", "fastdelivery");
+//                args.putString("getdate", formattedDate);
+//                args.putString("time", currentTime1);
+//
+//            }
           // Toast.makeText(getActivity(), location_id+address, Toast.LENGTH_SHORT).show();
 
             args.putString("location_id", location_id);
