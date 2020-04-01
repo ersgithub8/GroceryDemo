@@ -4,9 +4,11 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.SyncStateContract;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,18 +17,24 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.google.gson.Gson;
@@ -41,6 +49,7 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -70,8 +79,11 @@ public class Product_fragment extends Fragment {
     private static String TAG = Product_fragment.class.getSimpleName();
     private RecyclerView rv_cat;
     private TabLayout tab_cat;
+    String Storeid;
     TextView storename;
     private  View product,deals;
+    ArrayList<String> ids=new ArrayList<String>();
+    ArrayList<String> name=new ArrayList<String>();
     private List<Category_model> category_modelList = new ArrayList<>();
     private List<Slider_subcat_model> slider_subcat_models = new ArrayList<>();
     private List<String> cat_menu_id = new ArrayList<>();
@@ -85,6 +97,7 @@ public class Product_fragment extends Fragment {
     private Home_adapter adapter;
     private Button Product_btn,Deals_btn;
     ProgressDialog progressDialog;
+    Spinner store;
     public Product_fragment() {
     }
 
@@ -98,7 +111,7 @@ public class Product_fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product, container, false);
-
+        store=view.findViewById(R.id.spinnerstore);
         product=view.findViewById(R.id.pview);
         deals=view.findViewById(R.id.dview);
         storename=view.findViewById(R.id.sn);
@@ -116,14 +129,17 @@ public class Product_fragment extends Fragment {
         progressDialog = new ProgressDialog(getActivity());
         ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.tv_product_name));
 
+        Storeid = getArguments().getString("Store_id");
+
         deals.setVisibility(View.INVISIBLE);
         product.setVisibility(View.VISIBLE);
-
+        getStore(getcat_id);
+        Toast.makeText(getActivity(), getcat_id, Toast.LENGTH_SHORT).show();
         Product_btn.setBackgroundResource(R.color.bg);
         Product_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String Storeid = getArguments().getString("Store_id");
+//                 Storeid = getArguments().getString("Store_id");
                 product_modelList.clear();
 
                 product.setVisibility(View.VISIBLE);
@@ -140,7 +156,7 @@ public class Product_fragment extends Fragment {
         Deals_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String Storeid = getArguments().getString("Store_id");
+//                 Storeid = getArguments().getString("Store_id");
                 product_modelList.clear();
 
                 deals.setVisibility(View.VISIBLE);
@@ -166,7 +182,7 @@ public class Product_fragment extends Fragment {
             public void onItemClick(View view, int position) {
                 String getid = category_modelList.get(position).getId();
                 String getcat_title = category_modelList.get(position).getTitle();
-                String Storeid = getArguments().getString("Store_id");
+//                Storeid = getArguments().getString("Store_id");
                 makeGetProductsRequest(Storeid, getid);
 
 
@@ -195,7 +211,7 @@ public class Product_fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                String Storeid = getArguments().getString("Store_id");
+//                Storeid = getArguments().getString("Store_id");
                 bundle.putString("Store_id_S", Storeid);
                 Fragment fm = new Search_fragment();
                 fm.setArguments(bundle);
@@ -216,7 +232,7 @@ public class Product_fragment extends Fragment {
         if (ConnectivityReceiver.isConnected()) {
             //Shop by Catogary
             //makeGetCategoryRequest(getcat_id);
-            String Storeid = getArguments().getString("Store_id");
+//             Storeid = getArguments().getString("Store_id");
             makeGetProductRequest(Storeid);
             //makeGetProductsRequest(Storeid,getcat_id);
 
@@ -255,7 +271,22 @@ public class Product_fragment extends Fragment {
 //            public void onTabReselected(TabLayout.Tab tab) {
 //            }
 //        });
+        store.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position==0){
+                    return;
+                }
+                Storeid=ids.get(position);
+                makeGetProductRequest(ids.get(position));
 
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         return view;
     }
 
@@ -787,7 +818,88 @@ public class Product_fragment extends Fragment {
 
     }
 
+public void getStore(String catid){
+    final AlertDialog loading=new ProgressDialog(getActivity());
+    loading.setMessage("Loading...");
+    loading.setCancelable(false);
+    loading.show();
 
+    Map<String,String> params=new Hashtable<String, String>();
+    //TODO isko fix kia hoa he filhal dekh le
+    params.put("subCat_id","37");
+
+    CustomVolleyJsonRequest jsonObjectRequest=new CustomVolleyJsonRequest(Request.Method.POST
+            , BaseURL.GET_Store_URL
+            , params, new Response.Listener<JSONObject>() {
+        @Override
+        public void onResponse(JSONObject response) {
+            loading.dismiss();
+
+            Boolean status = null;
+            try{
+                status = response.getBoolean("response");
+
+                if (status){
+
+                    JSONArray jsonArray=response.getJSONArray("data");
+
+                    name.clear();
+                    ids.clear();
+                    name.add("Select Store");
+                    ids.add("0");
+                    for(int i=0;i<jsonArray.length();i++){
+
+                        JSONObject object=jsonArray.getJSONObject(i);
+
+                        name.add(object.getString("user_name"));
+                        ids.add(object.getString("user_id"));
+
+                        ArrayAdapter<String> adapter=new ArrayAdapter<String>(getActivity(),
+                                android.R.layout.simple_spinner_item,name);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        store.setAdapter(adapter);
+                        //Toast.makeText(Signin.this, jsonArray.getString(0), Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+                else {
+                    Toast.makeText(getActivity(),response.getString("data"),Toast.LENGTH_SHORT).show();
+                }
+
+            } catch (JSONException e) {
+
+                Toast.makeText(getActivity(), e+"", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+            , new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            loading.dismiss();
+            Toast.makeText(getActivity(),error+"",Toast.LENGTH_SHORT).show();
+
+        }
+    });
+
+    jsonObjectRequest.setRetryPolicy(new RetryPolicy() {
+        @Override
+        public int getCurrentTimeout() {
+            return 50000;
+        }
+
+        @Override
+        public int getCurrentRetryCount() {
+            return 50000;
+        }
+
+        @Override
+        public void retry(VolleyError error) throws VolleyError {
+
+        }
+    });
+    RequestQueue queue = Volley.newRequestQueue(getActivity());
+    queue.add(jsonObjectRequest);
+}
 }
 
 
