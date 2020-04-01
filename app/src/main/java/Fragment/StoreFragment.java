@@ -90,7 +90,7 @@ public class StoreFragment extends Fragment {
         tollbar=(TextView)view.findViewById(R.id.tollbar1);
         SharedPreferences prefs = getActivity().getSharedPreferences("city", MODE_PRIVATE);
 
-        String cat_id=getArguments().getString("subsubcat_id");
+        final String cat_id=getArguments().getString("subsubcat_id");
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
 
         if (ConnectivityReceiver.isConnected()) {
@@ -100,31 +100,7 @@ public class StoreFragment extends Fragment {
         jsonrequest(cat_id);
 
 
-        Bundle b = getArguments();
-//        if (b!=null) {
-//          StoreName = b.getString("1");
-//          //  Toast.makeText(getActivity(), StoreName, Toast.LENGTH_SHORT).show();
-//
-//            if (StoreName.equals("Grocery")) {
-//                tollbar.setText("Kirana Stores");
-//                jsonrequest();
-//            }
-//            if (StoreName.equals("Vegetable")) {
-//                tollbar.setText("Vegetable Stores");
-//                jsonrequest();
-//            }
-//            if (StoreName.equals("Fruit")) {
-//                tollbar.setText("Fruit Stores");
-//                jsonrequest();
-//            }
-//            if (StoreName.equals("All")) {
-//                tollbar.setText("Stores");
-//                jsonrequest();
-//            }if (StoreName.equals("232")) {
-//                tollbar.setText("Next Day Delivery Store");
-//                jsonrequest();
-//            }
-//        }
+
 
 
 
@@ -144,6 +120,7 @@ public class StoreFragment extends Fragment {
                 args.putString("Store_id", getid);
                 args.putString("store_name",getname);
                 args.putString("store_image",getimg);
+                args.putString("category_id",cat_id);
 
                 fm.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();

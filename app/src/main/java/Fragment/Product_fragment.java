@@ -126,6 +126,7 @@ public class Product_fragment extends Fragment {
         String get_deal_id = getArguments().getString("cat_deal");
         String get_top_sale_id = getArguments().getString("cat_top_selling");
         String getcat_title = getArguments().getString("cat_title");
+        String category_id=getArguments().getString("category_id");
         progressDialog = new ProgressDialog(getActivity());
         ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.tv_product_name));
 
@@ -133,7 +134,7 @@ public class Product_fragment extends Fragment {
 
         deals.setVisibility(View.INVISIBLE);
         product.setVisibility(View.VISIBLE);
-        getStore(getcat_id);
+        getStore(category_id);
         Toast.makeText(getActivity(), getcat_id, Toast.LENGTH_SHORT).show();
         Product_btn.setBackgroundResource(R.color.bg);
         Product_btn.setOnClickListener(new View.OnClickListener() {
@@ -826,7 +827,7 @@ public void getStore(String catid){
 
     Map<String,String> params=new Hashtable<String, String>();
     //TODO isko fix kia hoa he filhal dekh le
-    params.put("subCat_id","37");
+    params.put("subCat_id",catid);
 
     CustomVolleyJsonRequest jsonObjectRequest=new CustomVolleyJsonRequest(Request.Method.POST
             , BaseURL.GET_Store_URL
@@ -851,7 +852,7 @@ public void getStore(String catid){
 
                         JSONObject object=jsonArray.getJSONObject(i);
 
-                        name.add(object.getString("user_name"));
+                        name.add(object.getString("user_fullname"));
                         ids.add(object.getString("user_id"));
 
                         ArrayAdapter<String> adapter=new ArrayAdapter<String>(getActivity(),

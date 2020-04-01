@@ -99,7 +99,7 @@ public class Home_fragment extends Fragment {
     private boolean isSubcat = false;
     LinearLayout Search_layout;
     RelativeLayout rl_address;
-    String getid;
+    String getid,cat_id;
     String storename;
     String storeimg;
     String getcat_title;
@@ -388,11 +388,14 @@ private Master_category_adapter master_adapter;
             @Override
             public void onItemClick(View view, int position) {
                 getid = master_models.get(position).getId();
+                cat_id = product_models.get(position).getCategory_id();
+
                 Bundle args = new Bundle();
 
 
                 fm =new Subcategory_fragment();
                 args.putString("cat_id", getid);
+                args.putString("category_id", cat_id);
 //                Toast.makeText(getActivity(), getid, Toast.LENGTH_SHORT).show();
                 fm.setArguments(args);
                 FragmentManager fragmentManager1=getFragmentManager();
@@ -438,12 +441,14 @@ private Master_category_adapter master_adapter;
 
                 String dealOfDayStoreId= deal_of_day_models.get(position).getStoreid();
                 String dealof_Day_catId = deal_of_day_models.get(position).getId();
+                cat_id=product_models.get(position).getCategory_id();
              //  Toast.makeText(getActivity(), dealOfDayStoreId, Toast.LENGTH_SHORT).show();
 
                 Bundle args = new Bundle();
                 Fragment fm = new Product_fragment();
                 args.putString("Store_id", dealOfDayStoreId);
                 args.putString("cat__id",dealof_Day_catId);
+                args.putString("category_id",cat_id);
                // args.putString("store_type",getStore_type);
                 fm.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
@@ -459,19 +464,7 @@ private Master_category_adapter master_adapter;
 
             }
         }));
-        View_all_deals.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle args = new Bundle();
-                Fragment fm = new Product_fragment();
-                args.putString("cat_deal", "2");
-                fm.setArguments(args);
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                        .addToBackStack(null).commit();
 
-            }
-        });
 
 
         //REcyclerview Top Selling
@@ -485,6 +478,7 @@ private Master_category_adapter master_adapter;
                 Bundle args = new Bundle();
                 Fragment fm = new Product_fragment();
                 args.putString("Store_id", StoreidForTopSelling);
+                args.putString("category_id", cat_id);
 
 
                 fm.setArguments(args);
@@ -526,6 +520,7 @@ private Master_category_adapter master_adapter;
 
 
                 String StoreidForrecomendedSelling = product_models.get(position).getStoreid();
+                cat_id=product_models.get(position).getCategory_id();
 
 
                 Bundle args = new Bundle();
@@ -533,7 +528,7 @@ private Master_category_adapter master_adapter;
                 args.putString("Store_id", StoreidForrecomendedSelling);
 
                 args.putString("Store_name",storename);
-                args.putString("store_img",storeimg);
+                args.putString("category_id",cat_id);
                  fm.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
@@ -559,12 +554,14 @@ private Master_category_adapter master_adapter;
 
 
                 String StoreidForBestSelling = product_models.get(position).getStoreid();
+                cat_id=product_models.get(position).getCategory_id();
                 Bundle args = new Bundle();
                 Fragment fm = new Product_fragment();
                 args.putString("Store_id", StoreidForBestSelling);
 
                // Toast.makeText(getActivity(), storename, Toast.LENGTH_SHORT).show();
                 args.putString("Store_name",storename);
+                args.putString("category_id",cat_id);
 
                 // args.putString("store_type",getStore_type);
                 fm.setArguments(args);
