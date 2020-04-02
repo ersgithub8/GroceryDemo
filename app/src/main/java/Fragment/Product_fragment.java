@@ -826,7 +826,6 @@ public void getStore(String catid){
     loading.show();
 
     Map<String,String> params=new Hashtable<String, String>();
-    //TODO isko fix kia hoa he filhal dekh le
     params.put("subCat_id",catid);
 
     CustomVolleyJsonRequest jsonObjectRequest=new CustomVolleyJsonRequest(Request.Method.POST
