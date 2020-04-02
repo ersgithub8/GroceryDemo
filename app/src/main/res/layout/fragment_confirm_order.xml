@@ -100,6 +100,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         card_view:cardElevation="@dimen/space_3"
+                        android:layout_marginLeft="10dp"
                         card_view:cardUseCompatPadding="true"
                         card_view:cardCornerRadius="4dp">
 
@@ -143,6 +144,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/layout1"
+
                         android:visibility="gone"
                         android:orientation="vertical"
                         >
@@ -152,6 +154,7 @@
                             android:textSize="20sp"
                             android:text="Congratulation"
                             android:id="@+id/tvtick"
+                            android:fontFamily="@font/r8"
                             android:layout_gravity="center"
                             android:textColor="@color/color_1"
                             android:drawableTop="@drawable/tick"/>
@@ -167,6 +170,7 @@
                             android:textSize="18sp"
                             android:text="You have got"
                             android:gravity="center"
+                            android:fontFamily="@font/r8"
                             android:layout_gravity="center"
                             android:textColor="@color/color_3"
                             />
@@ -177,10 +181,12 @@
                                 android:textSize="18sp"
                                 android:id="@+id/tvdiscount"
                                 android:text="%"
+                                android:fontFamily="@font/r8"
+                                android:textStyle="bold"
                                 android:background="@drawable/medal"
                                 android:layout_gravity="center"
                                 android:gravity="center"
-                                android:textColor="@color/colorPrimary"
+                                android:textColor="@color/color_2"
                                 />
                             <TextView
                                 android:layout_width="0dp"
@@ -189,6 +195,7 @@
                                 android:textSize="18sp"
                                 android:text="Off For the membership"
 
+                                android:fontFamily="@font/r8"
                                 android:layout_gravity="center"
                                 android:textColor="@color/color_3"
                                 />
@@ -196,11 +203,17 @@
 
 
                     </LinearLayout>
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:orientation="vertical">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+android:visibility="gone"
                         android:id="@+id/layout2"
-                        android:visibility="gone"
+
                         android:orientation="vertical">
                         <TextView
                             android:layout_width="match_parent"
@@ -208,7 +221,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="15sp"
                             android:text="Buy Exclusive membership to get exclusive discount on every Shopping"
-
+                            android:fontFamily="@font/r8"
 
                             android:textColor="@color/colorPrimary"
                             />
@@ -218,14 +231,15 @@
                             android:layout_height="40dp"
                             android:layout_below="@+id/intro2"
                             android:layout_marginLeft="10dp"
-                            android:layout_marginTop="24dp"
+                            android:layout_marginTop="10dp"
                             android:layout_marginRight="10dp"
                             android:layout_marginBottom="9dp"
-                            android:background="#C9FBFB27"
+                            android:background="@color/colorPrimary"
                             android:drawableEnd="@drawable/arrow"
                             android:gravity="center"
                             android:text="Become A Member"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/r8"
                             android:textSize="20sp" />
                         <TextView
                             android:layout_width="wrap_content"
@@ -233,6 +247,7 @@
                             android:text=" And Enjoy"
                             android:textColor="@color/colorPrimary"
                             android:textSize="18sp"
+                            android:fontFamily="@font/r8"
                             android:layout_gravity="center"
                             />
                         <TextView
@@ -241,12 +256,15 @@
                             android:layout_gravity="center"
                             android:background="@drawable/medal"
                             android:text="10%off"
-                            android:textColor="@color/color_3"
+                            android:textColor="@color/color_2"
                             android:gravity="center"
+                            android:fontFamily="@font/r8"
+                            android:textStyle="bold"
                             />
 
 
                     </LinearLayout>
+                    </android.support.v7.widget.CardView>
 
 
 

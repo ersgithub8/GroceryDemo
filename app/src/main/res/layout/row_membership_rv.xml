@@ -33,10 +33,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:fontFamily="@font/gotham"
+                    android:fontFamily="@font/r8"
                     android:text="Membership:"
                     android:textColor="#83000000"
-                    android:textSize="12sp" />
+                    android:textSize="8sp" />
 
                 <Fonts.LatoBLack
                     android:id="@+id/name"
@@ -44,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:text="pending"
                     android:padding="5dp"
-                    android:fontFamily="@font/gotham"
+                    android:fontFamily="@font/r8"
                     android:textSize="13sp"
                     android:layout_marginLeft="15dp"
                     android:gravity="center"
@@ -63,8 +63,8 @@
 
                     android:text="TYPE:"
                     android:textColor="#83000000"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/gotham" />
+                    android:textSize="8sp"
+                    android:fontFamily="@font/r8" />
 
                 <Fonts.LatoBLack
                     android:id="@+id/Type"
@@ -75,7 +75,7 @@
                     android:textSize="13sp"
                     android:layout_marginLeft="15dp"
                     android:gravity="center"
-                    android:fontFamily="@font/gotham"
+                    android:fontFamily="@font/r8"
                     android:textColor="#000" />
             </LinearLayout>
 
@@ -92,8 +92,8 @@
                 android:text="Ammount:"
                 android:textColor="#83000000"
 
-                android:textSize="12sp"
-                android:fontFamily="@font/gotham" />
+                android:textSize="8sp"
+                android:fontFamily="@font/r8" />
 
             <Fonts.LatoBLack
                 android:id="@+id/ammount"
@@ -102,7 +102,7 @@
                 android:text="pending"
                 android:textSize="13sp"
                 android:layout_marginLeft="15dp"
-                android:fontFamily="@font/gotham"
+                android:fontFamily="@font/r8"
                 android:gravity="center"
                 android:padding="5dp"
                 android:textColor="#000" />
@@ -118,7 +118,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:fontFamily="@font/gotham"
+                    android:fontFamily="@font/r8"
 
                     android:gravity="center"
                     android:padding="15dp"
@@ -138,7 +138,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
 
-                    android:fontFamily="@font/gotham"
+                    android:fontFamily="@font/r8"
 
                     android:gravity="center"
                     android:padding="15dp"
