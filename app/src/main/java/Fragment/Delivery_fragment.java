@@ -395,12 +395,16 @@ String language;
                     args.putString("delivery_method","instantdelivery");
                     args.putString("getdate", formattedDate);
                     args.putString("time", currentTime1);
-                }else
+                }else if (CustomRadioBtn.isChecked())
                 {
-                    args.putString("delivery_method","customdelivery");
-                    args.putString("getdate", getdate );
-                    args.putString("time", currentTime1);
-                }
+                    args.putString("delivery_method", "customdelivery");
+                    args.putString("getdate", getdate);
+                    args.putString("time", currentTime1);if (!FastRadioBtn.isChecked())
+
+                    }else {
+                        Toast.makeText(getActivity(), "Select delivery method First", Toast.LENGTH_SHORT).show();
+
+                    }
 //            if (store_id.equals("232")) {
 //                args.putString("delivery_method", "nextdaydelivery");
 //                args.putString("getdate", tomorrowAsString);
