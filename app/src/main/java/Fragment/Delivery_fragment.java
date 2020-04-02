@@ -177,16 +177,16 @@ String language;
 
 
 
-
-        if (store_id.equals("232"))
-        {
-            FastRadioBtn.setChecked(true);
-           // Toast.makeText(getActivity(), tomorrowAsString, Toast.LENGTH_SHORT).show();
-
-            nextdaytext.setText("your order will be delivered Tomorrow 5:30 am to 8:00 am");
-        }else {
-            nextdaytext.setText("your order will be delivered within one hour");
-        }
+//
+//        if (store_id.equals("232"))
+//        {
+//            FastRadioBtn.setChecked(true);
+//           // Toast.makeText(getActivity(), tomorrowAsString, Toast.LENGTH_SHORT).show();
+//
+//            nextdaytext.setText("your order will be delivered Tomorrow 5:30 am to 8:00 am");
+//        }else {
+//            nextdaytext.setText("your order will be delivered within one hour");
+//        }
         //tv_socity = (TextView) view.findViewById(R.id.tv_deli_socity);
         //et_address = (EditText) view.findViewById(R.id.et_deli_address);
 
