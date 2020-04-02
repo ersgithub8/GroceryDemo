@@ -5,8 +5,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="gogrocer.tcc.HelpActivity">
+    tools:context="gogrocer.tcc.HelpActivity"
+    android:weightSum="10" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6.5"
+        android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"
+            >
+            <ImageButton
+                android:id="@+id/bhbtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="@dimen/space_5"
+                app:srcCompat="@drawable/left"
+                android:background="@android:color/transparent"
+                android:layout_gravity="center_vertical"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Help"
+                android:background="@color/colorPrimary"
+                android:textSize="20sp"
+                android:layout_gravity="center_vertical"
+                android:textColor="#ffffff"
+                android:padding="3dp"
+                android:fontFamily="@font/roboto"
+                />
+
+
+        </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,45 +52,36 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/green"
+            android:textColor="@color/black"
+            android:textSize="@dimen/space_18"
+            android:layout_marginLeft="@dimen/space_5"
             android:layout_marginBottom="@dimen/space_3"
             android:text="Dont wory you need help?\nWe are here to support our valuable customers."/>
-    <Spinner
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Spinner
         android:id="@+id/spinnerorder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/green"
+        android:padding="@dimen/space_10"
+        android:background="@drawable/etbg1"
         />
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/ic_keyboard_arrow_down"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/space_2"
         android:layout_marginBottom="@dimen/space_4"
+        android:visibility="gone"
         android:background="@color/green"/>
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="@color/green">
-
-
-        <EditText
-            android:id="@+id/ethelp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Describe Your Issue"
-            android:textSize="@dimen/space_15"
-            android:backgroundTint="@color/green"
-            android:textColor="@color/green"
-            android:layout_marginTop="@dimen/space_5"
-            />
-    </android.support.design.widget.TextInputLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/space_2"
-        android:layout_marginBottom="@dimen/space_4"
-        android:background="@color/green"/>
 <TextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -85,4 +110,49 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3.5"
+        android:paddingLeft="@dimen/space_5"
+        android:layout_gravity="bottom"
+        android:paddingRight="@dimen/space_5"
+        android:orientation="vertical"
+        android:weightSum="10">
+        <EditText
+            android:id="@+id/ethelp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8.5"
+            android:hint="Describe Your Issue"
+            android:textSize="@dimen/space_15"
+            android:textColorHint="@color/green"
+            android:paddingLeft="@dimen/space_5"
+            android:paddingTop="@dimen/space_5"
+            android:textColor="@color/green"
+            android:gravity="start"
+            android:layout_marginBottom="@dimen/space_5"
+            android:background="@drawable/etbg1"
+            android:layout_above="@id/helpsubmit"
+            android:layout_marginTop="@dimen/space_5"
+            />
+        <Button
+            android:id="@+id/helpsubmit"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.4"
+            android:background="@color/green"
+            android:text="Submit"
+            android:layout_gravity="center_horizontal"
+            android:paddingLeft="@dimen/space_20"
+            android:paddingRight="@dimen/space_20"
+            android:textColor="@color/white"
+            android:layout_marginBottom="@dimen/space_2"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"/>
+    </LinearLayout>
 </LinearLayout>
