@@ -388,18 +388,48 @@ String language;
 
             sessionManagement.cleardatetime();
 
-            Bundle args = new Bundle();
-            Fragment fm = new Delivery_payment_detail_fragment();
+
                 if (FastRadioBtn.isChecked())
                 {
+                    Bundle args = new Bundle();
+                    Fragment fm = new Delivery_payment_detail_fragment();
                     args.putString("delivery_method","instantdelivery");
                     args.putString("getdate", formattedDate);
                     args.putString("time", currentTime1);
-                }else
+                    args.putString("location_id", location_id);
+                    args.putString("address", address);
+                    args.putString("newaddresss", newaddresss);
+                    int charge = getArguments().getInt("charges");
+                    String chargeS = String.valueOf(charge);
+                    args.putString("deli_charges", chargeS);
+                    args.putString("storeid", store_id);
+                    args.putString("house_no",house_no);
+                    fm.setArguments(args);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                            .addToBackStack(null).commit();
+                }else if (CustomRadioBtn.isChecked())
                 {
-                    args.putString("delivery_method","customdelivery");
-                    args.putString("getdate", getdate );
+                    Bundle args = new Bundle();
+                    Fragment fm = new Delivery_payment_detail_fragment();
+                    args.putString("delivery_method", "customdelivery");
+                    args.putString("getdate", getdate);
                     args.putString("time", currentTime1);
+                    args.putString("location_id", location_id);
+                    args.putString("address", address);
+                    args.putString("newaddresss", newaddresss);
+                    int charge = getArguments().getInt("charges");
+                    String chargeS = String.valueOf(charge);
+                    args.putString("deli_charges", chargeS);
+                    args.putString("storeid", store_id);
+                    args.putString("house_no",house_no);
+                    fm.setArguments(args);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                            .addToBackStack(null).commit();
+                   } else {
+
+                    Toast.makeText(getActivity(), "Select delivery method first", Toast.LENGTH_SHORT).show();
                 }
 //            if (store_id.equals("232")) {
 //                args.putString("delivery_method", "nextdaydelivery");
@@ -414,18 +444,18 @@ String language;
 //            }
           // Toast.makeText(getActivity(), location_id+address, Toast.LENGTH_SHORT).show();
 
-            args.putString("location_id", location_id);
-            args.putString("address", address);
-            args.putString("newaddresss", newaddresss);
-            int charge = getArguments().getInt("charges");
-            String chargeS = String.valueOf(charge);
-            args.putString("deli_charges", chargeS);
-            args.putString("storeid", store_id);
-            args.putString("house_no",house_no);
-            fm.setArguments(args);
-            FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                    .addToBackStack(null).commit();
+//            args.putString("location_id", location_id);
+//            args.putString("address", address);
+//            args.putString("newaddresss", newaddresss);
+//            int charge = getArguments().getInt("charges");
+//            String chargeS = String.valueOf(charge);
+//            args.putString("deli_charges", chargeS);
+//            args.putString("storeid", store_id);
+//            args.putString("house_no",house_no);
+//            fm.setArguments(args);
+//            FragmentManager fragmentManager = getFragmentManager();
+//            fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+//                    .addToBackStack(null).commit();
 
         }
 
