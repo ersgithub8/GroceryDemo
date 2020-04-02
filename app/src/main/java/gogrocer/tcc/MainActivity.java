@@ -625,8 +625,14 @@ SharedPreferences sharedPreferences;
 //            finish();
         }
         else if(id==R.id.nav_help){
-            startActivity(new Intent(MainActivity.this,HelpActivity.class));
-//            Intent mailIntent = new Intent(Intent.ACTION_VIEW);
+            if (sessionManagement.isLoggedIn()) {
+                startActivity(new Intent(MainActivity.this,HelpActivity.class));
+            }else {
+                Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(i);
+                overridePendingTransition(0, 0);
+            }
+            //            Intent mailIntent = new Intent(Intent.ACTION_VIEW);
 //            Uri data = Uri.parse("mailto:?subject=" + ""+ "&body=" + "" + "&to=" + "Software.robin@gmail.com");
 //            mailIntent.setData(data);
 //            startActivity(Intent.createChooser(mailIntent, "Send mail..."));
