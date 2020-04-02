@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="gogrocer.tcc.HelpActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/space_5"
+        android:paddingTop="@dimen/space_10"
+        android:paddingRight="@dimen/space_10"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/space_10">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/green"
+            android:layout_marginBottom="@dimen/space_3"
+            android:text="Dont wory you need help?\nWe are here to support our valuable customers."/>
+    <Spinner
+        android:id="@+id/spinnerorder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_2"
+        android:layout_marginBottom="@dimen/space_4"
+        android:background="@color/green"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/green">
+
+
+        <EditText
+            android:id="@+id/ethelp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Describe Your Issue"
+            android:textSize="@dimen/space_15"
+            android:backgroundTint="@color/green"
+            android:textColor="@color/green"
+            android:layout_marginTop="@dimen/space_5"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_2"
+        android:layout_marginBottom="@dimen/space_4"
+        android:background="@color/green"/>
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/space_10"
+    android:paddingLeft="@dimen/space_10"
+    android:paddingTop="@dimen/space_5"
+    android:paddingRight="@dimen/space_10"
+    android:background="@color/green"
+    android:text="Order's Product"
+    android:textColor="@color/white"
+    android:textSize="@dimen/space_18"
+    android:textStyle="bold"
+    android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/space_10"
+        android:paddingLeft="@dimen/space_5"
+        android:paddingTop="@dimen/space_5"
+        android:paddingRight="@dimen/space_10"
+        android:text="Select any Product to Continue."
+        android:textColor="@color/green"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/helporder"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

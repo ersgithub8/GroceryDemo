@@ -625,10 +625,11 @@ SharedPreferences sharedPreferences;
 //            finish();
         }
         else if(id==R.id.nav_help){
-            Intent mailIntent = new Intent(Intent.ACTION_VIEW);
-            Uri data = Uri.parse("mailto:?subject=" + ""+ "&body=" + "" + "&to=" + "Software.robin@gmail.com");
-            mailIntent.setData(data);
-            startActivity(Intent.createChooser(mailIntent, "Send mail..."));
+            startActivity(new Intent(MainActivity.this,HelpActivity.class));
+//            Intent mailIntent = new Intent(Intent.ACTION_VIEW);
+//            Uri data = Uri.parse("mailto:?subject=" + ""+ "&body=" + "" + "&to=" + "Software.robin@gmail.com");
+//            mailIntent.setData(data);
+//            startActivity(Intent.createChooser(mailIntent, "Send mail..."));
         }
 
 
