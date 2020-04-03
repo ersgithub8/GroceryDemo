@@ -1,8 +1,10 @@
 package Fragment;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -42,6 +44,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.swipe.util.Attributes;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -63,10 +66,12 @@ import Adapter.Master_category_adapter;
 import Adapter.Product_adapter;
 import Adapter.Stores_adapter;
 import Adapter.Top_Selling_Adapter;
+import Adapter.View_address_adapter;
 import Adapter.my_last_order_adapter;
 import Config.BaseURL;
 import Model.Category_model;
 import Model.Deal_Of_Day_model;
+import Model.Delivery_address_model;
 import Model.Home_Icon_model;
 import Model.Master_category;
 import Model.My_Pending_order_model;
@@ -99,6 +104,7 @@ public class Home_fragment extends Fragment {
     private boolean isSubcat = false;
     LinearLayout Search_layout;
     RelativeLayout rl_address;
+    private Session_management sessionManagement;
     String getid,cat_id;
     String storename;
     String storeimg;
@@ -178,6 +184,19 @@ private Master_category_adapter master_adapter;
         rv_best_selling.startAnimation(move_left);
 
 
+
+        //Address
+        if (ConnectivityReceiver.isConnected()) {
+            sessionManagement=new Session_management(getActivity());
+
+            if(sessionManagement.isLoggedIn()) {
+                String user_id= sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
+                // Toast.makeText(getActivity(), user_id, Toast.LENGTH_SHORT).show();
+                makeGetAddressRequest(user_id);
+
+            }
+        }
+
 //best selling end
         //recomended
         rv_recomended= (RecyclerView) view.findViewById(R.id.new_offer);
@@ -207,15 +226,14 @@ private Master_category_adapter master_adapter;
                 last_order_rv.setVisibility(View.INVISIBLE);
             }
             membership(user_id_for_last_order);
-            rl_address.setVisibility(View.VISIBLE);
-            String city= sessionManagement.getUserDetails().get(BaseURL.KEY_SOCITY_NAME);
-            String area= sessionManagement.getUserDetails().get(BaseURL.KEY_AREA_NAME);
-            String apartment= sessionManagement.getUserDetails().get(BaseURL.KEY_APARTMENT_NAME);
-            if (city == ""||area==null||apartment==null) {
-                tv_address.setText("No Address Added");
-            }else{
-                tv_address.setText(city + "," + area + "," + apartment);
-            }
+//            String city= sessionManagement.getUserDetails().get(BaseURL.KEY_SOCITY_NAME);
+//            String area= sessionManagement.getUserDetails().get(BaseURL.KEY_AREA_NAME);
+//            String apartment= sessionManagement.getUserDetails().get(BaseURL.KEY_APARTMENT_NAME);
+//            if (city == ""||area==null||apartment==null) {
+//                tv_address.setText("No Address Added");
+//            }else{
+//                tv_address.setText(city + "," + area + "," + apartment);
+//            }
 
         }
 
@@ -1284,4 +1302,102 @@ private void make_Recomended_selling() {
 //        callIntent.setData(Uri.parse("tel:" + "919889887711"));
 //        startActivity(callIntent);
 //    }
+
+    private void makeGetAddressRequest(String user_id) {
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setCancelable(false);
+        loading.setMessage("loading...");
+//        loading.show();
+        // Tag used to cancel the request
+        String tag_json_obj = "json_get_address_req";
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("user_id", user_id);
+
+
+        final CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.GET_ADDRESS_URL, params, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, response.toString());
+
+                try {
+                    loading.dismiss();
+                    Boolean status = response.getBoolean("responce");
+                    JSONArray array=response.getJSONArray("data");
+//                    Toast.makeText(getActivity(), array+"", Toast.LENGTH_SHORT).show();
+                    if (status) {
+
+//                        delivery_address_modelList.clear();
+
+//                        Gson gson = new Gson();
+//                        Type listType = new TypeToken<List<Delivery_address_model>>() {
+//                        }.getType();
+
+
+//                        for (int i=0;i<array.length();){
+//                            JSONObject jsonObject=array.getJSONObject(i);
+//
+//                        }
+
+//                        if(array.length()>0){
+                        rl_address.setVisibility(View.VISIBLE);
+                        JSONObject jsonObject=array.getJSONObject(0);
+                        String city=jsonObject.getString("socity_name");
+                        String area=jsonObject.getString("area");
+                        String apartment=jsonObject.getString("apartment_name");
+                        tv_address.setText(city + "," + area + "," + apartment);
+//                        }else {
+//
+//                            rl_address.setVisibility(View.VISIBLE);
+//                            tv_address.setText("No Address Added");
+//                        }
+
+//                        delivery_address_modelList = gson.fromJson(response.getString("data"), listType);
+//
+//                        //RecyclerView.Adapter adapter1 = new Delivery_get_address_adapter(delivery_address_modelList);
+//                        adapter = new View_address_adapter(delivery_address_modelList);
+//                        ((View_address_adapter) adapter).setMode(Attributes.Mode.Single);
+//                        rv_address.setAdapter(adapter);
+//                        adapter.notifyDataSetChanged();
+//
+//                        if (delivery_address_modelList.isEmpty()) {
+//                            no_record.setVisibility(View.VISIBLE);
+//                            if (getActivity() != null) {
+//
+//                                //Toast.makeText(getActivity(), getResources().getString(R.string.no_rcord_found), Toast.LENGTH_SHORT).show();
+//                            }}
+
+
+                    }else{
+
+                        rl_address.setVisibility(View.VISIBLE);
+                        tv_address.setText("No Address Added");
+//                        no_record.setVisibility(View.VISIBLE);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                loading.dismiss();
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    if (getActivity() != null) {
+                        Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+
+
 }
