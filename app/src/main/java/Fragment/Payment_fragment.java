@@ -761,7 +761,7 @@ public class Payment_fragment extends Fragment {
 
                 try {
                     String status = response.getString("responce");
-                    Toast.makeText(getActivity(),String.valueOf(status), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getActivity(),String.valueOf(status), Toast.LENGTH_SHORT).show();
 
 
 

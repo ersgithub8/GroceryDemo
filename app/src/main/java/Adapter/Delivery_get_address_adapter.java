@@ -311,7 +311,7 @@ public class Delivery_get_address_adapter extends RecyclerSwipeAdapter<Delivery_
         holder.swipeLayout.setOnDoubleClickListener(new SwipeLayout.DoubleClickListener() {
             @Override
             public void onDoubleClick(SwipeLayout layout, boolean surface) {
-                Toast.makeText(context, "DoubleClick", Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(context, "DoubleClick", Toast.LENGTH_SHORT).show();
             }
         });
 

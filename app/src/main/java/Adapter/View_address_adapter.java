@@ -305,7 +305,7 @@ public class View_address_adapter extends RecyclerSwipeAdapter<View_address_adap
         holder.swipeLayout.setOnDoubleClickListener(new SwipeLayout.DoubleClickListener() {
             @Override
             public void onDoubleClick(SwipeLayout layout, boolean surface) {
-                Toast.makeText(context, "DoubleClick", Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(context, "DoubleClick", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -83,7 +83,7 @@ public class Need_help extends AppCompatActivity {
                     Boolean status;
 
                     status = response.getBoolean("response");
-                    Toast.makeText(Need_help.this,String.valueOf(status), Toast.LENGTH_SHORT).show();
+                 //   Toast.makeText(Need_help.this,String.valueOf(status), Toast.LENGTH_SHORT).show();
 
                     if(status) {
                         Gson gson = new Gson();
