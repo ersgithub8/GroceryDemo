@@ -12,7 +12,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -52,6 +54,8 @@ public class HelpActivity extends AppCompatActivity {
     ArrayList<String> nameo=new ArrayList<String>();
     ArrayList<String> id=new ArrayList<String>();
     RecyclerView rv_detail_order;
+    Button submit;
+    ImageButton back;
     EditText help;
     private List<My_order_detail_model> my_order_detail_modelList = new ArrayList<>();
     @Override
@@ -61,6 +65,8 @@ public class HelpActivity extends AppCompatActivity {
         rv_detail_order=findViewById(R.id.helporder);
         orders=findViewById(R.id.spinnerorder);
         help=findViewById(R.id.ethelp);
+        submit=findViewById(R.id.helpsubmit);
+        back=findViewById(R.id.bhbtn);
         rv_detail_order.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         Session_management sessionManagement = new Session_management(HelpActivity.this);
@@ -68,7 +74,6 @@ public class HelpActivity extends AppCompatActivity {
 
         makeGetOrderRequest(user_id);
 
-        nameo.add("Select Order");
         orders.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long ids) {
@@ -77,6 +82,7 @@ public class HelpActivity extends AppCompatActivity {
                 }
 //                Toast.makeText(HelpActivity.this,id.get(position) , Toast.LENGTH_SHORT).show();
 
+                help.setText("");
                 makeGetOrderDetailRequest(id.get(position));
             }
 
@@ -103,28 +109,51 @@ public class HelpActivity extends AppCompatActivity {
                 String pricce=my_order_detail_modelList.get(position).getPrice();
                 String qty_in_kg=my_order_detail_modelList.get(position).getQty_in_kg();
 //                String product_image=my_order_detail_modelList.get(position);
-                if(help.getText().toString().isEmpty()){
-                    Toast.makeText(HelpActivity.this, "Please Describe Your Issue.", Toast.LENGTH_SHORT).show();
-                    return;
 
-                }
-                String item="Sale item Id:"+sale_item_id+"\nSale id:"+sale_id+
-                        "\nProduct id:"+product_id+
+                String item="Sale item Id:"+sale_item_id+
+                        "\nSale id:"+sale_id+
+                        "\nProduct id:"+product_id+"\n\n"
 //                        "\nProduct name:"+product_name+
-                        "\n\n\n"+help.getText().toString();
+                        ;
 //                Toast.makeText(HelpActivity.this, item, Toast.LENGTH_SHORT).show();
-            Intent mailIntent = new Intent(Intent.ACTION_VIEW);
-            Uri data = Uri.parse("mailto:?subject=" + ""+ "&body=" + item + "&to=" + "Software.robin@gmail.com");
-            mailIntent.setData(data);
-            startActivity(Intent.createChooser(mailIntent, "Send mail..."));
+                if (help.getText().toString().contains(sale_item_id)){
+                    Toast.makeText(HelpActivity.this, "Product already added.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            help.append(item);
 
             }
+
+
 
             @Override
             public void onLongItemClick(View view, int position) {
 
             }
         }));
+
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(help.getText().toString().isEmpty()){
+                    Toast.makeText(HelpActivity.this, "Please Describe Your isseue to continue", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Intent mailIntent = new Intent(Intent.ACTION_VIEW);
+                Uri data = Uri.parse("mailto:?subject=" + ""+ "&body=" + help.getText().toString() + "&to=" + "Software.robin@gmail.com");
+                mailIntent.setData(data);
+                startActivity(Intent.createChooser(mailIntent, "Send mail..."));
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
 
@@ -170,8 +199,8 @@ public class HelpActivity extends AppCompatActivity {
 
 
                             ArrayAdapter<String> adapter=new ArrayAdapter<String>(HelpActivity.this,
-                                    R.layout.spinneritem,id);
-//                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                    android.R.layout.simple_spinner_item,id);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             orders.setAdapter(adapter);
                         }
 

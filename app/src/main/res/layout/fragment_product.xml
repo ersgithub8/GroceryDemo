@@ -6,10 +6,7 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <Spinner
-        android:id="@+id/spinnerstore"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+
     <android.support.design.widget.TabLayout
         android:visibility="gone"
         android:id="@+id/tab_cat"
@@ -23,16 +20,35 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="57dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@color/green"
         android:gravity="bottom">
-
+        <RelativeLayout
+            android:layout_width="150dp"
+            android:id="@+id/rl1"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/space_5"
+            android:layout_marginLeft="@dimen/space_12">
+            <Spinner
+                android:id="@+id/spinnerstore"
+                android:layout_width="match_parent"
+                android:background="@drawable/etbg1"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/ic_keyboard_arrow_down"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
         <LinearLayout
+            android:layout_below="@id/rl1"
             android:id="@+id/search_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="false"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
@@ -57,7 +73,7 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="@dimen/space_4"
                     android:layout_toRightOf="@id/lens"
@@ -67,7 +83,6 @@
                     android:textSize="12sp" />
             </RelativeLayout>
         </LinearLayout>
-
 
     </RelativeLayout>
 
