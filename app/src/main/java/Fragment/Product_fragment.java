@@ -854,10 +854,7 @@ public void getStore(String catid){
                         name.add(object.getString("user_fullname"));
                         ids.add(object.getString("user_id"));
 
-                        ArrayAdapter<String> adapter=new ArrayAdapter<String>(getActivity(),
-                                android.R.layout.simple_spinner_item,name);
-                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        store.setAdapter(adapter);
+
                         //Toast.makeText(Signin.this, jsonArray.getString(0), Toast.LENGTH_SHORT).show();
 
                     }
@@ -865,6 +862,12 @@ public void getStore(String catid){
                 else {
                     Toast.makeText(getActivity(),response.getString("data"),Toast.LENGTH_SHORT).show();
                 }
+
+                ArrayAdapter<String> adapter=new ArrayAdapter<String>(getActivity(),
+                        android.R.layout.simple_spinner_item,name);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                store.setAdapter(adapter);
+
 
             } catch (JSONException e) {
 
@@ -900,6 +903,16 @@ public void getStore(String catid){
     RequestQueue queue = Volley.newRequestQueue(getActivity());
     queue.add(jsonObjectRequest);
 }
+
+
+public void search(ArrayList<String> data){
+        for(int i =0;i<data.size();i++){
+            if (product_modelList.get(0).getStorename().equals(data.get(i))){
+                store.setSelection(i);
+            }
+        }
+}
+
 }
 
 

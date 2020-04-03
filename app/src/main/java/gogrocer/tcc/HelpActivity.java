@@ -116,6 +116,10 @@ public class HelpActivity extends AppCompatActivity {
 //                        "\nProduct name:"+product_name+
                         ;
 //                Toast.makeText(HelpActivity.this, item, Toast.LENGTH_SHORT).show();
+                if (help.getText().toString().contains(sale_item_id)){
+                    Toast.makeText(HelpActivity.this, "Product already added.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
             help.append(item);
 
             }

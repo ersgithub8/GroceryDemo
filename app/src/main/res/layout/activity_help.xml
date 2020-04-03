@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,9 +9,11 @@
     android:weightSum="10" >
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="6.5"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/reviewll"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -115,19 +117,19 @@
 
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/reviewll"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="3.5"
         android:paddingLeft="@dimen/space_5"
         android:layout_gravity="bottom"
         android:paddingRight="@dimen/space_5"
         android:orientation="vertical"
-        android:weightSum="10">
+        android:layout_alignParentBottom="true">
         <EditText
             android:id="@+id/ethelp"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="8.5"
+            android:layout_height="200dp"
             android:hint="Describe Your Issue"
             android:textSize="@dimen/space_15"
             android:textColorHint="@color/green"
@@ -143,8 +145,7 @@
         <Button
             android:id="@+id/helpsubmit"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1.4"
+            android:layout_height="wrap_content"
             android:background="@color/green"
             android:text="Submit"
             android:layout_gravity="center_horizontal"
@@ -155,4 +156,4 @@
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"/>
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>
