@@ -73,7 +73,7 @@
                 android:gravity="end"
                 android:text="Product Price"
                 android:textColor="#fff"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 />
             </RelativeLayout>
             <TextView
@@ -90,7 +90,9 @@
                 android:layout_toRightOf="@id/product_name"
                 android:gravity="end"
                 android:text="Product Price"
-                android:textColor="#fff"
+                android:textColor="#000"
+                android:fontFamily="@font/r8"
+                android:textStyle="bold"
                     android:textSize="15sp"
                  />
 
