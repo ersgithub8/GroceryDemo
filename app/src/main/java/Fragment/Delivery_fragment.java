@@ -140,6 +140,7 @@ String language;
         nextdaytext=(TextView)view.findViewById(R.id.nextdaytextview);
 
 
+        FastRadioBtn.setChecked(true);
 
         Date c = Calendar.getInstance().getTime();
 

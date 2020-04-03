@@ -199,6 +199,7 @@ public class Payment_fragment extends Fragment {
         db_cart = new DatabaseHandler(getActivity());
         view.setFocusableInTouchMode(true);
         view.requestFocus();
+        rb_Cod.setChecked(true);
         view.setOnKeyListener(new View.OnKeyListener()
 
         {

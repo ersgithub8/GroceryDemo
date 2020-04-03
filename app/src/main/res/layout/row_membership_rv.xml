@@ -14,99 +14,116 @@
         android:id="@+id/order_panding_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="@dimen/space_20"
+            android:layout_margin="5dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
                 <Fonts.LatoBLack
 
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
 
                     android:fontFamily="@font/r8"
                     android:text="Membership:"
                     android:textColor="#83000000"
-                    android:textSize="8sp" />
+                    android:textSize="10sp" />
 
                 <Fonts.LatoBLack
                     android:id="@+id/name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="pending"
-                    android:padding="5dp"
+
+                    android:layout_weight="1"
+
+
                     android:fontFamily="@font/r8"
-                    android:textSize="13sp"
-                    android:layout_marginLeft="15dp"
-                    android:gravity="center"
-                    android:textColor="#000000" />
+
+                    android:padding="5dp"
+                    android:text="pending"
+                    android:textColor="#000000"
+                    android:textSize="13sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
                 <Fonts.LatoBLack
 
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/r8"
 
+                    android:padding="3dp"
                     android:text="TYPE:"
                     android:textColor="#83000000"
-                    android:textSize="8sp"
-                    android:fontFamily="@font/r8" />
+                    android:textSize="10sp" />
 
                 <Fonts.LatoBLack
                     android:id="@+id/Type"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="pending"
-                    android:padding="5dp"
-                    android:textSize="13sp"
-                    android:layout_marginLeft="15dp"
-                    android:gravity="center"
+                    android:layout_weight="1"
                     android:fontFamily="@font/r8"
-                    android:textColor="#000" />
+
+                    android:padding="5dp"
+                    android:text="pending"
+
+                    android:textColor="#000"
+                    android:textSize="13sp" />
             </LinearLayout>
 
             <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Fonts.LatoBLack
-
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-                android:text="Ammount:"
-                android:textColor="#83000000"
+                <Fonts.LatoBLack
 
-                android:textSize="8sp"
-                android:fontFamily="@font/r8" />
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/r8"
 
-            <Fonts.LatoBLack
-                android:id="@+id/ammount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="pending"
-                android:textSize="13sp"
-                android:layout_marginLeft="15dp"
-                android:fontFamily="@font/r8"
-                android:gravity="center"
-                android:padding="5dp"
-                android:textColor="#000" />
-        </LinearLayout>
+                    android:padding="3dp"
+                    android:text="Ammount:"
+
+                    android:textColor="#83000000"
+                    android:textSize="10sp" />
+
+                <Fonts.LatoBLack
+                    android:id="@+id/ammount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/r8"
+                    android:padding="5dp"
+                    android:text="pending"
+
+                    android:textColor="#000"
+                    android:textSize="13sp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -127,6 +144,7 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="27sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -138,12 +156,12 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
 
-                    android:fontFamily="@font/r8"
+                    android:background="@color/colorPrimary"
 
+                    android:fontFamily="@font/r8"
                     android:gravity="center"
                     android:padding="15dp"
                     android:text="Buy"
-                    android:background="@color/colorPrimary"
                     android:textColor="#ffffff"
                     android:textSize="17sp" />
             </LinearLayout>

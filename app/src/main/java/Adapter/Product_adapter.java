@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Paint;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -76,7 +77,11 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 
         Product_model mList = modelList.get(position);
 
+        String mrp=mList.getMrp();
+        holder.tv_mrp.setText(mrp+context.getResources().getString(R.string.currency));
+        int dis=((Integer.parseInt(mList.getMrp())-Integer.parseInt(mList.getPrice()))*100)/Integer.parseInt(mList.getMrp());
 
+        holder.tv_disc.setText(dis+"%OFF");
         Glide.with(context)
                 .load(BaseURL.IMG_PRODUCT_URL + mList.getProduct_image())
                 .centerCrop()
@@ -119,22 +124,23 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 String selectedItemText = (String) parent.getItemAtPosition(pos);
                 // Display the selected item into the TextView
-             try {
+                try {
 
-                 asubunit =  modelList.get(position).getSubunits();
-                 bsubprice =  modelList.get(position).getSubprice();
-                 holder.tv_price1.setText("");
-                 holder.tv_price1.setText(selectedItemText);
-                 selectedunit=selectedItemText;
-                 Log.e("prices"+pos,""+pos);
-                 holder.tv_price2.setText(bsubprice.get(pos));
-                 holder.tv_contetiy.setText("0");
-             }
-             catch (Exception e)
-             {
+                    asubunit =  modelList.get(position).getSubunits();
+                    bsubprice =  modelList.get(position).getSubprice();
+                    holder.tv_price1.setText("");
+                    holder.tv_price1.setText(selectedItemText);
+                    selectedunit=selectedItemText;
+                    Log.e("prices"+pos,""+pos);
+                    holder.tv_price2.setText(bsubprice.get(pos));
+
+                    holder.tv_contetiy.setText("0");
+                }
+                catch (Exception e)
+                {
 
 
-             }
+                }
 
 
 
@@ -220,6 +226,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
         final ImageView iv_minus = (ImageView) dialog.findViewById(R.id.iv_subcat_minus);
         final ImageView iv_plus = (ImageView) dialog.findViewById(R.id.iv_subcat_plus);
         TextView tv_title = (TextView) dialog.findViewById(R.id.tv_product_detail_title);
+
         TextView tv_detail = (TextView) dialog.findViewById(R.id.tv_product_detail);
         final TextView tv_contetiy = (TextView) dialog.findViewById(R.id.tv_subcat_contetiy);
         final TextView tv_add = (TextView) dialog.findViewById(R.id.tv_subcat_add);
@@ -354,7 +361,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
         public LinearLayout llMain;
 
         Spinner dropdown;
-        public TextView textView1, textView2, textView3, textView4, textView5, textView6;
+        public TextView textView1, textView2, textView3, textView4, textView5, textView6,tv_mrp,tv_disc;
 
         public MyViewHolder(View view) {
             super(view);
@@ -365,7 +372,8 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 //            textView4 = (TextView) view.findViewById(R.id.four);
 //            textView5 = (TextView) view.findViewById(R.id.five);
 //            textView6 = (TextView) view.findViewById(R.id.six);
-
+            tv_mrp = (TextView) view.findViewById(R.id.price_mrp);
+            tv_disc = (TextView) view.findViewById(R.id.disc);
             tv_title = (TextView) view.findViewById(R.id.tv_subcat_title);
             tv_price = (TextView) view.findViewById(R.id.tv_subcat_price);
             tv_price1 = (TextView) view.findViewById(R.id.tv_subcat_price1);
@@ -379,6 +387,8 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
             iv_plus = (ImageView) view.findViewById(R.id.iv_subcat_plus);
             iv_minus = (ImageView) view.findViewById(R.id.iv_subcat_minus);
             iv_remove = (ImageView) view.findViewById(R.id.iv_subcat_remove);
+            tv_mrp.setPaintFlags( tv_price.getPaintFlags()|Paint.STRIKE_THRU_TEXT_FLAG);
+
             iv_remove.setVisibility(View.GONE);
             iv_minus.setOnClickListener(this);
             iv_plus.setOnClickListener(this);
@@ -390,7 +400,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 //            textView4.setOnClickListener(this);
 //            textView5.setOnClickListener(this);
 //            textView6.setOnClickListener(this);
-             dropdown = view.findViewById(R.id.spinner_prize);
+            dropdown = view.findViewById(R.id.spinner_prize);
 
 //            llMain=(LinearLayout)view.findViewById(R.id.units_layout);
 //            textView= new TextView(context);
@@ -412,7 +422,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 //                tv_contetiy.setText(String.valueOf(qty));
 //
 //            } else
-                if (id == R.id.iv_subcat_minus) {
+            if (id == R.id.iv_subcat_minus) {
 
                 int qty = 0;
                 if (!tv_contetiy.getText().toString().equalsIgnoreCase(""))
@@ -426,9 +436,9 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
             } else if (id == R.id.iv_subcat_plus) {
 
 
-                    int qty = Integer.valueOf(tv_contetiy.getText().toString());
-                    qty = qty + 1;
-                    tv_contetiy.setText(String.valueOf(qty));
+                int qty = Integer.valueOf(tv_contetiy.getText().toString());
+                qty = qty + 1;
+                tv_contetiy.setText(String.valueOf(qty));
 
 
                 HashMap<String, String> map = new HashMap<>();
@@ -449,7 +459,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                 unitvalue = (String) tv_price1.getText();
                 pricee = (String) tv_price2.getText();
 
-              //  Log.e("unit",unit+" "+unitvalue);
+                //  Log.e("unit",unit+" "+unitvalue);
 
                 map.put("product_name", modelList.get(position).getProduct_name());
                 map.put("category_id", modelList.get(position).getCategory_id());
@@ -485,7 +495,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 
 
                             if(a.equals(map.get("product_id"))
-                            && b.equals(map.get("unit"))){
+                                    && b.equals(map.get("unit"))){
                                 String qty1=res.getString(1);
                                 String id1=res.getString(0);
                                 int no= Integer.parseInt(qty1)+1;

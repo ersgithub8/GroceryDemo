@@ -12,7 +12,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="165dp"
+        android:layout_height="190dp"
         android:orientation="vertical"
         android:paddingBottom="@dimen/space_4">
 
@@ -29,6 +29,36 @@
             card_view:layout_constraintLeft_toLeftOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
             card_view:srcCompat="@drawable/icon" />
+
+        <TextView
+            android:id="@+id/disc"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="20%Off"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+            android:background="@drawable/category_back"
+            android:textColor="@color/color_3"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintLeft_toRightOf="@+id/linearLayout6"
+            app:layout_constraintRight_toLeftOf="@+id/iv_subcat_minus"
+            app:layout_constraintTop_toTopOf="@+id/iv_subcat_img"
+            tools:layout_editor_absoluteX="145dp"
+            tools:ignore="MissingConstraints" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            app:layout_constraintLeft_toRightOf="@+id/linearLayout6"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/disc"
+            android:layout_marginRight="20dp"
+            android:id="@+id/price_mrp"
+            android:text="20"
+            />
 
         <LinearLayout
             android:id="@+id/linearLayout6"
