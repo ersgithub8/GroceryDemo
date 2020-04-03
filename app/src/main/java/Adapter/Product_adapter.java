@@ -78,7 +78,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
         Product_model mList = modelList.get(position);
 
         String mrp=mList.getMrp();
-        holder.tv_mrp.setText(mrp+context.getResources().getString(R.string.currency));
+        holder.tv_mrp.setText(mrp+context.getResources().getString(R.string.currency)+"mrp");
         int dis=((Integer.parseInt(mList.getMrp())-Integer.parseInt(mList.getPrice()))*100)/Integer.parseInt(mList.getMrp());
 
         holder.tv_disc.setText(dis+"%OFF");
