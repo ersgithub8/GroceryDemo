@@ -153,38 +153,7 @@
                     android:background="@drawable/membershipbanner"
                     android:gravity="center" />
 
-                <TextView
-                    android:id="@+id/intro"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/membership"
-                    android:textSize="23sp"
-                    android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/intro1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/intro"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="50dp"
-                    android:text="New Smart Bachat Club"
-                    android:textColor="#ffffff"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/intro2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/intro1"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="50dp"
-                    android:text="Save More With Exclusive Membership  "
-                    android:textColor="#ffee05"
-                    android:textSize="23sp"
-                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/membership_tv"
