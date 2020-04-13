@@ -18,6 +18,7 @@ import java.util.List;
 
 import Model.Area;
 import Model.get_membership_model;
+import gogrocer.tcc.PaymentGatWay;
 import gogrocer.tcc.Paytm;
 import gogrocer.tcc.R;
 
@@ -70,8 +71,10 @@ public class Get_membership_adapter extends RecyclerView.Adapter<Get_membership_
         holder.Buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(context, Paytm.class);
+                Intent i=new Intent(context, PaymentGatWay.class);
+                i.putExtra("sub","1");
                 i.putExtra("total",mList.getAmount());
+                i.putExtra("subid",mList.getId());
                 context.startActivity(i);
             }
         });

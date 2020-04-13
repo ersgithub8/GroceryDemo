@@ -70,6 +70,8 @@ public class PaymentGatWay extends Activity implements PaymentResultListener {
         String total_rs = getIntent().getStringExtra("total");
 
 
+        Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
+
         getlocation_id = getIntent().getStringExtra("getlocationid");
         getstore_id = getIntent().getStringExtra("getstoreid");
         gettime = getIntent().getStringExtra("gettime");
@@ -128,6 +130,14 @@ startPayment(name,total_rs,email,mobile);
     @SuppressWarnings("unused")
     @Override
     public void onPaymentSuccess(String razorpayPaymentID) {
+
+        if(getIntent().getStringExtra("sub").equals("1"))
+        {
+            makesubrRequest(user_id,razorpayPaymentID);
+            return;
+        }
+
+
         try {
             Toast.makeText(this, "Payment Successful: " + razorpayPaymentID, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
@@ -265,5 +275,44 @@ Log.e(TAG, "Exception in onPaymentSuccess", e);
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
+
+
+
+
+    private void makesubrRequest(String userid, String trid ) {
+        String tag_json_obj = "json_add_order_req";
+        Map<String, String> params = new HashMap<String, String>();
+        String subid=getIntent().getStringExtra("subid");
+        params.put("user_id", userid);
+            params.put("membership_id", subid);
+        params.put("txtid", trid);
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.Subscriptionadd, params, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, response.toString());
+
+                try {
+                    Boolean status = response.getBoolean("responce");
+                    if (status) {
+//                        db_cart.clearCart();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(PaymentGatWay.this, getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
 
 }

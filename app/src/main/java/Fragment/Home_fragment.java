@@ -1332,10 +1332,6 @@ private void make_Recomended_selling() {
 //                        }.getType();
 
 
-//                        for (int i=0;i<array.length();){
-//                            JSONObject jsonObject=array.getJSONObject(i);
-//
-//                        }
 
 //                        if(array.length()>0){
                         rl_address.setVisibility(View.VISIBLE);
