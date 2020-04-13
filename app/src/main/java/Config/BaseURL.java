@@ -133,6 +133,7 @@ public class BaseURL {
 
     public static String GET_LIMITE_SETTING_URL = BASE_URL + "index.php/api/get_limit_settings";
     public static String GET_DEEIVERY_CHARGE_URL = BASE_URL + "index.php/api/get_limit_settings";
+    public static String GET_STORE_SLOT = BASE_URL + "index.php/api/check_time_slot";
 
     public static String ADD_ADDRESS_URL = BASE_URL + "index.php/api/add_address";
 

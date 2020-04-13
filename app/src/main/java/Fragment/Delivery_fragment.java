@@ -81,7 +81,7 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
 
     public String formattedDate;
     Date currentTime;
-    String currentTime1;
+    String currentTime1,dmethod;
 
     private Delivery_get_address_adapter adapter;
     private List<Delivery_address_model> delivery_address_modelList = new ArrayList<>();
@@ -101,6 +101,7 @@ SharedPreferences preferences;
 
     private String deli_charges;
     String store_id;
+    String time;
     public String total;
 String language;
     public Delivery_fragment() {
@@ -139,8 +140,14 @@ String language;
         CustomRadioBtn=(RadioButton)view.findViewById(R.id.custom_delivery);
         nextdaytext=(TextView)view.findViewById(R.id.nextdaytextview);
 
+        makeslotrequest(store_id);
 
         FastRadioBtn.setChecked(true);
+        tv_date.setEnabled(false);
+        tv_time.setEnabled(false);
+        tv_time.setBackgroundResource(R.color.gray);
+        tv_date.setBackgroundResource(R.color.gray);
+
 
         Date c = Calendar.getInstance().getTime();
 
@@ -154,8 +161,19 @@ String language;
         CustomRadioBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (dmethod.equalsIgnoreCase("slot")){
                     tv_date.setVisibility(View.VISIBLE);
+                    tv_time.setVisibility(View.VISIBLE);
+                    tv_time.setEnabled(true);
+                    tv_date.setEnabled(true);
+                    tv_time.setBackgroundResource(R.color.colorPrimary);
+                    tv_date.setBackgroundResource(R.color.colorPrimary);
+                }else {
+                    Toast.makeText(getActivity(), "Time slot not Available", Toast.LENGTH_SHORT).show();
+                    btn_checkout.setEnabled(false);
+                }
+
+
             }
         });
 
@@ -165,6 +183,7 @@ String language;
             public void onClick(View v) {
 
                 tv_date.setVisibility(View.INVISIBLE);
+                tv_time.setVisibility(View.INVISIBLE);
                 nextdaytext.setText("your order will be delivered within one hour");
             }
         });
@@ -215,14 +234,14 @@ String language;
         btn_checkout.setOnClickListener(this);
 
         String date = sessionManagement.getdatetime().get(BaseURL.KEY_DATE);
-        String time = sessionManagement.getdatetime().get(BaseURL.KEY_TIME);
+         time = sessionManagement.getdatetime().get(BaseURL.KEY_TIME);
 
 
 
         if (date != null && time != null) {
 
             getdate = date;
-            gettime = time;
+
 
             try {
                 String inputPattern = "yyyy-MM-dd";
@@ -241,17 +260,17 @@ String language;
                 tv_date.setText(getResources().getString(R.string.delivery_date) + getdate);
             }
             language=preferences.getString("language","");
-            if (language.contains("spanish")) {
-                String timeset=time;
-                 timeset=timeset.replace("PM","م");
-                 timeset=timeset.replace("AM","ص");
-                tv_time.setText(timeset);
-
-            }
-            else {
+//            if (language.contains("spanish")) {
+//                String timeset=time;
+//                 timeset=timeset.replace("PM","م");
+//                 timeset=timeset.replace("AM","ص");
+//                tv_time.setText(timeset);
+//
+//            }
+//            else {
 
                 tv_time.setText(time);
-            }
+//            }
         }
 
 
@@ -281,6 +300,7 @@ String language;
                 Bundle args = new Bundle();
                 Fragment fm = new View_time_fragment();
                 args.putString("date", getdate);
+                args.putString("store_id",store_id);
                 fm.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
@@ -357,6 +377,10 @@ String language;
                 Toast.makeText(getActivity(), getResources().getString(R.string.please_select_date_time), Toast.LENGTH_SHORT).show();
                 cancel = true;
             }
+            if (TextUtils.isEmpty(time)) {
+                Toast.makeText(getActivity(), "Select Time Slot", Toast.LENGTH_SHORT).show();
+                cancel = true;
+            }
         }
 
 //        else if (TextUtils.isEmpty(gettime)) {
@@ -415,7 +439,7 @@ String language;
                     Fragment fm = new Delivery_payment_detail_fragment();
                     args.putString("delivery_method", "customdelivery");
                     args.putString("getdate", getdate);
-                    args.putString("time", currentTime1);
+                    args.putString("time", time);
                     args.putString("location_id", location_id);
                     args.putString("address", address);
                     args.putString("newaddresss", newaddresss);
@@ -575,19 +599,17 @@ String language;
 
 
 
-    //DELIVERY CHARGES API
-    private void makeGetcity(String cityid,String areaid,String apartmentid,String totalamount)
+
+    private void makeslotrequest(String storeid)
     {
         String tag_json_obj = "json_product_req";
         Map<String, String> params = new HashMap<String, String>();
-        params.put("city_id",cityid);
-        params.put("area_id",areaid);
-        params.put("apartment_id",apartmentid);
-        params.put("order_amount",totalamount);
+        params.put("store_id",storeid);
+
         // Toast.makeText(getActivity(), Store_id, Toast.LENGTH_SHORT).show();
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
-                BaseURL.GET_DEEIVERY_CHARGE_URL, params, new Response.Listener<JSONObject>() {
+                BaseURL.GET_STORE_SLOT, params, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
@@ -596,29 +618,17 @@ String language;
                 try {
 
 
-                    Boolean status = response.getBoolean("response");
-              //      Toast.makeText(getActivity(), String.valueOf(status), Toast.LENGTH_SHORT).show();
+                    Boolean status = response.getBoolean("responce");
+                    //      Toast.makeText(getActivity(), String.valueOf(status), Toast.LENGTH_SHORT).show();
                     if(status) {
-//                        Gson gson = new Gson();
-//                        Type listType = new TypeToken<List<Model.Area>>() {
-//                        }.getType();
-//
-//                        area_modelList = gson.fromJson(response.getString("data"), listType);
-//
-//
-//                        area_adapter = new Area_Adapter(area_modelList);
-//                        rv_socity.setAdapter(area_adapter);
-//                        area_adapter.notifyDataSetChanged();
+
+                        dmethod=response.getString("times");
                     }else{
-                        Toast.makeText(getActivity(), "No record found", Toast.LENGTH_SHORT).show();
+                        dmethod="no";
                     }
-//
-//                    if(area_modelList.isEmpty()){
-//                        if(getActivity() != null) {
-//                            Toast.makeText(getActivity(), getResources().getString(R.string.no_rcord_found), Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-////
+
+
+
                 } catch (JSONException e) {
                     e.printStackTrace();
 //                    progressDialog.dismiss();
@@ -637,5 +647,4 @@ String language;
         });
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
-
 }

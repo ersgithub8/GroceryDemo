@@ -35,7 +35,9 @@ import java.util.List;
 import java.util.Map;
 
 import Adapter.Master_Subcat;
+import Adapter.Stores_adapter;
 import Config.BaseURL;
+import Model.Store_model;
 import Model.Sub_Categories;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.CustomSlider;
@@ -48,7 +50,11 @@ public class Subsub_categories extends Fragment {
     private Master_Subcat master_subcat_adapter;
     private static String TAG = Subcategory_fragment.class.getSimpleName();
     private List<Sub_Categories> subcat_models = new ArrayList<>();
+    private Stores_adapter store_adapter;
+
+    private List<Store_model> store_models = new ArrayList<>();
     Fragment fm = null;
+    String s_id;
     private SliderLayout imgSlider;
     RecyclerView rv_subsubcategories;
     @Override
@@ -75,12 +81,13 @@ public class Subsub_categories extends Fragment {
                 Bundle args = new Bundle();
 
 
-                fm =new StoreFragment();
-                args.putString("subsubcat_id", getid);
-
-                fm.setArguments(args);
-                FragmentManager fragmentManager1=getFragmentManager();
-                fragmentManager1.beginTransaction().replace(R.id.contentPanel,fm).addToBackStack(null).commit();
+                jsonrequest(getid);
+//                fm =new StoreFragment();
+//                args.putString("subsubcat_id", getid);
+//
+//                fm.setArguments(args);
+//                FragmentManager fragmentManager1=getFragmentManager();
+//                fragmentManager1.beginTransaction().replace(R.id.contentPanel,fm).addToBackStack(null).commit();
 
 
             }
@@ -206,6 +213,73 @@ public class Subsub_categories extends Fragment {
             }
         });
         AppController.getInstance().addToRequestQueue(req);
+
+    }
+    private void jsonrequest(final String cat_id) {
+        String tag_json_obj = "json_category_req";
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("subCat_id", cat_id);
+
+       /* if (parent_id != null && parent_id != "") {
+        }*/
+
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.GET_Store_URL, params, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+//
+                    Boolean status = response.getBoolean("response");
+                    JSONArray array=response.getJSONArray("data");
+                    if (status) {
+                        JSONObject jsonObject=array.getJSONObject(0);
+
+                        String getid=jsonObject.getString("user_id");
+                        String getname=jsonObject.getString("user_fullname");
+
+
+
+
+
+
+
+                        Bundle args = new Bundle();
+                        Fragment fm = new Product_fragment();
+                        args.putString("Store_id", getid);
+                        args.putString("store_name",getname);
+
+                        args.putString("category_id",cat_id);
+
+                        fm.setArguments(args);
+                        FragmentManager fragmentManager = getFragmentManager();
+                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                                .addToBackStack(null).commit();
+
+
+                    } else {
+                        Toast.makeText(getActivity(), "No Data found", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }
 }

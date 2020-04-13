@@ -151,25 +151,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/membershipbanner"
+                    android:id="@+id/membership_tv"
+
                     android:gravity="center" />
 
 
 
-                <TextView
-                    android:id="@+id/membership_tv"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_below="@+id/intro2"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="9dp"
-                    android:background="#E6D9D9"
-                    android:drawableEnd="@drawable/arrow"
-                    android:gravity="center"
-                    android:text="Become A Member"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp" />
+
             </RelativeLayout>
 
 

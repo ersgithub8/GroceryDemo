@@ -67,7 +67,6 @@
                 </LinearLayout>
 
                 <Fonts.LatoBLack
-                    android:visibility="gone"
                     android:id="@+id/tv_deli_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -81,7 +80,6 @@
 
                 <Fonts.LatoBLack
                     android:id="@+id/tv_deli_fromtime"
-                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space_5"

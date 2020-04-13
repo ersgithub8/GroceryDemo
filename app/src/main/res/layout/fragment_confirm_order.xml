@@ -143,9 +143,10 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:id="@+id/layout1"
 
-                        android:visibility="gone"
+
                         android:orientation="vertical"
                         >
                         <TextView
@@ -210,57 +211,21 @@
                         android:orientation="vertical">
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-android:visibility="gone"
+                        android:layout_height="200dp"
+
                         android:id="@+id/layout2"
+                       android:visibility="gone"
 
                         android:orientation="vertical">
-                        <TextView
+
+                        <ImageView
                             android:layout_width="match_parent"
-
-                            android:layout_height="wrap_content"
-                            android:textSize="15sp"
-                            android:text="Buy Exclusive membership to get exclusive discount on every Shopping"
-                            android:fontFamily="@font/r8"
-
-                            android:textColor="@color/colorPrimary"
-                            />
-                        <TextView
+                            android:layout_height="match_parent"
+                            android:background="@drawable/membershipbanner"
                             android:id="@+id/membership_tv"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_below="@+id/intro2"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginBottom="9dp"
-                            android:background="@color/colorPrimary"
-                            android:drawableEnd="@drawable/arrow"
-                            android:gravity="center"
-                            android:text="Become A Member"
-                            android:textColor="@color/white"
-                            android:fontFamily="@font/r8"
-                            android:textSize="20sp" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=" And Enjoy"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="18sp"
-                            android:fontFamily="@font/r8"
-                            android:layout_gravity="center"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@drawable/medal"
-                            android:text="10%off"
-                            android:textColor="@color/color_2"
-                            android:gravity="center"
-                            android:fontFamily="@font/r8"
-                            android:textStyle="bold"
-                            />
+
+                            android:gravity="center" />
+
 
 
                     </LinearLayout>

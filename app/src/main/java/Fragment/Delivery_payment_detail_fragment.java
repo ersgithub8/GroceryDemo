@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,7 +50,8 @@ public class Delivery_payment_detail_fragment extends Fragment {
 
     private static String TAG = Delivery_payment_detail_fragment.class.getSimpleName();
 
-    private TextView tv_timeslot, tv_address, tv_total,tv_grandtotal,tv_discount,membership_tv;
+    private TextView tv_timeslot, tv_address, tv_total,tv_grandtotal,tv_discount;
+    ImageView membership_tv;
     private LinearLayout btn_order;
 
     private String getlocation_id = "";
@@ -89,7 +91,7 @@ SharedPreferences preferences;
         sessionManagement = new Session_management(getActivity());
 
         tv_timeslot = (TextView) view.findViewById(R.id.textTimeSlot);
-        membership_tv = (TextView) view.findViewById(R.id.membership_tv);
+        membership_tv = (ImageView) view.findViewById(R.id.membership_tv);
         tv_discount = (TextView) view.findViewById(R.id.tvdiscount);
         tv_address = (TextView) view.findViewById(R.id.txtAddress);
         //tv_item = (TextView) view.findViewById(R.id.textItems);
@@ -150,7 +152,7 @@ SharedPreferences preferences;
         {
             tv_timeslot.setText(delivery_method);
         }else {
-            tv_timeslot.setText(getdate);
+            tv_timeslot.setText(getdate+"\n"+time);
         }
        // Toast.makeText(getActivity(), newgetaddresss, Toast.LENGTH_SHORT).show();
 

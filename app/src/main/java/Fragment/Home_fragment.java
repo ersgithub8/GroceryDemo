@@ -107,6 +107,7 @@ public class Home_fragment extends Fragment {
     private Session_management sessionManagement;
     String getid,cat_id;
     String storename;
+    Boolean status_member;
     String storeimg;
     String getcat_title;
     ScrollView scrollView;
@@ -141,8 +142,8 @@ private Master_category_adapter master_adapter;
 
 
 
-    private ImageView iv_Call, iv_Whatspp, iv_reviews, iv_share_via;
-    private TextView timer,tv_address,membership_tv;
+    private ImageView iv_Call, iv_Whatspp, iv_reviews, iv_share_via,membership_tv;
+    private TextView timer,tv_address;
     Button View_all_deals, View_all_TopSell,btn1,btn2,btn3,nextDay_delivery;
 
     private ImageView Top_Selling_Poster, Deal_Of_Day_poster;
@@ -260,10 +261,10 @@ private Master_category_adapter master_adapter;
             @Override
             public void onClick(View v) {
 
-               String tec= (String) membership_tv.getText();
+
 
                 if (sessionManagement.isLoggedIn()){
-                    if (tec.equals("Membership Active")){
+                    if (status_member){
                         Toast.makeText(getActivity(), "Membership Active", Toast.LENGTH_SHORT).show();
                     }else {
                         Fragment fm = new Membership_fragment();
@@ -1009,13 +1010,8 @@ private Master_category_adapter master_adapter;
 
                 try {
                     if (response != null && response.length() > 0) {
-                        Boolean status = response.getBoolean("response");
-                        if (status) {
-
-                            membership_tv.setBackgroundResource(R.color.yelow);
-
-                            membership_tv.setText("Membership Active");
-
+                        status_member = response.getBoolean("response");
+                        if (status_member) {
 
 
 

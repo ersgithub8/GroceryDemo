@@ -17,6 +17,116 @@
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="match_parent"
         android:id="@+id/rv_times"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:id="@+id/layout1"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Morning Time:"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:fontFamily="@font/r8"
+            android:padding="4dp"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/morning_time"
+            android:text=""
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:fontFamily="@font/r8"
+            android:padding="4dp"
+            />
+
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:id="@+id/layout2"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="AfterNoon Time:"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:fontFamily="@font/r8"
+            android:padding="4dp"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/noon_time"
+            android:text=""
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:fontFamily="@font/r8"
+            android:padding="4dp"
+            />
+
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:id="@+id/layout3"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Night Time:"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:fontFamily="@font/r8"
+            android:padding="4dp"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/night_time"
+            android:text=""
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:fontFamily="@font/r8"
+            android:padding="4dp"
+            />
+
+
+
+
+
+    </LinearLayout>
 </LinearLayout>
