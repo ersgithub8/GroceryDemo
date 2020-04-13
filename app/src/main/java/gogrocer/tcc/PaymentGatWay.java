@@ -296,7 +296,9 @@ Log.e(TAG, "Exception in onPaymentSuccess", e);
                     Boolean status = response.getBoolean("responce");
                     if (status) {
 //                        db_cart.clearCart();
-
+                        Intent intent = new Intent(PaymentGatWay.this, ThanksOrder.class);
+                        startActivity(intent);
+                        finish();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
