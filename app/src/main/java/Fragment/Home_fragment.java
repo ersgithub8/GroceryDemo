@@ -407,14 +407,14 @@ private Master_category_adapter master_adapter;
             @Override
             public void onItemClick(View view, int position) {
                 getid = master_models.get(position).getId();
-                cat_id = product_models.get(position).getCategory_id();
+//                cat_id = product_models.get(position).getCategory_id();
 
                 Bundle args = new Bundle();
 
 
                 fm =new Subcategory_fragment();
                 args.putString("cat_id", getid);
-                args.putString("category_id", cat_id);
+//                args.putString("category_id", cat_id);
 //                Toast.makeText(getActivity(), getid, Toast.LENGTH_SHORT).show();
                 fm.setArguments(args);
                 FragmentManager fragmentManager1=getFragmentManager();
@@ -829,6 +829,12 @@ private Master_category_adapter master_adapter;
 
 
     private void makeGetCategoryRequest() {
+        final AlertDialog loasing=new ProgressDialog(getActivity());
+        loasing.setMessage("Loading");
+        loasing.setCancelable(false);
+        loasing.show();
+
+
         String tag_json_obj = "json_category_req";
         isSubcat = false;
         Map<String, String> params = new HashMap<String, String>();
@@ -847,18 +853,26 @@ private Master_category_adapter master_adapter;
 //                    if (response != null && response.length() > 0) {
                         Boolean status = response.getBoolean("response");
                         if (status) {
-
+                            loasing.dismiss();
+                            master_models.clear();
                             Gson gson = new Gson();
                             Type listType = new TypeToken<List<Master_category>>() {
                             }.getType();
+
                             master_models = gson.fromJson(response.getString("data"), listType);
                             master_adapter = new Master_category_adapter(master_models);
                             rv_items.setAdapter(master_adapter);
                             master_adapter.notifyDataSetChanged();
                         }
+                        else {
+
+                            loasing.dismiss();
+                        }
     //                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
+
+                    loasing.dismiss();
                     Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -869,6 +883,8 @@ private Master_category_adapter master_adapter;
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+
+                    loasing.dismiss();
                 }
             }
         });
