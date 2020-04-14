@@ -386,6 +386,7 @@
                             android:layout_height="wrap_content"
                             android:paddingLeft="10dp"
                             android:paddingTop="5dp"
+                            android:visibility="gone"
                             android:paddingBottom="5dp"
                             android:background="@color/green"
                             android:orientation="horizontal">
@@ -411,6 +412,7 @@
                             android:layout_marginLeft="@dimen/space_4"
                             android:layout_marginRight="@dimen/space_4"
                             android:fontFamily="@font/cold"
+                            android:visibility="gone"
                             android:text="@string/paytm"
                             android:textSize="@dimen/text_size_small" />
 
