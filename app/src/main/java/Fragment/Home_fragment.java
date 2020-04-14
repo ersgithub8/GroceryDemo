@@ -407,14 +407,14 @@ private Master_category_adapter master_adapter;
             @Override
             public void onItemClick(View view, int position) {
                 getid = master_models.get(position).getId();
-                cat_id = product_models.get(position).getCategory_id();
+
 
                 Bundle args = new Bundle();
 
 
                 fm =new Subcategory_fragment();
                 args.putString("cat_id", getid);
-                args.putString("category_id", cat_id);
+
 //                Toast.makeText(getActivity(), getid, Toast.LENGTH_SHORT).show();
                 fm.setArguments(args);
                 FragmentManager fragmentManager1=getFragmentManager();
