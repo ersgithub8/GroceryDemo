@@ -659,7 +659,7 @@ private Master_category_adapter master_adapter;
 
 
 
-
+//TODO abc
     private void makeGetSliderRequest() {
         JsonArrayRequest req = new JsonArrayRequest(BaseURL.GET_SLIDER_URL,
                 new Response.Listener<JSONArray>() {
@@ -667,6 +667,7 @@ private Master_category_adapter master_adapter;
                     public void onResponse(JSONArray response) {
                         Log.d(TAG, response.toString());
                         try {
+
                             ArrayList<HashMap<String, String>> listarray = new ArrayList<>();
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject jsonObject = (JSONObject) response.get(i);
@@ -844,8 +845,8 @@ private Master_category_adapter master_adapter;
                 Log.d("Cat", response.toString());
                 try {
 //                    if (response != null && response.length() > 0) {
-//                        Boolean status = response.getBoolean("responce");
-//                        if (status) {
+                        Boolean status = response.getBoolean("response");
+                        if (status) {
 
                             Gson gson = new Gson();
                             Type listType = new TypeToken<List<Master_category>>() {
@@ -854,7 +855,7 @@ private Master_category_adapter master_adapter;
                             master_adapter = new Master_category_adapter(master_models);
                             rv_items.setAdapter(master_adapter);
                             master_adapter.notifyDataSetChanged();
-//                        }
+                        }
     //                    }
                 } catch (JSONException e) {
                     e.printStackTrace();

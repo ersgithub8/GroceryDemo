@@ -855,13 +855,16 @@ public void getStore(String catid){
                         ids.add(object.getString("user_id"));
 
 
+
+                        ArrayAdapter<String> adapter=new ArrayAdapter<String>(getActivity(),
+                                android.R.layout.simple_spinner_item,name);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        store.setAdapter(adapter);
+
                         //Toast.makeText(Signin.this, jsonArray.getString(0), Toast.LENGTH_SHORT).show();
 
                     }
-                    ArrayAdapter<String> adapter=new ArrayAdapter<String>(getActivity(),
-                            android.R.layout.simple_spinner_item,name);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    store.setAdapter(adapter);
+
                 }
                 else {
                     Toast.makeText(getActivity(),response.getString("data"),Toast.LENGTH_SHORT).show();
