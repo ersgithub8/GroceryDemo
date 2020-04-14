@@ -712,7 +712,7 @@ private Master_category_adapter master_adapter;
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -772,7 +772,7 @@ private Master_category_adapter master_adapter;
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -828,6 +828,10 @@ private Master_category_adapter master_adapter;
 
 
     private void makeGetCategoryRequest() {
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("loading....");
+        loading.setCancelable(false);
+        loading.show();
         String tag_json_obj = "json_category_req";
         isSubcat = false;
         Map<String, String> params = new HashMap<String, String>();
@@ -844,9 +848,10 @@ private Master_category_adapter master_adapter;
                 Log.d("Cat", response.toString());
                 try {
 //                    if (response != null && response.length() > 0) {
-//                        Boolean status = response.getBoolean("responce");
-//                        if (status) {
-
+                        Boolean status = response.getBoolean("response");
+                        if (status) {
+                            loading.dismiss();
+                            master_models.clear();
                             Gson gson = new Gson();
                             Type listType = new TypeToken<List<Master_category>>() {
                             }.getType();
@@ -854,10 +859,12 @@ private Master_category_adapter master_adapter;
                             master_adapter = new Master_category_adapter(master_models);
                             rv_items.setAdapter(master_adapter);
                             master_adapter.notifyDataSetChanged();
-//                        }
+                        }
+                        loading.dismiss();
     //                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
                     Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -866,6 +873,7 @@ private Master_category_adapter master_adapter;
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
+                loading.dismiss();
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
