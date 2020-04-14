@@ -27,11 +27,9 @@
                 android:id="@+id/service_image"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:src="@drawable/icon"
-
-                android:scaleType="fitXY"
+                android:src="@drawable/example"
+                android:scaleType="centerCrop"
                 android:padding="6dp"
-
                 android:clickable="true" />
 
             <TextView

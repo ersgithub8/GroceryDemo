@@ -58,13 +58,13 @@ public class Master_category_adapter extends RecyclerView.Adapter<Master_categor
     @Override
     public void onBindViewHolder(Master_category_adapter.MyViewHolder holder, int position) {
         Master_category mList = modelList.get(position);
-        Glide.with(context)
-                .load(BaseURL.GET_MASTERImages_URL + mList.getImage())
-                .placeholder(R.drawable.icon)
-                .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .dontAnimate()
-                .into(holder.image);
+//        Glide.with(context)
+//                .load(BaseURL.GET_MASTERImages_URL + mList.getImage())
+//                .placeholder(R.drawable.icon)
+//                .crossFade()
+//                .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                .dontAnimate()
+//                .into(holder.image);
         preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
         language=preferences.getString("language","");
         if (language.contains("english")) {
