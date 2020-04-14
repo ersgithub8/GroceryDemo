@@ -117,9 +117,9 @@ public class Subsub_categories extends Fragment {
             public void onResponse(JSONObject response) {
                 Log.d("Cat", response.toString());
                 try {
-//                     Boolean status = response.getBoolean("response");
+                     Boolean status = response.getBoolean("response");
 //                    Toast.makeText(getActivity(), String.valueOf(status), Toast.LENGTH_SHORT).show();
-//                    if (status) {
+                    if (status) {
 
                             Gson gson = new Gson();
                             Type listType = new TypeToken<List<Sub_Categories>>() {
@@ -128,13 +128,13 @@ public class Subsub_categories extends Fragment {
                             master_subcat_adapter = new Master_Subcat(subcat_models);
                             rv_subsubcategories.setAdapter(master_subcat_adapter);
                             master_subcat_adapter.notifyDataSetChanged();
-//                    } else {
-//                        Toast.makeText(getActivity(), "No Data found", Toast.LENGTH_SHORT).show();
-//                    }
+                    } else {
+                        Toast.makeText(getActivity(), "No Data found", Toast.LENGTH_SHORT).show();
+                    }
 //
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -143,7 +143,7 @@ public class Subsub_categories extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getParentFragment().getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
         });
