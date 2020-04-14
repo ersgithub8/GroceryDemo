@@ -160,6 +160,7 @@ private Master_category_adapter master_adapter;
     }
 
     Fragment fm = null;
+    AlertDialog loading;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
@@ -176,7 +177,9 @@ private Master_category_adapter master_adapter;
         fade_in= AnimationUtils.loadAnimation(getActivity(),R.anim.fade_in);
         move_left=AnimationUtils.loadAnimation(getActivity(),R.anim.another_animation);
         //best selling products
-
+         loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.show();
         rv_best_selling= (RecyclerView) view.findViewById(R.id.best_selling_rv);
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(getActivity());
         layoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -308,6 +311,8 @@ private Master_category_adapter master_adapter;
 
 
         }
+
+
 
         View_all_deals = (Button) view.findViewById(R.id.view_all_deals);
         View_all_TopSell = (Button) view.findViewById(R.id.view_all_topselling);
@@ -684,19 +689,19 @@ private Master_category_adapter master_adapter;
                                 textSliderView.getBundle().putString("extra", name.get("sub_cat"));
                                 imgSlider.addSlider(textSliderView);
                                 final String sub_cat = (String) textSliderView.getBundle().get("extra");
-                                textSliderView.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
-                                    @Override
-                                    public void onSliderClick(BaseSliderView slider) {
-                                        //   Toast.makeText(getActivity(), "" + sub_cat, Toast.LENGTH_SHORT).show();
-                                        Bundle args = new Bundle();
-                                        Fragment fm = new Product_fragment();
-                                        args.putString("id", sub_cat);
-                                        fm.setArguments(args);
-                                        FragmentManager fragmentManager = getFragmentManager();
-                                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                                                .addToBackStack(null).commit();
-                                    }
-                                });
+//                                textSliderView.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+//                                    @Override
+//                                    public void onSliderClick(BaseSliderView slider) {
+//                                        //   Toast.makeText(getActivity(), "" + sub_cat, Toast.LENGTH_SHORT).show();
+//                                        Bundle args = new Bundle();
+//                                        Fragment fm = new Product_fragment();
+//                                        args.putString("id", sub_cat);
+//                                        fm.setArguments(args);
+//                                        FragmentManager fragmentManager = getFragmentManager();
+//                                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+//                                                .addToBackStack(null).commit();
+//                                    }
+//                                });
 
 
                             }
@@ -744,19 +749,19 @@ private Master_category_adapter master_adapter;
                                 textSliderView.getBundle().putString("extra", name.get("sub_cat"));
                                 banner_slider.addSlider(textSliderView);
                                 final String sub_cat = (String) textSliderView.getBundle().get("extra");
-                                textSliderView.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
-                                    @Override
-                                    public void onSliderClick(BaseSliderView slider) {
-                                        //   Toast.makeText(getActivity(), "" + sub_cat, Toast.LENGTH_SHORT).show();
-                                        Bundle args = new Bundle();
-                                        Fragment fm = new Product_fragment();
-                                        args.putString("id", sub_cat);
-                                        fm.setArguments(args);
-                                        FragmentManager fragmentManager = getFragmentManager();
-                                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                                                .addToBackStack(null).commit();
-                                    }
-                                });
+//                                textSliderView.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+//                                    @Override
+//                                    public void onSliderClick(BaseSliderView slider) {
+//                                        //   Toast.makeText(getActivity(), "" + sub_cat, Toast.LENGTH_SHORT).show();
+//                                        Bundle args = new Bundle();
+//                                        Fragment fm = new Product_fragment();
+//                                        args.putString("id", sub_cat);
+//                                        fm.setArguments(args);
+//                                        FragmentManager fragmentManager = getFragmentManager();
+//                                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+//                                                .addToBackStack(null).commit();
+//                                    }
+//                                });
 
                             }
 
@@ -1017,7 +1022,7 @@ private Master_category_adapter master_adapter;
 
                         }else {
                         }
-
+                        loading.dismiss();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
