@@ -1,7 +1,9 @@
 package Fragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -109,14 +111,21 @@ public class Subsub_categories extends Fragment {
 
        /* if (parent_id != null && parent_id != "") {
         }*/
-
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.GET_SUBSUB_CATEGORY_URL, params, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
                 Log.d("Cat", response.toString());
+
+
+
                 try {
+                    loading.dismiss();
                      Boolean status = response.getBoolean("response");
 //                    Toast.makeText(getActivity(), String.valueOf(status), Toast.LENGTH_SHORT).show();
                     if (status) {
@@ -134,6 +143,8 @@ public class Subsub_categories extends Fragment {
 //
                 } catch (JSONException e) {
                     e.printStackTrace();
+
+                    loading.dismiss();
 //                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -143,6 +154,8 @@ public class Subsub_categories extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+
+                    loading.dismiss();
 //                    Toast.makeText(getParentFragment().getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }

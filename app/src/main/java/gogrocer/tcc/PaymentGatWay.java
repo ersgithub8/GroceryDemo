@@ -1,6 +1,8 @@
 package gogrocer.tcc;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -247,6 +249,16 @@ Log.e(TAG, "Exception in onPaymentSuccess", e);
         params.put("store_id", store_id);
         params.put("payment_method", getvalue);
         params.put("data", passArray.toString());
+
+
+        final AlertDialog loading=new ProgressDialog(PaymentGatWay.this);
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
+
+
+
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.ADD_ORDER_URL, params, new Response.Listener<JSONObject>() {
             @Override
@@ -254,11 +266,13 @@ Log.e(TAG, "Exception in onPaymentSuccess", e);
                 Log.d(TAG, response.toString());
 
                 try {
+                    loading.dismiss();
                     Boolean status = response.getBoolean("responce");
                     if (status) {
                         db_cart.clearCart();
                     }
                 } catch (JSONException e) {
+                    loading.dismiss();
                     e.printStackTrace();
                 }
             }
@@ -269,6 +283,8 @@ Log.e(TAG, "Exception in onPaymentSuccess", e);
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(PaymentGatWay.this, getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+
+                    loading.dismiss();
                 }
             }
         });
@@ -280,6 +296,16 @@ Log.e(TAG, "Exception in onPaymentSuccess", e);
 
 
     private void makesubrRequest(String userid, String trid ) {
+
+        final AlertDialog loading=new ProgressDialog(PaymentGatWay.this);
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
+
+
+
+
         String tag_json_obj = "json_add_order_req";
         Map<String, String> params = new HashMap<String, String>();
         String subid=getIntent().getStringExtra("subid");
@@ -293,6 +319,7 @@ Log.e(TAG, "Exception in onPaymentSuccess", e);
                 Log.d(TAG, response.toString());
 
                 try {
+                    loading.dismiss();
                     Boolean status = response.getBoolean("responce");
                     if (status) {
 //                        db_cart.clearCart();
@@ -302,6 +329,7 @@ Log.e(TAG, "Exception in onPaymentSuccess", e);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
                 }
             }
         }, new Response.ErrorListener() {
@@ -311,6 +339,7 @@ Log.e(TAG, "Exception in onPaymentSuccess", e);
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(PaymentGatWay.this, getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    loading.dismiss();
                 }
             }
         });

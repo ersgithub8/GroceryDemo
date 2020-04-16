@@ -1,5 +1,6 @@
 package Fragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -167,6 +168,10 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
 
         private void referalCodeRequestbyLoginApi(String email) {
 
+            final AlertDialog loading=new ProgressDialog(getActivity());
+            loading.setMessage("Loading...");
+            loading.setCancelable(false);
+            loading.show();
 
             SharedPreferences prefs = this.getActivity().getSharedPreferences("2", Context.MODE_PRIVATE);
             String password = prefs.getString("2", "No name defined");//"No name defined" is the default value.
@@ -187,6 +192,7 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
                 Log.d(TAG, response.toString());
 
                 try {
+                    loading.dismiss();
                     Boolean status = response.getBoolean("responce");
                     if (status) {
                         JSONObject obj = response.getJSONObject("data");
@@ -214,6 +220,7 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    loading.dismiss();
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }

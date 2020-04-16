@@ -1,5 +1,7 @@
 package gogrocer.tcc;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -226,6 +228,13 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void get_otp() {
 
+        final AlertDialog loading=new ProgressDialog(RegisterActivity.this);
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
+
+
 
         getphone= et_phone.getText().toString();
         getname= et_name.getText().toString();
@@ -248,6 +257,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Log.d(TAG, response.toString());
 
                 try {
+                    loading.dismiss();
                     Boolean status = response.getBoolean("responce");
                     if (status) {
 
@@ -264,6 +274,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
                 }
             }
         }, new Response.ErrorListener() {
@@ -273,6 +284,7 @@ public class RegisterActivity extends AppCompatActivity {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(RegisterActivity.this, getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    loading.dismiss();
                 }
             }
         });
@@ -284,6 +296,13 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void makeRegisterRequest(String name, String mobile,
                                      String email, String password) {
+
+
+        final AlertDialog loading=new ProgressDialog(RegisterActivity.this);
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
 
         // Tag used to cancel the request
         String tag_json_obj = "json_register_req";
@@ -303,6 +322,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Log.d(TAG, response.toString());
 
                 try {
+                    loading.dismiss();
                     Boolean status = response.getBoolean("responce");
                     if (status) {
 
@@ -321,6 +341,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
                 }
             }
         }, new Response.ErrorListener() {
@@ -330,6 +351,7 @@ public class RegisterActivity extends AppCompatActivity {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(RegisterActivity.this, getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                loading.dismiss();
                 }
             }
         });

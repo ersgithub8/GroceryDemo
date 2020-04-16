@@ -1,7 +1,9 @@
 package Fragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -189,8 +191,14 @@ public class StoreFragment extends Fragment {
 
 //    }
     private void jsonrequest(String cat_id) {
-        String tag_json_obj = "json_category_req";
 
+
+//        Toast.makeText(getActivity(), cat_id, Toast.LENGTH_SHORT).show();
+        String tag_json_obj = "json_category_req";
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+//        loading.setCancelable(false);
+        loading.show();
         Map<String, String> params = new HashMap<String, String>();
         params.put("subCat_id", cat_id);
 
@@ -208,6 +216,7 @@ public class StoreFragment extends Fragment {
                     Boolean status = response.getBoolean("response");
                     if (status) {
 
+                        loading.dismiss();
 
                         Gson gson = new Gson();
                         Type listType = new TypeToken<List<Store_model>>() {
@@ -217,11 +226,13 @@ public class StoreFragment extends Fragment {
                         recyclerView.setAdapter(store_adapter);
                         store_adapter.notifyDataSetChanged();
                     } else {
+                        loading.dismiss();
                         Toast.makeText(getActivity(), "No Data found", Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
                     Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -232,7 +243,9 @@ public class StoreFragment extends Fragment {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    loading.dismiss();
                 }
+
             }
         });
 

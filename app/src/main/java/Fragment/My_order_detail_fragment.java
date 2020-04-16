@@ -1,6 +1,7 @@
 package Fragment;
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -165,7 +166,10 @@ public class My_order_detail_fragment extends Fragment {
      * Method to make json array request where json response starts wtih
      */
     private void makeGetOrderDetailRequest(String sale_id) {
-
+//        final android.app.AlertDialog loading=new ProgressDialog(getActivity());
+//        loading.setMessage("Loading...");
+//        loading.setCancelable(false);
+//        loading.show();
         // Tag used to cancel the request
         String tag_json_obj = "json_order_detail_req";
 

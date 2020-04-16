@@ -1,5 +1,7 @@
 package Fragment;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -146,6 +148,12 @@ public class My_Past_Order extends Fragment {
         String tag_json_obj = "json_socity_req";
         Map<String, String> params = new HashMap<String, String>();
         params.put("user_id", userid);
+
+//        final AlertDialog loading=new ProgressDialog(getActivity());
+//        loading.setMessage("Loading...");
+//        loading.setCancelable(false);
+//        loading.show();
+//
 
         CustomVolleyJsonArrayRequest jsonObjReq = new CustomVolleyJsonArrayRequest(Request.Method.POST,
                 BaseURL.GET_DELIVERD_ORDER_URL, params, new Response.Listener<JSONArray>() {

@@ -1,5 +1,7 @@
 package gogrocer.tcc;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -66,6 +68,15 @@ public class Need_help extends AppCompatActivity {
     }
     private void makeGetrefund(String user_id)
     {
+
+        final AlertDialog loading=new ProgressDialog(Need_help.this);
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
+
+
+
         String tag_json_obj = "json_product_req";
         Map<String, String> params = new HashMap<String, String>();
         params.put("user_id",user_id);
@@ -79,7 +90,7 @@ public class Need_help extends AppCompatActivity {
 
 
                 try {
-
+                    loading.dismiss();
                     Boolean status;
 
                     status = response.getBoolean("response");
@@ -109,6 +120,7 @@ public class Need_help extends AppCompatActivity {
 ////
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
 //                    progressDialog.dismiss();
                 }
             }
@@ -120,6 +132,7 @@ public class Need_help extends AppCompatActivity {
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(Need_help.this, getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
 //                    progressDialog.dismiss();
+                    loading.dismiss();
                 }
             }
         });

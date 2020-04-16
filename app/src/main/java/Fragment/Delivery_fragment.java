@@ -1,8 +1,10 @@
 package Fragment;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -602,6 +604,11 @@ String language;
 
     private void makeslotrequest(String storeid)
     {
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
         String tag_json_obj = "json_product_req";
         Map<String, String> params = new HashMap<String, String>();
         params.put("store_id",storeid);
@@ -616,7 +623,7 @@ String language;
                 Log.d(TAG, response.toString());
 
                 try {
-
+                    loading.dismiss();
 
                     Boolean status = response.getBoolean("responce");
                     //      Toast.makeText(getActivity(), String.valueOf(status), Toast.LENGTH_SHORT).show();
@@ -631,6 +638,7 @@ String language;
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
 //                    progressDialog.dismiss();
                 }
             }
@@ -642,6 +650,7 @@ String language;
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
 //                    progressDialog.dismiss();
+                    loading.dismiss();
                 }
             }
         });

@@ -1,5 +1,7 @@
 package gogrocer.tcc;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -90,6 +92,11 @@ public class ForgotActivity extends AppCompatActivity implements View.OnClickLis
      * Method to make json object request where json response starts wtih
      */
     private void makeForgotRequest(final String email) {
+        final AlertDialog loading=new ProgressDialog(ForgotActivity.this);
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
 
         // Tag used to cancel the request
         String tag_json_obj = "json_forgot_req";
@@ -105,6 +112,7 @@ public class ForgotActivity extends AppCompatActivity implements View.OnClickLis
                // Toast.makeText(ForgotActivity.this, String.valueOf(response), Toast.LENGTH_SHORT).show();
 
                 try {
+                    loading.dismiss();
                     Boolean status = response.getBoolean("responce");
                     String error = response.getString("error");
 //                    String error_arb=response.getString("error_arb");
@@ -124,7 +132,9 @@ public class ForgotActivity extends AppCompatActivity implements View.OnClickLis
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                loading.dismiss();
                 }
+
             }
         }, new Response.ErrorListener() {
 
@@ -132,6 +142,7 @@ public class ForgotActivity extends AppCompatActivity implements View.OnClickLis
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    loading.dismiss();
                     Toast.makeText(ForgotActivity.this, getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }

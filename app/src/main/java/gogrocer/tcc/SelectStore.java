@@ -1,5 +1,6 @@
 package gogrocer.tcc;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -121,6 +122,12 @@ public class SelectStore extends AppCompatActivity {
     }
 
     private void Get_City() {
+        final AlertDialog loading=new ProgressDialog(gogrocer.tcc.SelectStore.this);
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
+
         final String state_id = SharedPref.getString(SelectStore.this, BaseURL.CITY_ID);
         final ProgressDialog dialog = new ProgressDialog(SelectStore.this);
         Json = new JsonObject();
@@ -131,6 +138,7 @@ public class SelectStore extends AppCompatActivity {
                 if (e == null) {
                     Log.e("result", result);
                     try {
+                        loading.dismiss();
                         JSONObject js = new JSONObject(result);
                         {
                             JSONArray obj = js.getJSONArray("data");
@@ -152,6 +160,7 @@ public class SelectStore extends AppCompatActivity {
                         SelectCityDialog();
                     } catch (JSONException e1) {
                         e1.printStackTrace();
+                        loading.dismiss();
                     }
                 }
             }

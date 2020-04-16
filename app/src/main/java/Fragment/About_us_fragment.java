@@ -1,6 +1,8 @@
 package Fragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -75,7 +77,10 @@ public class About_us_fragment extends Fragment {
      * Method to make json object request where json response starts wtih
      */
     private void makeGetInfoRequest(String url) {
-
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
         // Tag used to cancel the request
         String tag_json_obj = "json_info_req";
 
@@ -86,6 +91,7 @@ public class About_us_fragment extends Fragment {
                 Log.d(TAG, response.toString());
 
                 try {
+                    loading.dismiss();
                     // Parsing json array response
                     // loop through each json object
 
@@ -112,6 +118,7 @@ public class About_us_fragment extends Fragment {
                     Toast.makeText(getActivity(),
                             "Error: " + e.getMessage(),
                             Toast.LENGTH_LONG).show();
+                    loading.dismiss();
                 }
             }
         }, new Response.ErrorListener() {
@@ -121,6 +128,7 @@ public class About_us_fragment extends Fragment {
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
+                loading.dismiss();
             }
         });
 

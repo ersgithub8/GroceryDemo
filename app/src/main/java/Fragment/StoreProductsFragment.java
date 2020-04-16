@@ -1,6 +1,8 @@
 package Fragment;
 
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -93,6 +95,11 @@ public class StoreProductsFragment extends android.app.Fragment {
         Map<String, String> params = new HashMap<String, String>();
         params.put("store_id", store_id);
 
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.GET_store_product_URL, params, new Response.Listener<JSONObject>() {
 
@@ -101,6 +108,7 @@ public class StoreProductsFragment extends android.app.Fragment {
                 Log.d(TAG, response.toString());
 
                 try {
+                    loading.dismiss();
                     Boolean status = response.getBoolean("responce");
                     if (status) {
                         Gson gson = new Gson();
@@ -119,6 +127,7 @@ public class StoreProductsFragment extends android.app.Fragment {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
                 }
             }
         }, new Response.ErrorListener() {
@@ -128,6 +137,7 @@ public class StoreProductsFragment extends android.app.Fragment {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    loading.dismiss();
                 }
             }
         });

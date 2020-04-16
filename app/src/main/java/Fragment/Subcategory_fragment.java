@@ -1,9 +1,11 @@
 package Fragment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -120,6 +122,11 @@ public class Subcategory_fragment extends Fragment {
 
        /* if (parent_id != null && parent_id != "") {
         }*/
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.GET_MASTER_SUB_CATEGORY_URL, params, new Response.Listener<JSONObject>() {
@@ -129,6 +136,7 @@ public class Subcategory_fragment extends Fragment {
                 Log.d("Cat", response.toString());
                 try {
 //
+                    loading.dismiss();
                     Boolean status = response.getBoolean("response");
                    // Toast.makeText(getActivity(), String.valueOf(status), Toast.LENGTH_SHORT).show();
                     if (status) {
@@ -147,6 +155,7 @@ public class Subcategory_fragment extends Fragment {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
                     Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                 }
             }

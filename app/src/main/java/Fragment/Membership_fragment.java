@@ -1,6 +1,8 @@
 package Fragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -59,6 +61,11 @@ public class Membership_fragment extends Fragment {
         return view;
     }
     private void makeGetCategoryRequest() {
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
         String tag_json_obj = "json_category_req";
 
         Map<String, String> params = new HashMap<String, String>();
@@ -74,7 +81,7 @@ public class Membership_fragment extends Fragment {
             public void onResponse(JSONObject response) {
 
                 try {
-
+                        loading.dismiss();
                         Boolean status = response.getBoolean("response");
 
                         if (status) {
@@ -101,6 +108,7 @@ public class Membership_fragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    loading.dismiss();
                 }
             }
         });

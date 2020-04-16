@@ -1,7 +1,9 @@
 package Fragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -406,6 +408,11 @@ public class Payment_fragment extends Fragment {
 
         //Toast.makeText(getActivity(), deliveryCharge, Toast.LENGTH_SHORT).show();
 
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.ADD_ORDER_URL, params, new Response.Listener<JSONObject>() {
@@ -416,6 +423,7 @@ public class Payment_fragment extends Fragment {
 
                 String msg_arb=null;
                 try {
+                    loading.dismiss();
                     status = response.getBoolean("responce");
                     //Toast.makeText(getActivity(),String.valueOf(status), Toast.LENGTH_SHORT).show();
 
@@ -447,6 +455,7 @@ public class Payment_fragment extends Fragment {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
                 }
             }
         }, new Response.ErrorListener() {
@@ -456,6 +465,7 @@ public class Payment_fragment extends Fragment {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    loading.dismiss();
                 }
             }
         });
@@ -468,7 +478,10 @@ public class Payment_fragment extends Fragment {
 
         params.put("user_id", userid);
         params.put("wallet_amount", Wallet);
-
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.Wallet_CHECKOUT, params, new Response.Listener<JSONObject>() {
             @Override
@@ -476,10 +489,12 @@ public class Payment_fragment extends Fragment {
                 Log.d(TAG, response.toString());
 
                 try {
+                    loading.dismiss();
                     String status = response.getString("responce");
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
                 }
             }
         }, new Response.ErrorListener() {
@@ -489,6 +504,7 @@ public class Payment_fragment extends Fragment {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    loading.dismiss();
                 }
             }
         });
@@ -501,12 +517,20 @@ public class Payment_fragment extends Fragment {
         final String Ammount = SharedPref.getString(getActivity(), BaseURL.TOTAL_AMOUNT);
         if (NetworkConnection.connectionChecking(getActivity())) {
             RequestQueue rq = Volley.newRequestQueue(getActivity());
+
+
+            final AlertDialog loading=new ProgressDialog(getActivity());
+            loading.setMessage("Loading...");
+            loading.setCancelable(false);
+            loading.show();
+
             StringRequest postReq = new StringRequest(Request.Method.POST, BaseURL.BASE_URL+"index.php/api/wallet_on_checkout",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
                             Log.i("eclipse", "Response=" + response);
                             try {
+                                loading.dismiss();
                                 JSONObject object = new JSONObject(response);
                                 JSONArray Jarray = object.getJSONArray("final_amount");
                                 for (int i = 0; i < Jarray.length(); i++) {
@@ -545,6 +569,7 @@ public class Payment_fragment extends Fragment {
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
+                                loading.dismiss();
                             }
                         }
                     }, new Response.ErrorListener() {
@@ -552,6 +577,7 @@ public class Payment_fragment extends Fragment {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     System.out.println("Error [" + error + "]");
+                loading.dismiss();
                 }
             }) {
 
@@ -582,6 +608,10 @@ public class Payment_fragment extends Fragment {
     }
 
     private void Coupon_code() {
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
         final String Ammount = SharedPref.getString(getActivity(), BaseURL.TOTAL_AMOUNT);
         final String Wallet_Ammount = SharedPref.getString(getActivity(), BaseURL.WALLET_TOTAL_AMOUNT);
         final String Coupon_code = et_Coupon.getText().toString();
@@ -593,7 +623,7 @@ public class Payment_fragment extends Fragment {
                         public void onResponse(String response) {
                             Log.i("eclipse", "Response=" + response);
                             try {
-
+                                loading.dismiss();
                                 JSONObject obj = new JSONObject(response);
                                 total_amount = obj.getString("Total_amount");
                                 String Used_coupon_amount = obj.getString("coupon_value");
@@ -619,6 +649,7 @@ public class Payment_fragment extends Fragment {
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
+                                loading.dismiss();
                             }
                         }
                     }, new Response.ErrorListener() {
@@ -626,6 +657,7 @@ public class Payment_fragment extends Fragment {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     System.out.println("Error [" + error + "]");
+                    loading.dismiss();
                 }
             }) {
 
@@ -731,6 +763,14 @@ public class Payment_fragment extends Fragment {
     private void makeGetcity1(String date, String gettime, String userid, String
             location, String store_id, JSONArray passArray,String unit,String unit_value)
     {
+
+
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
+
         String tag_json_obj = "json_product_req";
         Map<String, String> params = new HashMap<String, String>();
         params.put("date", date);
@@ -760,6 +800,7 @@ public class Payment_fragment extends Fragment {
                 Log.d(TAG, response.toString());
 
                 try {
+                    loading.dismiss();
                     String status = response.getString("responce");
                    // Toast.makeText(getActivity(),String.valueOf(status), Toast.LENGTH_SHORT).show();
 
@@ -785,6 +826,7 @@ public class Payment_fragment extends Fragment {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
 //                    progressDialog.dismiss();
                 }
             }
@@ -796,6 +838,7 @@ public class Payment_fragment extends Fragment {
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
 //                    progressDialog.dismiss();
+                    loading.dismiss();
                 }
             }
         });

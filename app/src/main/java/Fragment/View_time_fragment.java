@@ -1,6 +1,8 @@
 package Fragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -167,6 +169,12 @@ public class View_time_fragment extends Fragment {
         params.put("date",date);
         params.put("store_id",storeid);
 
+
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.GET_TIME_SLOT_URL, params, new Response.Listener<JSONObject>() {
 
@@ -175,6 +183,7 @@ public class View_time_fragment extends Fragment {
                 Log.d(TAG, response.toString());
 
                 try {
+                    loading.dismiss();
                     Boolean status = response.getBoolean("responce");
 //                    Toast.makeText(getActivity(), status.toString(), Toast.LENGTH_SHORT).show();
                     if (status) {
@@ -205,10 +214,12 @@ public class View_time_fragment extends Fragment {
 
 
                     }else {
+
                         Toast.makeText(getActivity(), "Time slot not available Select another date", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
                 }
             }
         }, new Response.ErrorListener() {
@@ -218,6 +229,7 @@ public class View_time_fragment extends Fragment {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    loading.dismiss();
                 }
             }
         });

@@ -1,6 +1,8 @@
 package gogrocer.tcc;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -175,6 +177,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      * Method to make json object request where json response starts wtih
      */
     private void makeLoginRequest(String email, final String password) {
+        final AlertDialog loading=new ProgressDialog(LoginActivity.this);
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
 
         // Tag used to cancel the request
         String tag_json_obj = "json_login_req";
@@ -190,6 +197,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Log.d(TAG, response.toString());
 
                 try {
+                    loading.dismiss();
                     Boolean status = response.getBoolean("responce");
                     if (status) {
                         JSONObject obj = response.getJSONObject("data");
@@ -228,6 +236,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
                 }
             }
         }, new Response.ErrorListener() {
@@ -237,6 +246,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(LoginActivity.this, getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    loading.dismiss();
                 }
             }
         });

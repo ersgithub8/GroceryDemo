@@ -1,5 +1,7 @@
 package gogrocer.tcc;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -93,6 +95,11 @@ public class Activity extends AppCompatActivity  {
     }
 
     private void jsonrequest() {
+        final AlertDialog loading=new ProgressDialog(Activity.this);
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
 
         String URL = "http://kitchenbasket.eparking.website/backend/index.php/api/get_stores" ;
         final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
@@ -101,7 +108,7 @@ public class Activity extends AppCompatActivity  {
 
 
                 try {
-
+                    loading.dismiss();
                     JSONArray array = response.getJSONArray("data");
 //
                     for (int i=0; i<array.length(); i++) {
@@ -117,12 +124,13 @@ public class Activity extends AppCompatActivity  {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                loading.dismiss();
                 error.printStackTrace();
             }
         });

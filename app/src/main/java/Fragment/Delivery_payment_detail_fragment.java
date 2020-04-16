@@ -1,8 +1,10 @@
 package Fragment;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -200,7 +202,10 @@ SharedPreferences preferences;
     }
 
      private void membership(String userid) {
-
+         final AlertDialog loading=new ProgressDialog(getActivity());
+         loading.setMessage("Loading...");
+         loading.setCancelable(false);
+         loading.show();
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("user_id",userid);
@@ -217,6 +222,7 @@ SharedPreferences preferences;
                 Log.d(TAG, response.toString());
 
                 try {
+                    loading.dismiss();
                     if (response != null && response.length() > 0) {
                         Boolean status = response.getBoolean("response");
                         if (status) {
@@ -242,6 +248,7 @@ SharedPreferences preferences;
                     }
                 } catch (Exception  e) {
                     e.printStackTrace();
+                    loading.dismiss();
                 }
             }
         }, new Response.ErrorListener() {
@@ -251,6 +258,7 @@ SharedPreferences preferences;
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    loading.dismiss();
                 }
             }
         });

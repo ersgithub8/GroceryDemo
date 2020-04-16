@@ -1,5 +1,7 @@
 package gogrocer.tcc;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -157,6 +159,13 @@ public class RatingActivity extends AppCompatActivity {
         params.put("store_comments", str_cmnts);
         // Toast.makeText(getActivity(), Store_id, Toast.LENGTH_SHORT).show();
 
+        final AlertDialog loading=new ProgressDialog(RatingActivity.this);
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
+
+
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.ADD_RATING_URL, params, new Response.Listener<JSONObject>() {
 
@@ -166,6 +175,7 @@ public class RatingActivity extends AppCompatActivity {
 
                 try {
 
+                    loading.dismiss();
 
                     Boolean status = response.getBoolean("responce");
                     String msg=response.getString("data");
@@ -181,7 +191,7 @@ public class RatingActivity extends AppCompatActivity {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-
+                    loading.dismiss();
                 }
             }
         }, new Response.ErrorListener() {
@@ -189,6 +199,7 @@ public class RatingActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    loading.dismiss();
                     Toast.makeText(RatingActivity.this, getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }

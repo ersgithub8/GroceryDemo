@@ -1,5 +1,6 @@
 package gogrocer.tcc;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -193,13 +194,19 @@ public class MyOrderDetail extends AppCompatActivity {
         Map<String, String> params = new HashMap<String, String>();
         params.put("sale_id", sale_id);
 
+        final android.app.AlertDialog loading=new ProgressDialog(MyOrderDetail.this);
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
+
         CustomVolleyJsonArrayRequest jsonObjReq = new CustomVolleyJsonArrayRequest(Request.Method.POST,
                 BaseURL.ORDER_DETAIL_URL, params, new Response.Listener<JSONArray>() {
 
             @Override
             public void onResponse(JSONArray response) {
                 Log.d(TAG, response.toString());
-
+                loading.dismiss();
                 Gson gson = new Gson();
                 Type listType = new TypeToken<List<My_order_detail_model>>() {
                 }.getType();
@@ -223,6 +230,7 @@ public class MyOrderDetail extends AppCompatActivity {
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(MyOrderDetail.this, getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
+                loading.dismiss();
             }
         });
 

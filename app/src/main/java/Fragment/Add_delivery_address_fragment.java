@@ -1,7 +1,9 @@
 package Fragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -510,7 +512,10 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
      */
     private void makeEditAddressRequest(String location_id, String pincode, String socity_id,
                                         String house_no, String receiver_name, String receiver_mobile,String address ,String area,String apartment){
-
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
         // Tag used to cancel the request
         String tag_json_obj = "json_edit_address_req";
 
@@ -533,6 +538,7 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
                 Log.d(TAG, response.toString());
 
                 try {
+                    loading.dismiss();
                     Boolean status = response.getBoolean("responce");
                     if (status) {
 
@@ -544,6 +550,7 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
                 }
             }
         }, new Response.ErrorListener() {
@@ -554,6 +561,7 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
+                loading.dismiss();
             }
         });
 

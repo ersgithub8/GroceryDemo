@@ -1,6 +1,8 @@
 package gogrocer.tcc;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -126,6 +128,12 @@ public class SelectCity extends AppCompatActivity {
 
     private void Get_City() {
         if (NetworkConnection.connectionChecking(getApplicationContext())) {
+            final AlertDialog loading=new ProgressDialog(gogrocer.tcc.SelectCity.this);
+            loading.setMessage("Loading...");
+            loading.setCancelable(false);
+            loading.show();
+
+
             Json = new JsonObject();
             Ion.with(SelectCity.this).load(BaseURL.BASE_URL+"index.php/api/city")
                     .setTimeout(15000).setJsonObjectBody(Json).asString().setCallback(new FutureCallback<String>() {
@@ -134,6 +142,7 @@ public class SelectCity extends AppCompatActivity {
                     if (e == null) {
                         Log.e("result", result);
                         try {
+                            loading.dismiss();
                             JSONObject js = new JSONObject(result);
                             {
                                 JSONArray obj = js.getJSONArray("city");
@@ -151,12 +160,14 @@ public class SelectCity extends AppCompatActivity {
                             SelectCityDialog();
                         } catch (JSONException e1) {
                             e1.printStackTrace();
+                            loading.dismiss();
                         }
                     }
                 }
             });
 
         } else {
+
             Toast.makeText(getApplicationContext(), "No Internet Connnection", Toast.LENGTH_SHORT).show();
         }
     }

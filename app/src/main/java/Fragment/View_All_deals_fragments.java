@@ -1,6 +1,8 @@
 package Fragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -113,6 +115,11 @@ public class View_All_deals_fragments extends Fragment {
 
     private void makeGetProductRequest(String Store_id)
     {
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
         String tag_json_obj = "json_product_req";
         Map<String, String> params = new HashMap<String, String>();
         params.put("storeid", Store_id);
@@ -126,6 +133,7 @@ public class View_All_deals_fragments extends Fragment {
                 Log.d(TAG, response.toString());
 
                 try {
+                    loading.dismiss();
                     Boolean status = response.getBoolean("responce");
                     if (status) {
                         Gson gson = new Gson();
@@ -144,6 +152,7 @@ public class View_All_deals_fragments extends Fragment {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
                 }
             }
         }, new Response.ErrorListener() {
@@ -153,6 +162,8 @@ public class View_All_deals_fragments extends Fragment {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+
+                    loading.dismiss();
                 }
             }
         });

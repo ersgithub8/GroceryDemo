@@ -1,6 +1,8 @@
 package Fragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -132,6 +134,11 @@ public class Apartment extends Fragment {
     }
     private void makeGetcity(String cityid,String areaid)
     {
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
         String tag_json_obj = "json_product_req";
         Map<String, String> params = new HashMap<String, String>();
         params.put("city_id",cityid);
@@ -146,7 +153,7 @@ public class Apartment extends Fragment {
                 Log.d(TAG, response.toString());
 
                 try {
-
+                    loading.dismiss();
 
                     status = response.getBoolean("response");
                     if(status) {
@@ -176,6 +183,7 @@ public class Apartment extends Fragment {
 ////
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
 //                    progressDialog.dismiss();
                 }
             }
@@ -188,6 +196,7 @@ public class Apartment extends Fragment {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
 //                    progressDialog.dismiss();
                 }
+                loading.dismiss();
             }
         });
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);

@@ -1,6 +1,8 @@
 package Fragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -76,6 +78,11 @@ public class Wallet_fragment extends Fragment {
     }
 
     public void getRefresrh() {
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
         String user_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
         RequestQueue rq = Volley.newRequestQueue(getActivity());
         StringRequest strReq = new StringRequest(Request.Method.GET, BaseURL.WALLET_REFRESH + user_id,
@@ -83,6 +90,7 @@ public class Wallet_fragment extends Fragment {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            loading.dismiss();
                             JSONObject jObj = new JSONObject(response);
                             if (jObj.optString("success").equalsIgnoreCase("success")) {
                                 String wallet_amount = jObj.getString("wallet");
@@ -93,6 +101,8 @@ public class Wallet_fragment extends Fragment {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
+
+                            loading.dismiss();
                         }
 
                     }

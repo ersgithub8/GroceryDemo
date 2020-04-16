@@ -2,6 +2,7 @@ package Fragment;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -170,6 +171,11 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
      * Method to make json array request where json response starts wtih
      */
     private void makeGetLimiteRequest() {
+        final android.app.AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
 
         JsonArrayRequest req = new JsonArrayRequest(BaseURL.GET_LIMITE_SETTING_URL,
                 new Response.Listener<JSONArray>() {
@@ -183,7 +189,7 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
                         try {
                             // Parsing json array response
                             // loop through each json object
-
+                            loading.dismiss();
                             boolean issmall = false;
                             boolean isbig = false;
 
@@ -260,6 +266,7 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            loading.dismiss();
                             Toast.makeText(getActivity(),
                                     "Error: " + e.getMessage(),
                                     Toast.LENGTH_LONG).show();
@@ -271,6 +278,7 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), "Connection Time out", Toast.LENGTH_SHORT).show();
+                loading.dismiss();
                 }
             }
         });

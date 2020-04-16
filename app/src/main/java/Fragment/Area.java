@@ -1,6 +1,8 @@
 package Fragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -130,6 +132,12 @@ public class Area extends Fragment {
     }
     private void makeGetcity(String cityid)
     {
+
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
         String tag_json_obj = "json_product_req";
         Map<String, String> params = new HashMap<String, String>();
          params.put("city_id",cityid);
@@ -144,6 +152,7 @@ public class Area extends Fragment {
 
                 try {
 
+                    loading.dismiss();
 
                      status = response.getBoolean("response");
 //                    Toast.makeText(getActivity(),String.valueOf(status), Toast.LENGTH_SHORT).show();
@@ -175,6 +184,7 @@ public class Area extends Fragment {
 ////
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
 //                    progressDialog.dismiss();
                 }
             }
@@ -186,6 +196,7 @@ public class Area extends Fragment {
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
 //                    progressDialog.dismiss();
+                    loading.dismiss();
                 }
             }
         });

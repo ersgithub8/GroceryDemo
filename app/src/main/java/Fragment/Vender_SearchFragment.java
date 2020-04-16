@@ -1,7 +1,9 @@
 package Fragment;
 
 
+import android.app.AlertDialog;
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -207,6 +209,10 @@ public class Vender_SearchFragment extends android.app.Fragment {
 //    }
     private void makeGetcity()
     {
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
         String tag_json_obj = "json_product_req";
         Map<String, String> params = new HashMap<String, String>();
         params.put("city",cityname);
@@ -221,7 +227,7 @@ public class Vender_SearchFragment extends android.app.Fragment {
 
                 try {
 
-
+                    loading.dismiss();
                     status = response.getBoolean("responce");
 //                    Toast.makeText(getActivity(),String.valueOf(status), Toast.LENGTH_SHORT).show();
 
@@ -252,6 +258,7 @@ public class Vender_SearchFragment extends android.app.Fragment {
 ////
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
 //                    progressDialog.dismiss();
                 }
             }
@@ -263,6 +270,7 @@ public class Vender_SearchFragment extends android.app.Fragment {
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
 //                    progressDialog.dismiss();
+                    loading.dismiss();
                 }
             }
         });

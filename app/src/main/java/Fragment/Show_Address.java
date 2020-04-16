@@ -1,6 +1,8 @@
 package Fragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -76,7 +78,10 @@ public class Show_Address extends Fragment {
         return view;
     }
     private void makeGetAddressRequest(String user_id) {
-
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
         // Tag used to cancel the request
         String tag_json_obj = "json_get_address_req";
 
@@ -92,6 +97,7 @@ public class Show_Address extends Fragment {
                 Log.d(TAG, response.toString());
 
                 try {
+                    loading.dismiss();
                      status = response.getBoolean("responce");
                     if (status) {
 
@@ -122,6 +128,7 @@ public class Show_Address extends Fragment {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
                 }
             }
         }, new Response.ErrorListener() {
@@ -132,6 +139,7 @@ public class Show_Address extends Fragment {
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     if (getActivity() != null) {
                         Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                        loading.dismiss();
                     }
                 }
             }

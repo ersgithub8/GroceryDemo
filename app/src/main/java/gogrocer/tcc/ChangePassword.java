@@ -1,5 +1,7 @@
 package gogrocer.tcc;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -56,6 +58,16 @@ public class ChangePassword extends AppCompatActivity {
 
     private void makeForgotRequest(String number, final String newpasswrd) {
 
+
+
+        final AlertDialog loading=new ProgressDialog(ChangePassword.this);
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
+
+
+
         // Tag used to cancel the request
         String tag_json_obj = "json_forgot_req";
         Map<String, String> params = new HashMap<String, String>();
@@ -72,6 +84,7 @@ public class ChangePassword extends AppCompatActivity {
                 // Toast.makeText(ForgotActivity.this, String.valueOf(response), Toast.LENGTH_SHORT).show();
 
                 try {
+                    loading.dismiss();
                     Boolean status = response.getBoolean("responce");
                     String error = response.getString("error");
 //                    String error_arb=response.getString("error_arb");
@@ -89,6 +102,7 @@ public class ChangePassword extends AppCompatActivity {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
                 }
             }
         }, new Response.ErrorListener() {
@@ -98,6 +112,7 @@ public class ChangePassword extends AppCompatActivity {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(ChangePassword.this, getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    loading.dismiss();
                 }
             }
         });

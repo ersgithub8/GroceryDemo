@@ -1,6 +1,8 @@
 package Fragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -89,6 +91,12 @@ public class Reward_fragment extends Fragment {
     }
 
     public void getRewards() {
+
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
         String user_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
         RequestQueue rq = Volley.newRequestQueue(getActivity());
         StringRequest strReq = new StringRequest(Request.Method.GET, BaseURL.REWARDS_REFRESH + user_id,
@@ -96,6 +104,7 @@ public class Reward_fragment extends Fragment {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            loading.dismiss();
                             JSONObject jObj = new JSONObject(response);
                             if (jObj.optString("success").equalsIgnoreCase("success")) {
                                 String rewards_points = jObj.getString("total_rewards");
@@ -111,6 +120,7 @@ public class Reward_fragment extends Fragment {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            loading.dismiss();
                         }
 
                     }
@@ -118,7 +128,7 @@ public class Reward_fragment extends Fragment {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                loading.dismiss();
             }
         }) {
 
@@ -127,6 +137,10 @@ public class Reward_fragment extends Fragment {
     }
 
     private void Shift_Reward_to_WAllet() {
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
         final String user_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
         final String getreward = Rewards_Points.getText().toString();
         final String getwallet = SharedPref.getString(getActivity(), BaseURL.KEY_WALLET_Ammount);
@@ -138,6 +152,7 @@ public class Reward_fragment extends Fragment {
                         public void onResponse(String response) {
                             Log.i("eclipse", "Response=" + response);
                             try {
+                                loading.dismiss();
                                 JSONObject object = new JSONObject(response);
                                 JSONArray Jarray = object.getJSONArray("wallet_amount");
                                 for (int i = 0; i < Jarray.length(); i++) {
@@ -149,6 +164,7 @@ public class Reward_fragment extends Fragment {
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
+                                loading.dismiss();
                             }
                         }
                     }, new Response.ErrorListener() {
@@ -156,6 +172,7 @@ public class Reward_fragment extends Fragment {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     System.out.println("Error [" + error + "]");
+                    loading.dismiss();
                 }
             }) {
 

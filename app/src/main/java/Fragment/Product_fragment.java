@@ -847,23 +847,24 @@ public void getStore(String catid){
                     ids.clear();
                     name.add("Select Store");
                     ids.add("0");
+//                    Toast.makeText(getActivity(), jsonArray.length()+"", Toast.LENGTH_SHORT).show();
                     for(int i=0;i<jsonArray.length();i++){
 
+
                         JSONObject object=jsonArray.getJSONObject(i);
-
-                        name.add(object.getString("user_fullname"));
-                        ids.add(object.getString("user_id"));
-
-
-
-                        ArrayAdapter<String> adapter=new ArrayAdapter<String>(getActivity(),
-                                android.R.layout.simple_spinner_item,name);
-                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        store.setAdapter(adapter);
-
+                        if(search(object.getString("user_fullname"))) {
+                            name.add(object.getString("user_fullname"));
+                            ids.add(object.getString("user_id"));
+                        }
                         //Toast.makeText(Signin.this, jsonArray.getString(0), Toast.LENGTH_SHORT).show();
 
                     }
+
+                    ArrayAdapter<String> adapter=new ArrayAdapter<String>(getActivity(),
+                            android.R.layout.simple_spinner_item,name);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    store.setAdapter(adapter);
+
 
                 }
                 else {
@@ -909,12 +910,14 @@ public void getStore(String catid){
 }
 
 
-public void search(ArrayList<String> data){
-        for(int i =0;i<data.size();i++){
-            if (product_modelList.get(0).getStorename().equals(data.get(i))){
-                store.setSelection(i);
+public boolean search(String name1){
+//        int a=0;
+        for(int i =0;i<name.size();i++){
+            if (name.get(i).equals(name)){
+                return false;
             }
         }
+        return true;
 }
 
 }

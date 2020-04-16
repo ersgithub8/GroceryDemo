@@ -1,6 +1,8 @@
 package Fragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,7 +49,7 @@ public class Change_password_fragment extends Fragment {
 
     private TextView tv_new_pass, tv_old_pass, tv_con_pass;
     private EditText et_new_pass, et_old_pass, et_con_pass;
-    private Button btn_change_pass;
+    private RelativeLayout btn_change_pass;
 
     private Session_management sessionManagement;
 
@@ -76,7 +79,7 @@ public class Change_password_fragment extends Fragment {
         et_new_pass = (EditText) view.findViewById(R.id.et_change_new_password);
         et_old_pass = (EditText) view.findViewById(R.id.et_change_old_password);
         et_con_pass = (EditText) view.findViewById(R.id.et_change_con_password);
-        btn_change_pass = (Button) view.findViewById(R.id.btn_change_password);
+        btn_change_pass = (RelativeLayout) view.findViewById(R.id.btn_change_password);
 
         btn_change_pass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,6 +173,10 @@ public class Change_password_fragment extends Fragment {
     private void makeChangePasswordRequest(String user_id, String new_password,
                                            String current_password) {
 
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
         // Tag used to cancel the request
         String tag_json_obj = "json_change_password_req";
 
@@ -186,6 +193,7 @@ public class Change_password_fragment extends Fragment {
                 Log.d(TAG, response.toString());
 
                 try {
+                    loading.dismiss();
                     Boolean status = response.getBoolean("responce");
                     if (status) {
 
@@ -199,6 +207,7 @@ public class Change_password_fragment extends Fragment {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
                 }
             }
         }, new Response.ErrorListener() {
@@ -208,6 +217,7 @@ public class Change_password_fragment extends Fragment {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                loading.dismiss();
                 }
             }
         });

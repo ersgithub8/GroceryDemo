@@ -1,7 +1,9 @@
 package Fragment;
 
 
+import android.app.AlertDialog;
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -119,6 +121,12 @@ public class DemoFragment extends android.app.Fragment {
 
 
     private void makeGetCategoryRequest() {
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
+
         String tag_json_obj = "json_category_req";
 
         isSubcat = false;
@@ -137,6 +145,7 @@ public class DemoFragment extends android.app.Fragment {
                 Log.d(TAG, response.toString());
 
                 try {
+                    loading.dismiss();
                     if (response != null && response.length() > 0) {
                         Boolean status = response.getBoolean("responce");
                         if (status) {
@@ -151,6 +160,7 @@ public class DemoFragment extends android.app.Fragment {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
                 }
             }
         }, new Response.ErrorListener() {
@@ -160,6 +170,7 @@ public class DemoFragment extends android.app.Fragment {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    loading.dismiss();
                 }
             }
         });

@@ -1,6 +1,8 @@
 package Fragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -141,7 +143,10 @@ public class Socity_fragment extends Fragment {
      * Method to make json array request where json response starts wtih
      */
     private void makeGetSocityRequest() {
-
+//        final AlertDialog loading=new ProgressDialog(getActivity());
+//        loading.setMessage("Loading...");
+//        loading.setCancelable(false);
+//        loading.show();
         // Tag used to cancel the request
         String tag_json_obj = "json_socity_req";
 

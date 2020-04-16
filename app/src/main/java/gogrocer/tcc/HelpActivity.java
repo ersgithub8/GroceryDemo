@@ -177,12 +177,9 @@ public class HelpActivity extends AppCompatActivity {
                 //Log.d(TAG, response.toString());
 
                 try {
-
-
                     Boolean status = response.getBoolean("responce");
                     //  Toast.makeText(HelpActivity.this,String.valueOf(status), Toast.LENGTH_SHORT).show();
                     JSONArray array=response.getJSONArray("data");
-
 
 
                     if(status) {
@@ -205,8 +202,9 @@ public class HelpActivity extends AppCompatActivity {
                         }
 
                     }else{
-
-                        Toast.makeText(HelpActivity.this, "No record found", Toast.LENGTH_SHORT).show();
+                        loading.dismiss();
+                        String error=response.getString("data");
+                        Toast.makeText(HelpActivity.this, error, Toast.LENGTH_SHORT).show();
                     }
 //
 //                    if(area_modelList.isEmpty()){
@@ -217,6 +215,7 @@ public class HelpActivity extends AppCompatActivity {
 ////
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
 //                    progressDialog.dismiss();
                 }
             }

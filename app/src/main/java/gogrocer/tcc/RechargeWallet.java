@@ -1,6 +1,8 @@
 package gogrocer.tcc;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -153,6 +155,15 @@ public class RechargeWallet extends AppCompatActivity implements PaymentResultLi
     }
 
     private void Recharge_wallet() {
+
+        final AlertDialog loading=new ProgressDialog(RechargeWallet.this);
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
+
+
+
         final String user_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
         if (NetworkConnection.connectionChecking(this)) {
             RequestQueue rq = Volley.newRequestQueue(this);
@@ -162,6 +173,7 @@ public class RechargeWallet extends AppCompatActivity implements PaymentResultLi
                         public void onResponse(String response) {
                             Log.i("eclipse", "Response=" + response);
                             try {
+                                loading.dismiss();
                                 JSONObject object = new JSONObject(response);
                                 if (object.optString("success").equalsIgnoreCase("success")) {
                                     String wallet_amount = object.getString("wallet_amount");
@@ -171,6 +183,7 @@ public class RechargeWallet extends AppCompatActivity implements PaymentResultLi
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
+                                loading.dismiss();
                             }
                         }
                     }, new Response.ErrorListener() {
@@ -178,6 +191,7 @@ public class RechargeWallet extends AppCompatActivity implements PaymentResultLi
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     System.out.println("Error [" + error + "]");
+                    loading.dismiss();
                 }
             }) {
 
