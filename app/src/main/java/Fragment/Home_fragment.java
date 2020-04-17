@@ -107,7 +107,7 @@ public class Home_fragment extends Fragment {
     private Session_management sessionManagement;
     String getid,cat_id;
     String storename;
-    Boolean status_member;
+    Boolean status_member=false;
     String storeimg;
     String getcat_title;
     ScrollView scrollView;
@@ -179,7 +179,7 @@ private Master_category_adapter master_adapter;
         //best selling products
          loading=new ProgressDialog(getActivity());
         loading.setMessage("Loading...");
-        loading.show();
+//        loading.show();
         rv_best_selling= (RecyclerView) view.findViewById(R.id.best_selling_rv);
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(getActivity());
         layoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);

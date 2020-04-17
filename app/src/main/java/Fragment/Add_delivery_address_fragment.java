@@ -412,7 +412,7 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
         if (TextUtils.isEmpty(getarea) && getarea == null) {
             tv_socity.setTextColor(getResources().getColor(R.color.colorPrimary));
             focusView = tv_area;
-            cancel = true;
+            cancel = false;
         }
         if (TextUtils.isEmpty(getapartment)
         //        && getapartment == null

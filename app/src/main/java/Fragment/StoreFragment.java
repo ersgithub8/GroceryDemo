@@ -197,7 +197,7 @@ public class StoreFragment extends Fragment {
         String tag_json_obj = "json_category_req";
         final AlertDialog loading=new ProgressDialog(getActivity());
         loading.setMessage("Loading...");
-//        loading.setCancelable(false);
+        loading.setCancelable(false);
         loading.show();
         Map<String, String> params = new HashMap<String, String>();
         params.put("subCat_id", cat_id);
@@ -243,8 +243,9 @@ public class StoreFragment extends Fragment {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
-                    loading.dismiss();
+
                 }
+//                loading.dismiss();
 
             }
         });

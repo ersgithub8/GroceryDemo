@@ -3,6 +3,7 @@ package gogrocer.tcc;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -179,11 +180,12 @@ public class HelpActivity extends AppCompatActivity {
                 try {
                     Boolean status = response.getBoolean("responce");
                     //  Toast.makeText(HelpActivity.this,String.valueOf(status), Toast.LENGTH_SHORT).show();
-                    JSONArray array=response.getJSONArray("data");
 
 
                     if(status) {
-                    loading.dismiss();
+                        JSONArray array=response.getJSONArray("data");
+
+                        loading.dismiss();
 //                        nameo.clear();
                         id.clear();
 //                        nameo.add("Select Order");
@@ -204,7 +206,14 @@ public class HelpActivity extends AppCompatActivity {
                     }else{
                         loading.dismiss();
                         String error=response.getString("data");
+
                         Toast.makeText(HelpActivity.this, error, Toast.LENGTH_SHORT).show();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                onBackPressed();
+                            }
+                        },500);
                     }
 //
 //                    if(area_modelList.isEmpty()){
@@ -215,6 +224,8 @@ public class HelpActivity extends AppCompatActivity {
 ////
                 } catch (JSONException e) {
                     e.printStackTrace();
+
+//                    Toast.makeText(HelpActivity.this, "No record found", Toast.LENGTH_SHORT).show();
                     loading.dismiss();
 //                    progressDialog.dismiss();
                 }
