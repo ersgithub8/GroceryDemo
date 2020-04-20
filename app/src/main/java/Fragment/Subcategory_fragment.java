@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -52,6 +53,7 @@ import Model.Anime;
 import Model.Master_category;
 import Model.ShopNow_model;
 import Model.Sub_Categories;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.CustomSlider;
 import gogrocer.tcc.R;
@@ -150,8 +152,20 @@ public class Subcategory_fragment extends Fragment {
                         rv_subcategories.setAdapter(master_subcat_adapter);
                         master_subcat_adapter.notifyDataSetChanged();
                     } else {
-                            Toast.makeText(getActivity(), "No Data found", Toast.LENGTH_SHORT).show();
-                        }
+//                            Toast.makeText(getActivity(), "No Data found", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getActivity(), "No Data found", Toast.LENGTH_SHORT).show();
+                        SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE);
+                        alertDialog.setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                        sweetAlertDialog.dismiss();
+                                        getActivity().onBackPressed();
+                                    }
+                                }).setTitleText("No data Found")
+                                .setCancelable(false);
+                        alertDialog.setConfirmButtonBackgroundColor(Color.RED);
+                        alertDialog.show();
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();

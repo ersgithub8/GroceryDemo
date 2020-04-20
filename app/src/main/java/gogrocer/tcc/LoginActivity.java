@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -44,6 +45,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import Config.BaseURL;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import util.ConnectivityReceiver;
 import util.CustomVolleyJsonRequest;
 import util.Session_management;
@@ -231,8 +233,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     } else {
                         String error = response.getString("error");
                         btn_continue.setEnabled(true);
+                        SweetAlertDialog alertDialog=new SweetAlertDialog(LoginActivity.this,SweetAlertDialog.ERROR_TYPE);
+                        alertDialog.setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                sweetAlertDialog.dismiss();
+                            }
+                        }).setTitleText(error)
+                                .setCancelable(false);
 
-                        Toast.makeText(LoginActivity.this, "" + error, Toast.LENGTH_SHORT).show();
+                        alertDialog.setConfirmButtonBackgroundColor(Color.RED);
+                        alertDialog.show();
+//                        Toast.makeText(LoginActivity.this, "" + error, Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

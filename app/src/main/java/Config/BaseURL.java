@@ -74,6 +74,7 @@ public class BaseURL {
 
     public static String GET_SUBSUB_CATEGORY_URL = BASE_URL + "index.php/api/get_sub_subCategories";
     public static String GET_Store_URL = BASE_URL +"index.php/api/get_stores";
+    public static String GET_Store_URLA = BASE_URL +"index.php/api/get_storess";
 
     public static String GET_MASTERImages_URL = "https://gromal.finalyearprojects.website/backend/uploads/master_images/";
     public static String GET_STOREImages_URL = "https://gromal.finalyearprojects.website/backend/uploads/profile/";

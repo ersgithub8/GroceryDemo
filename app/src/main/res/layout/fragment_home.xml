@@ -375,7 +375,7 @@
 
                 android:id="@+id/top_selling_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="3dp"
                 android:scrollbars="none"

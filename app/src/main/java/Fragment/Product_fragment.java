@@ -6,6 +6,7 @@ import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.SyncStateContract;
@@ -61,6 +62,7 @@ import Config.SharedPref;
 import Model.Category_model;
 import Model.Product_model;
 import Model.Slider_subcat_model;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.CustomSlider;
 import gogrocer.tcc.MainActivity;
@@ -735,7 +737,19 @@ public class Product_fragment extends Fragment {
                         adapter_product.notifyDataSetChanged();
                         if (getActivity() != null) {
                             if (product_modelList.isEmpty()) {
-                                Toast.makeText(getActivity(), getResources().getString(R.string.no_rcord_found), Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(getActivity(), getResources().getString(R.string.no_rcord_found), Toast.LENGTH_SHORT).show();
+                                SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE);
+                                alertDialog.setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                        sweetAlertDialog.dismiss();
+                                        getActivity().onBackPressed();
+                                    }
+                                }).setTitleText("No data Found")
+                                        .setCancelable(false);
+
+                                alertDialog.setConfirmButtonBackgroundColor(Color.RED);
+                                alertDialog.show();
                             }
                         }
 

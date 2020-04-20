@@ -2,6 +2,7 @@ package gogrocer.tcc;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
@@ -45,6 +46,7 @@ import Adapter.My_order_detail_adapter;
 import Config.BaseURL;
 import Model.My_Pending_order_model;
 import Model.My_order_detail_model;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import util.CustomVolleyJsonArrayRequest;
 import util.CustomVolleyJsonRequest;
 import util.RecyclerTouchListener;
@@ -206,14 +208,20 @@ public class HelpActivity extends AppCompatActivity {
                     }else{
                         loading.dismiss();
                         String error=response.getString("data");
-
-                        Toast.makeText(HelpActivity.this, error, Toast.LENGTH_SHORT).show();
-                        new Handler().postDelayed(new Runnable() {
+                        SweetAlertDialog alertDialog=new SweetAlertDialog(HelpActivity.this,SweetAlertDialog.ERROR_TYPE);
+                        alertDialog.setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
                             @Override
-                            public void run() {
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                sweetAlertDialog.dismiss();
                                 onBackPressed();
                             }
-                        },500);
+                        }).setTitleText(error)
+                                .setCancelable(false);
+
+                        alertDialog.setConfirmButtonBackgroundColor(Color.RED);
+                        alertDialog.show();
+//                        Toast.makeText(HelpActivity.this, error, Toast.LENGTH_SHORT).show();
+
                     }
 //
 //                    if(area_modelList.isEmpty()){

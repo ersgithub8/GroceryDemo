@@ -1,6 +1,7 @@
 package Fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,6 +37,7 @@ import Adapter.Area_Adapter;
 import Adapter.My_Pending_Order_adapter;
 import Config.BaseURL;
 import Model.My_Pending_order_model;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.MyOrderDetail;
@@ -221,8 +223,19 @@ public class My_Pending_Order extends Fragment {
                         rv_myorder.setAdapter(myPendingOrderAdapter);
                         myPendingOrderAdapter.notifyDataSetChanged();
                     }else{
+                        SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE);
+                        alertDialog.setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                sweetAlertDialog.dismiss();
+                                getActivity().onBackPressed();
+                            }
+                        }).setTitleText("No data Found")
+                                .setCancelable(false);
 
-                        Toast.makeText(getActivity(), "No record found", Toast.LENGTH_SHORT).show();
+                        alertDialog.setConfirmButtonBackgroundColor(Color.RED);
+                        alertDialog.show();
+//                        Toast.makeText(getActivity(), "No record found", Toast.LENGTH_SHORT).show();
                     }
 //
 //                    if(area_modelList.isEmpty()){

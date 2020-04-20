@@ -5,6 +5,7 @@
     <group>
         <item
             android:id="@+id/nav_shop_now"
+            android:visible="false"
             android:icon="@drawable/ic_nav_home"
             android:title="@string/nav_home" />
         <item

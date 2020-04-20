@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -41,6 +42,7 @@ import Adapter.Area_Adapter;
 import Config.BaseURL;
 import Model.Apartment_Model;
 import Model.Area;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.R;
@@ -172,7 +174,19 @@ public class Apartment extends Fragment {
                         String area_name="choose apartment";
                         String area_id= null;
                         sessionManagement.updateApartment(area_name,area_id);
-                        Toast.makeText(getActivity(), "No record found", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getActivity(), "No record found", Toast.LENGTH_SHORT).show();
+                        SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE);
+                        alertDialog.setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                sweetAlertDialog.dismiss();
+                                getActivity().onBackPressed();
+                            }
+                        }).setTitleText("No data Found")
+                                .setCancelable(false);
+
+                        alertDialog.setConfirmButtonBackgroundColor(Color.RED);
+                        alertDialog.show();
                     }
 //
 //                    if(area_modelList.isEmpty()){

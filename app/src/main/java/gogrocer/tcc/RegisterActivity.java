@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -29,6 +30,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import Config.BaseURL;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import util.ConnectivityReceiver;
 import util.CustomVolleyJsonRequest;
 
@@ -270,7 +272,19 @@ public class RegisterActivity extends AppCompatActivity {
                     } else {
                         String error = response.getString("error");
                         btn_register.setEnabled(true);
-                        Toast.makeText(RegisterActivity.this, "" + error, Toast.LENGTH_SHORT).show();
+                        SweetAlertDialog alertDialog=new SweetAlertDialog(RegisterActivity.this,SweetAlertDialog.ERROR_TYPE);
+                        alertDialog.setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                sweetAlertDialog.dismiss();
+//                                onBackPressed();
+                            }
+                        }).setTitleText(error)
+                                .setCancelable(false);
+
+                        alertDialog.setConfirmButtonBackgroundColor(Color.RED);
+                        alertDialog.show();
+//                        Toast.makeText(RegisterActivity.this, "" + error, Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
