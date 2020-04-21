@@ -172,7 +172,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
         Double price = Double.parseDouble(mList.getPrice());
         Double reward = Double.parseDouble(mList.getRewards());
         holder.tv_total.setText("" + price * items);
-
+        holder.ll.setVisibility(View.GONE);
     }
 
     @Override
@@ -362,7 +362,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 
         Spinner dropdown;
         public TextView textView1, textView2, textView3, textView4, textView5, textView6,tv_mrp,tv_disc;
-
+        LinearLayout ll;
         public MyViewHolder(View view) {
             super(view);
 
@@ -388,7 +388,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
             iv_minus = (ImageView) view.findViewById(R.id.iv_subcat_minus);
             iv_remove = (ImageView) view.findViewById(R.id.iv_subcat_remove);
             tv_mrp.setPaintFlags( tv_price.getPaintFlags()|Paint.STRIKE_THRU_TEXT_FLAG);
-
+            ll=view.findViewById(R.id.pll);
             iv_remove.setVisibility(View.GONE);
             iv_minus.setOnClickListener(this);
             iv_plus.setOnClickListener(this);
@@ -554,6 +554,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                 Double reward = Double.parseDouble(map.get("rewards"));
                 tv_reward.setText("" + reward * items);
                 tv_total.setText("" + price * items);
+                tv_total.setVisibility(View.GONE);
                 ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
 
             } else if (id == R.id.iv_subcat_img) {

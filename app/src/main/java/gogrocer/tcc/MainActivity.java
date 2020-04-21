@@ -443,6 +443,7 @@ SharedPreferences sharedPreferences;
             nav_menu.findItem(R.id.nav_logout).setVisible(true);
             nav_menu.findItem(R.id.nav_powerd).setVisible(true);
 
+//            nav_menu.findItem(R.id.nav_logout).setVisible(true);
 //            nav_menu.findItem(R.id.nav_user).setVisible(true);
         } else {
 
@@ -592,7 +593,7 @@ SharedPreferences sharedPreferences;
             args.putString("title", getResources().getString(R.string.nav_about));
             fm.setArguments(args);
         } else if (id == R.id.nav_policy) {
-           Intent i=new Intent(MainActivity.this, Terms_and_Condition.class);
+           Intent i=new Intent(MainActivity.this, Terms.class);
            startActivity(i);
         } else if (id == R.id.nav_review) {
             Intent i=new Intent(MainActivity.this, About_us.class);
@@ -603,7 +604,7 @@ SharedPreferences sharedPreferences;
         } else if (id == R.id.nav_contact) {
             fm = new Contact_Us_fragment();
             args.putString("url", BaseURL.GET_SUPPORT_URL);
-            args.putString("title", getResources().getString(R.string.nav_terms));
+            args.putString("title", getResources().getString(R.string.nav_contact));
             fm.setArguments(args);
         } else if (id == R.id.nav_my_address) {
                 fm = new Show_Address();

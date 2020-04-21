@@ -927,7 +927,7 @@ public void getStore(String catid){
 public boolean search(String name1){
 //        int a=0;
         for(int i =0;i<name.size();i++){
-            if (name.get(i).equals(name)){
+            if (name.get(i).equals(name1)){
                 return false;
             }
         }

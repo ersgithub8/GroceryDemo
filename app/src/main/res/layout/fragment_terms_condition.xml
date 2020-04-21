@@ -16,23 +16,7 @@
             android:layout_height="wrap_content"
             android:padding="15dp"
             android:textColor="#000"
-
-            android:text="1.)  If one’s you receive your order by delivery boy so it will neither the order will be returned or money\n
-\n
-2). The replacement item will be pickup at the time of new order will arrival . If your replacement item does not qualify for the exchange you can have to pay new order charges and get your new order.\n
-\n
-3). At the time of delivery first you have to pay billing amount to delivery boy and then take your order.\n
-\n
-4). If you not paying the order amount to the delivery boy or using abusive language with him. So company will can take appropriate legal action on you.  \n
-\n
-5). If you cancel an order after one minute of placing the order, you will have to pay the cancel charge for it.\n
-\n
-6). Check your order item in front of delivery boy. If there was any change or mistake immediate infor to delivery boy . After delivery boy leaves,  the order neither will change or returned. \n
-\n
-7).  If you make cash on delivery, it is your responsibility to keep the change of cash to the delivery boy. For that you cannot force the delivery boy.\n
-\n
-8). If due to some reason the delivery boy is late to deliver your order . So in that case also you will have to take the order and pay the billing amount to delivery boy .
-"/>
+            />
     </ScrollView>
 
 </LinearLayout>

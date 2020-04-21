@@ -214,19 +214,19 @@ public class Subcategory_fragment extends Fragment {
                                 textSliderView.getBundle().putString("extra", name.get("sub_cat"));
                                 imgSlider.addSlider(textSliderView);
                                 final String sub_cat = (String) textSliderView.getBundle().get("extra");
-                                textSliderView.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
-                                    @Override
-                                    public void onSliderClick(BaseSliderView slider) {
+//                                textSliderView.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+//                                    @Override
+//                                    public void onSliderClick(BaseSliderView slider) {
                                         //   Toast.makeText(getActivity(), "" + sub_cat, Toast.LENGTH_SHORT).show();
-                                        Bundle args = new Bundle();
-                                        Fragment fm = new Product_fragment();
-                                        args.putString("id", sub_cat);
-                                        fm.setArguments(args);
-                                        FragmentManager fragmentManager = getFragmentManager();
-                                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                                                .addToBackStack(null).commit();
-                                    }
-                                });
+//                                        Bundle args = new Bundle();
+//                                        Fragment fm = new Product_fragment();
+//                                        args.putString("id", sub_cat);
+//                                        fm.setArguments(args);
+//                                        FragmentManager fragmentManager = getFragmentManager();
+//                                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+//                                                .addToBackStack(null).commit();
+//                                    }
+//                                });
 
 
                             }

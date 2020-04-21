@@ -127,6 +127,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
+                android:id="@+id/pll"
                 android:layout_marginBottom="@dimen/space_3"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">

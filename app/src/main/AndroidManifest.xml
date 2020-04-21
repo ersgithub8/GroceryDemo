@@ -31,7 +31,8 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HelpActivity"></activity>
+        <activity android:name=".Terms"></activity>
+        <activity android:name=".HelpActivity" />
         <activity android:name=".RatingActivity" />
         <activity
             android:name=".Need_help"

@@ -247,6 +247,18 @@ public class HelpActivity extends AppCompatActivity {
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(HelpActivity.this, getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
 //                    progressDialog.dismiss();
+                    SweetAlertDialog alertDialog=new SweetAlertDialog(HelpActivity.this,SweetAlertDialog.ERROR_TYPE);
+                    alertDialog.setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            sweetAlertDialog.dismiss();
+                            onBackPressed();
+                        }
+                    }).setTitleText(getString(R.string.connection_time_out))
+                            .setCancelable(false);
+
+                    alertDialog.setConfirmButtonBackgroundColor(Color.RED);
+                    alertDialog.show();
                 }
             }
         });
