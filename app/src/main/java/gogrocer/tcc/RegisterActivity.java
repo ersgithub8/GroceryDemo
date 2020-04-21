@@ -300,6 +300,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                     loading.dismiss();
                 }
+                loading.dismiss();
             }
         });
 
@@ -342,7 +343,6 @@ public class RegisterActivity extends AppCompatActivity {
 
                         String msg = response.getString("message");
                         Toast.makeText(RegisterActivity.this, "" + msg, Toast.LENGTH_SHORT).show();
-
                         Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
                         startActivity(i);
                         finish();
@@ -351,7 +351,19 @@ public class RegisterActivity extends AppCompatActivity {
                     } else {
                         String error = response.getString("error");
                         btn_register.setEnabled(true);
-                        Toast.makeText(RegisterActivity.this, "" + error, Toast.LENGTH_SHORT).show();
+                        SweetAlertDialog alertDialog=new SweetAlertDialog(RegisterActivity.this,SweetAlertDialog.ERROR_TYPE);
+                        alertDialog.setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                sweetAlertDialog.dismiss();
+//                                onBackPressed();
+                            }
+                        }).setTitleText(error)
+                                .setCancelable(false);
+
+                        alertDialog.setConfirmButtonBackgroundColor(Color.RED);
+                        alertDialog.show();
+//                        Toast.makeText(RegisterActivity.this, "" + error, Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -367,6 +379,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 loading.dismiss();
                 }
+                loading.dismiss();
             }
         });
 

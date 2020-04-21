@@ -225,7 +225,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                         Intent i = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(i);
-                        finish();
+                        finishAffinity();
                         checkLogin(user_id,token);
 
                         btn_continue.setEnabled(false);
