@@ -317,8 +317,6 @@ public class StoreFragment extends Fragment {
 //                                                .addToBackStack(null).commit();
 //                                    }
 //                                });
-
-
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

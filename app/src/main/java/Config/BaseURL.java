@@ -50,6 +50,7 @@ public class BaseURL {
     public static final String STORE_ID = "STORE_ID";
 
     public static String BASE_URL = "https://gromal.finalyearprojects.website/backend/";
+    public static String get_DeliveryCharges=BASE_URL+"index.php/api/get_delivery_charges";
     public static String Subscriptionadd=BASE_URL+"index.php/api/save_user_memberships";
     public static String IMG_SLIDER_URL = BASE_URL + "uploads/sliders/";
     public static String IMG_CATEGORY_URL = BASE_URL + "uploads/category/";
