@@ -44,12 +44,14 @@
 
                 <RadioButton
                     android:id="@+id/fast_delivery"
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Fast Delivery"></RadioButton>
                     <RadioButton
                         android:id="@+id/custom_delivery"
                         android:layout_width="wrap_content"
+                        android:visibility="gone"
                         android:layout_height="wrap_content"
                         android:text="Custom Delivery"></RadioButton>
 
@@ -68,6 +70,7 @@
 
                 <Fonts.LatoBLack
                     android:id="@+id/tv_deli_date"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space_5"
@@ -81,6 +84,7 @@
                 <Fonts.LatoBLack
                     android:id="@+id/tv_deli_fromtime"
                     android:layout_width="match_parent"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/space_5"
                     android:background="@drawable/xml_textbox_blue_bg"

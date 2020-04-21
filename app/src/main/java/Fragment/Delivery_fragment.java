@@ -144,11 +144,23 @@ String language;
 
         makeslotrequest(store_id);
 
-        FastRadioBtn.setChecked(true);
-        tv_date.setEnabled(false);
-        tv_time.setEnabled(false);
-        tv_time.setBackgroundResource(R.color.gray);
-        tv_date.setBackgroundResource(R.color.gray);
+
+//        if(dmethod.equalsIgnoreCase("instant")){
+//
+//            FastRadioBtn.setVisibility(View.VISIBLE);
+//            FastRadioBtn.setChecked(true);
+//            nextdaytext.setText("your order will be delivered within one hour");
+//        }else if (dmethod.equalsIgnoreCase("slot")){
+//            CustomRadioBtn.setVisibility(View.VISIBLE);
+//            CustomRadioBtn.setChecked(true);
+//            tv_date.setVisibility(View.VISIBLE);
+//            tv_time.setVisibility(View.VISIBLE);
+//        }else {
+//            Toast.makeText(getActivity(), "Cannot deliver", Toast.LENGTH_SHORT).show();
+//        }
+
+
+
 
 
         Date c = Calendar.getInstance().getTime();
@@ -160,35 +172,33 @@ String language;
         currentTime1 = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
         //Toast.makeText(getActivity(), currentTime+formattedDate, Toast.LENGTH_SHORT).show();
 
-        CustomRadioBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (dmethod.equalsIgnoreCase("slot")){
-                    tv_date.setVisibility(View.VISIBLE);
-                    tv_time.setVisibility(View.VISIBLE);
-                    tv_time.setEnabled(true);
-                    tv_date.setEnabled(true);
-                    tv_time.setBackgroundResource(R.color.colorPrimary);
-                    tv_date.setBackgroundResource(R.color.colorPrimary);
-                }else {
-                    Toast.makeText(getActivity(), "Time slot not Available", Toast.LENGTH_SHORT).show();
-                    btn_checkout.setEnabled(false);
-                }
-
-
-            }
-        });
-
-
-        FastRadioBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                tv_date.setVisibility(View.INVISIBLE);
-                tv_time.setVisibility(View.INVISIBLE);
-                nextdaytext.setText("your order will be delivered within one hour");
-            }
-        });
+//        CustomRadioBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (dmethod.equalsIgnoreCase("slot")){
+//                    tv_date.setVisibility(View.VISIBLE);
+//                    tv_time.setVisibility(View.VISIBLE);
+//                    tv_time.setEnabled(true);
+//                    tv_date.setEnabled(true);
+//
+//                                   }else {
+//                    Toast.makeText(getActivity(), "Time slot not Available", Toast.LENGTH_SHORT).show();
+//                    btn_checkout.setEnabled(false);
+//                }
+//
+//
+//            }
+//        });
+//
+//
+//        FastRadioBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//
+//                nextdaytext.setText("your order will be delivered within one hour");
+//            }
+//        });
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_YEAR, 1);
         Date tomorrow = calendar.getTime();
@@ -630,6 +640,19 @@ String language;
                     if(status) {
 
                         dmethod=response.getString("times");
+                        if(dmethod.equalsIgnoreCase("instant")){
+//
+            FastRadioBtn.setVisibility(View.VISIBLE);
+            FastRadioBtn.setChecked(true);
+            nextdaytext.setText("your order will be delivered within one hour");
+        }else if (dmethod.equalsIgnoreCase("slot")){
+            CustomRadioBtn.setVisibility(View.VISIBLE);
+            CustomRadioBtn.setChecked(true);
+            tv_date.setVisibility(View.VISIBLE);
+            tv_time.setVisibility(View.VISIBLE);
+        }else {
+            Toast.makeText(getActivity(), "Cannot deliver", Toast.LENGTH_SHORT).show();
+        }
                     }else{
                         dmethod="no";
                     }
