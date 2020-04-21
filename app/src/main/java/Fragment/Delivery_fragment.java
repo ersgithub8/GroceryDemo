@@ -397,7 +397,7 @@ String language;
 
         if (CustomRadioBtn.isChecked()) {
             if (TextUtils.isEmpty(getdate)) {
-                Toast.makeText(getActivity(), getResources().getString(R.string.please_select_date_time), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), getResources().getString(R.string.please_select_date_time), Toast.LENGTH_SHORT).show();
                 new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE)
                         .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
                             @Override
@@ -410,7 +410,7 @@ String language;
                 cancel = true;
             }
             if (TextUtils.isEmpty(time)) {
-                Toast.makeText(getActivity(), "Select Time Slot", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Select Time Slot", Toast.LENGTH_SHORT).show();
                 new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE)
                         .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
                             @Override

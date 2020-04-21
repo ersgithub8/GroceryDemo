@@ -221,6 +221,7 @@ public class View_time_fragment extends Fragment {
                                     @Override
                                     public void onClick(SweetAlertDialog sweetAlertDialog) {
                                         sweetAlertDialog.dismiss();
+                                        getActivity().onBackPressed();
                                     }
                                 }).setTitleText("Time slot not available Select another date")
                                 .setConfirmButtonBackgroundColor(Color.RED)
