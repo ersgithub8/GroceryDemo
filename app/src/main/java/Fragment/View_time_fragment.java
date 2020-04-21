@@ -3,6 +3,7 @@ package Fragment;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -32,6 +33,7 @@ import java.util.Map;
 
 import Config.BaseURL;
 import Model.Slot_Model;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.R;
@@ -214,8 +216,16 @@ public class View_time_fragment extends Fragment {
 
 
                     }else {
-
-                        Toast.makeText(getActivity(), "Time slot not available Select another date", Toast.LENGTH_SHORT).show();
+                        new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE)
+                                .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                        sweetAlertDialog.dismiss();
+                                    }
+                                }).setTitleText("Time slot not available Select another date")
+                                .setConfirmButtonBackgroundColor(Color.RED)
+                                .show();
+//                        Toast.makeText(getActivity(), "Time slot not available Select another date", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

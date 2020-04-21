@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -55,6 +56,7 @@ import Adapter.Area_Adapter;
 import Adapter.Delivery_get_address_adapter;
 import Config.BaseURL;
 import Model.Delivery_address_model;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.R;
@@ -307,7 +309,16 @@ String language;
         } else if (id == R.id.tv_deli_fromtime) {
 
             if (TextUtils.isEmpty(getdate)) {
-                Toast.makeText(getActivity(), getResources().getString(R.string.please_select_date), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), getResources().getString(R.string.please_select_date), Toast.LENGTH_SHORT).show();
+                new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE)
+                        .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                sweetAlertDialog.dismiss();
+                            }
+                        }).setTitleText(getResources().getString(R.string.please_select_date))
+                        .setConfirmButtonBackgroundColor(Color.RED)
+                        .show();
             } else {
                 Bundle args = new Bundle();
                 Fragment fm = new View_time_fragment();
@@ -387,10 +398,28 @@ String language;
         if (CustomRadioBtn.isChecked()) {
             if (TextUtils.isEmpty(getdate)) {
                 Toast.makeText(getActivity(), getResources().getString(R.string.please_select_date_time), Toast.LENGTH_SHORT).show();
+                new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE)
+                        .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                sweetAlertDialog.dismiss();
+                            }
+                        }).setTitleText(getResources().getString(R.string.please_select_date_time))
+                        .setConfirmButtonBackgroundColor(Color.RED)
+                        .show();
                 cancel = true;
             }
             if (TextUtils.isEmpty(time)) {
                 Toast.makeText(getActivity(), "Select Time Slot", Toast.LENGTH_SHORT).show();
+                new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE)
+                        .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                sweetAlertDialog.dismiss();
+                            }
+                        }).setTitleText(getResources().getString(R.string.please_select_date_time))
+                        .setConfirmButtonBackgroundColor(Color.RED)
+                        .show();
                 cancel = true;
             }
         }
@@ -529,6 +558,7 @@ String language;
                     Boolean status = response.getBoolean("responce");
                     if (status) {
 
+                        Toast.makeText(getActivity(), response+"abv", Toast.LENGTH_SHORT).show();
                         delivery_address_modelList.clear();
 
                         Gson gson = new Gson();
@@ -549,6 +579,7 @@ String language;
                             }
                         }
 
+                    }else{
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

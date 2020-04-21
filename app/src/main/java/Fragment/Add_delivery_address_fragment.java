@@ -412,7 +412,7 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
         if (TextUtils.isEmpty(getarea) && getarea == null) {
             tv_socity.setTextColor(getResources().getColor(R.color.colorPrimary));
             focusView = tv_area;
-            cancel = false;
+            cancel = true;
         }
         if (TextUtils.isEmpty(getapartment)
         //        && getapartment == null
@@ -421,7 +421,7 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
 //            focusView = tv_apartment;
 
 //            getapartment="";
-            cancel = false;
+            cancel = true;
         }
 
         if (cancel) {
