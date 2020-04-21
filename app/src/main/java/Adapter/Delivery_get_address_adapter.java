@@ -64,7 +64,7 @@ public class Delivery_get_address_adapter extends RecyclerSwipeAdapter<Delivery_
     private boolean ischecked = false;
     public String charge=null;
     private String location_id = "";
-    private String getsocity, gethouse, getphone, getpin, getname, getcharge,getaddress;
+    private String getsocity, gethouse, getphone, getpin, getname, getcharge,getaddress,s_id,are_id,apart_id;
 
     public String getHouse() {
         String house = gethouse;
@@ -284,6 +284,9 @@ public class Delivery_get_address_adapter extends RecyclerSwipeAdapter<Delivery_
             getphone = modelList.get(0).getReceiver_mobile();
             getsocity = modelList.get(0).getSocity_name();
             getpin = modelList.get(0).getPincode();
+            s_id = modelList.get(0).getSocity_id();
+            are_id = modelList.get(0).getArea_id();
+            apart_id = modelList.get(0).getArea_id();
             getcharge = charge;
             getaddress=modelList.get(0).getAddress();
 
@@ -291,6 +294,9 @@ public class Delivery_get_address_adapter extends RecyclerSwipeAdapter<Delivery_
             SharedPreferences preferences1 = PreferenceManager.getDefaultSharedPreferences(context);
             SharedPreferences.Editor editor = preferences1.edit();
             editor.putString("delivery_charges",charge);
+            editor.putString("citid",s_id);
+            editor.putString("areid",are_id);
+            editor.putString("apartid",apart_id);
             editor.apply();
 
             Intent updates = new Intent("Grocery_delivery_charge");
