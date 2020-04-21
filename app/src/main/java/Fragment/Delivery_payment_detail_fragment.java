@@ -272,4 +272,63 @@ SharedPreferences preferences;
     }
 
 
+    private void deliverycaharges(String city,String area,String appartment,String amount) {
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("city_id",city);
+        params.put("area_id",area);
+        params.put("apartment_id",appartment);
+        params.put("order_amount",amount);
+       /* if (parent_id != null && parent_id != "") {
+        }*/
+
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.get_DeliveryCharges, params, new Response.Listener<JSONObject>() {
+
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, response.toString());
+
+                try {
+                    loading.dismiss();
+                    if (response != null && response.length() > 0) {
+                        Boolean status = response.getBoolean("response");
+                        if (status) {
+
+                            String delivery_charges=response.getString("delivery_charges");
+
+                            Toast.makeText(getActivity(), delivery_charges, Toast.LENGTH_SHORT).show();
+
+                        }else {
+                            Toast.makeText(getActivity(), "Spmething went wrong", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                } catch (Exception  e) {
+                    e.printStackTrace();
+                    loading.dismiss();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    loading.dismiss();
+                }
+            }
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq);
+
+    }
+
 }
