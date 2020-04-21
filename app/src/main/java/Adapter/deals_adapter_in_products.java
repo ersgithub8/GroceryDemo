@@ -3,6 +3,7 @@ package Adapter;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -129,6 +130,10 @@ public class deals_adapter_in_products extends RecyclerView.Adapter<deals_adapte
                 preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
                 language=preferences.getString("language","");
 
+
+
+
+
                 int qty = Integer.valueOf(tv_contetiy.getText().toString());
                 qty = qty + 1;
                 tv_contetiy.setText(String.valueOf(qty));
@@ -189,6 +194,28 @@ public class deals_adapter_in_products extends RecyclerView.Adapter<deals_adapte
 
                     if (dbcart.isTileInCart(map.get("title"))=="empty" || dbcart.isTileInCart(map.get("title"))==(modelList.get(position).getStoreid()))
                     {
+
+
+
+                        Cursor res=dbcart.viewAll();
+
+                        while (res.moveToNext()){
+                            String a=res.getString(2);
+                            String b=res.getString(9);
+
+
+                            if(a.equals(map.get("product_id"))
+                                    && b.equals(map.get("unit"))){
+                                String qty1=res.getString(1);
+                                String id1=res.getString(0);
+                                int no= Integer.parseInt(qty1)+1;
+                                dbcart.update(no+"",id1);
+//                                Toast.makeText(context, Integer.parseInt(qty1)+"", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        }
+
+
                         if (dbcart.isInCart(map.get("c_id"))) {
                             dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
                             tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
