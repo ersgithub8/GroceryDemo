@@ -97,10 +97,10 @@ public class Apartment extends Fragment {
         if (ConnectivityReceiver.isConnected()) {
 //            makeGetSocityRequest();
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-            String name = preferences.getString("area_id", "");
-            String name1 = preferences.getString("city_id", "");
+            String areid = preferences.getString("area_id", "");
+            String citid = preferences.getString("city_id", "");
 
-            makeGetcity(name,name1);
+            makeGetcity(citid,areid);
         } else {
             ((MainActivity) getActivity()).onNetworkConnectionChanged(false);
         }

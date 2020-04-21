@@ -116,6 +116,7 @@ public class Vender_SearchFragment extends android.app.Fragment {
                 Bundle args = new Bundle();
                 android.app.Fragment fm = new Product_fragment();
                 args.putString("Store_id", getid);
+                args.putString("category_id","null");
                 fm.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)

@@ -22,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -99,6 +100,7 @@ public class Product_fragment extends Fragment {
     private Home_adapter adapter;
     private Button Product_btn,Deals_btn;
     ProgressDialog progressDialog;
+    RelativeLayout r1;
     Spinner store;
     public Product_fragment() {
     }
@@ -116,6 +118,7 @@ public class Product_fragment extends Fragment {
         store=view.findViewById(R.id.spinnerstore);
         product=view.findViewById(R.id.pview);
         deals=view.findViewById(R.id.dview);
+        r1=(RelativeLayout) view.findViewById(R.id.rl1);
         storename=view.findViewById(R.id.sn);
         tab_cat = (TabLayout) view.findViewById(R.id.tab_cat);
         banner_slider = (SliderLayout) view.findViewById(R.id.relative_banner);
@@ -136,7 +139,11 @@ public class Product_fragment extends Fragment {
 
         deals.setVisibility(View.INVISIBLE);
         product.setVisibility(View.VISIBLE);
-        getStore(category_id);
+        if (category_id.equals("null")){
+            r1.setVisibility(View.GONE);
+        }else {
+            getStore(category_id);
+        }
    //     Toast.makeText(getActivity(), getcat_id, Toast.LENGTH_SHORT).show();
         Product_btn.setBackgroundResource(R.color.bg);
         Product_btn.setOnClickListener(new View.OnClickListener() {
