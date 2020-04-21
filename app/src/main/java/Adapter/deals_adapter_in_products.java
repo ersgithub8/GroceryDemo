@@ -106,12 +106,13 @@ public class deals_adapter_in_products extends RecyclerView.Adapter<deals_adapte
         public void onClick(View view) {
             int id = view.getId();
             int position = getAdapterPosition();
-            if (id == R.id.iv_subcat_plus) {
-                int qty = Integer.valueOf(tv_contetiy.getText().toString());
-                qty = qty + 1;
-                tv_contetiy.setText(String.valueOf(qty));
-
-            } else if (id == R.id.iv_subcat_minus) {
+//            if (id == R.id.iv_subcat_plus) {
+//                int qty = Integer.valueOf(tv_contetiy.getText().toString());
+//                qty = qty + 1;
+//                tv_contetiy.setText(String.valueOf(qty));
+//
+//            } else
+            if (id == R.id.iv_subcat_minus) {
                // Toast.makeText(context, modelList.get(position).getStoreid(), Toast.LENGTH_SHORT).show();
                 int qty = 0;
                 if (!tv_contetiy.getText().toString().equalsIgnoreCase(""))
@@ -122,13 +123,15 @@ public class deals_adapter_in_products extends RecyclerView.Adapter<deals_adapte
                     tv_contetiy.setText(String.valueOf(qty));
                 }
 
-            } else if (id == R.id.tv_subcat_add)
+            } else if (id == R.id.iv_subcat_plus)
             {
                 HashMap<String, String> map = new HashMap<>();
                 preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
                 language=preferences.getString("language","");
 
-
+                int qty = Integer.valueOf(tv_contetiy.getText().toString());
+                qty = qty + 1;
+                tv_contetiy.setText(String.valueOf(qty));
                 map.put("product_id", modelList.get(position).getProduct_id());
 
 
@@ -186,7 +189,7 @@ public class deals_adapter_in_products extends RecyclerView.Adapter<deals_adapte
 
                     if (dbcart.isTileInCart(map.get("title"))=="empty" || dbcart.isTileInCart(map.get("title"))==(modelList.get(position).getStoreid()))
                     {
-                        if (dbcart.isInCart(map.get("product_id"))) {
+                        if (dbcart.isInCart(map.get("c_id"))) {
                             dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
                             tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
                         } else {
@@ -507,76 +510,80 @@ public class deals_adapter_in_products extends RecyclerView.Adapter<deals_adapte
         } else {
             tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
         }
+//
+//        iv_plus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                HashMap<String, String> map = new HashMap<>();
+//                preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
+//                language=preferences.getString("language","");
+//                int qty = Integer.valueOf(tv_contetiy.getText().toString());
+//                qty = qty + 1;
+//
+//                tv_contetiy.setText(String.valueOf(qty));
+//
+//                map.put("product_id", modelList.get(position).getProduct_id());
+//                map.put("product_name", modelList.get(position).getProduct_name());
+//                map.put("category_id", modelList.get(position).getCategory_id());
+//                map.put("product_description", modelList.get(position).getProduct_description());
+//                map.put("deal_price", modelList.get(position).getDeal_price());
+//                map.put("start_date", modelList.get(position).getStart_date());
+//                map.put("start_time", modelList.get(position).getStart_time());
+//                map.put("end_date", modelList.get(position).getEnd_date());
+//                map.put("end_time", modelList.get(position).getEnd_time());
+//                map.put("price", pricee);
+//                map.put("product_image", modelList.get(position).getProduct_image());
+//                map.put("status", modelList.get(position).getStatus());
+//                map.put("in_stock", modelList.get(position).getIn_stock());
+//                map.put("unit_value", unitvalue);
+//                map.put("unit", unit);
+//                map.put("increament", modelList.get(position).getIncreament());
+//                map.put("rewards", modelList.get(position).getRewards());
+//                map.put("stock", modelList.get(position).getStock());
+//                map.put("title", modelList.get(position).getStoreid());
+//
+//
+//
+//
+//                if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
+//
+//                    if (dbcart.isTileInCart(map.get("title"))=="empty" || dbcart.isTileInCart(map.get("title"))==(modelList.get(position).getStoreid())) {
+//
+//                        if (dbcart.isInCart(map.get("c_id"))) {
+//                            dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
+//                            tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+//                        } else {
+//                            dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
+//                            tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+//                        }
+//                    }else {
+//                        Toast.makeText(context, "you can only select product from one store at a time", Toast.LENGTH_SHORT).show();
+//                    }
+//
+//
+//                } else {
+//                    dbcart.removeItemFromCart(map.get("product_id"));
+//                    tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
+//                }
+//
+//                Double items = Double.parseDouble(dbcart.getInCartItemQty(map.get("product_id")));
+//                Double price = Double.parseDouble(map.get("price"));
+//                ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
+//
+//                notifyItemChanged(position);
+//
+//            }
+//        });
 
-        tv_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                HashMap<String, String> map = new HashMap<>();
-                preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
-                language=preferences.getString("language","");
-
-                map.put("product_id", modelList.get(position).getProduct_id());
-                map.put("product_name", modelList.get(position).getProduct_name());
-                map.put("category_id", modelList.get(position).getCategory_id());
-                map.put("product_description", modelList.get(position).getProduct_description());
-                map.put("deal_price", modelList.get(position).getDeal_price());
-                map.put("start_date", modelList.get(position).getStart_date());
-                map.put("start_time", modelList.get(position).getStart_time());
-                map.put("end_date", modelList.get(position).getEnd_date());
-                map.put("end_time", modelList.get(position).getEnd_time());
-                map.put("price", pricee);
-                map.put("product_image", modelList.get(position).getProduct_image());
-                map.put("status", modelList.get(position).getStatus());
-                map.put("in_stock", modelList.get(position).getIn_stock());
-                map.put("unit_value", unitvalue);
-                map.put("unit", unit);
-                map.put("increament", modelList.get(position).getIncreament());
-                map.put("rewards", modelList.get(position).getRewards());
-                map.put("stock", modelList.get(position).getStock());
-                map.put("title", modelList.get(position).getStoreid());
-
-
-
-
-                if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
-
-                    if (dbcart.isTileInCart(map.get("title"))=="empty" || dbcart.isTileInCart(map.get("title"))==(modelList.get(position).getStoreid())) {
-
-                        if (dbcart.isInCart(map.get("product_id"))) {
-                            dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
-                            tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
-                        } else {
-                            dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
-                            tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
-                        }
-                    }else {
-                        Toast.makeText(context, "you can only select product from one store at a time", Toast.LENGTH_SHORT).show();
-                    }
-
-
-                } else {
-                    dbcart.removeItemFromCart(map.get("product_id"));
-                    tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
-                }
-
-                Double items = Double.parseDouble(dbcart.getInCartItemQty(map.get("product_id")));
-                Double price = Double.parseDouble(map.get("price"));
-                ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
-
-                notifyItemChanged(position);
-
-            }
-        });
-
-        iv_plus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int qty = Integer.valueOf(tv_contetiy.getText().toString());
-                qty = qty + 1;
-
-                tv_contetiy.setText(String.valueOf(qty));
-            }
-        });
+//        iv_plus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                int qty = Integer.valueOf(tv_contetiy.getText().toString());
+//                qty = qty + 1;
+//
+//                tv_contetiy.setText(String.valueOf(qty));
+//            }
+//        });
 
         iv_minus.setOnClickListener(new View.OnClickListener() {
             @Override
