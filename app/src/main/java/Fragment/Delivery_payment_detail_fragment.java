@@ -7,6 +7,7 @@ import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -33,6 +34,7 @@ import java.util.Map;
 
 import Config.BaseURL;
 import Config.SharedPref;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.LoginActivity;
 import gogrocer.tcc.MainActivity;
@@ -284,7 +286,8 @@ SharedPreferences preferences;
         params.put("area_id",area);
         params.put("apartment_id",appartment);
         params.put("order_amount",amount);
-       /* if (parent_id != null && parent_id != "") {
+        Toast.makeText(getActivity(), params+"", Toast.LENGTH_SHORT).show();
+        /* if (parent_id != null && parent_id != "") {
         }*/
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
@@ -306,7 +309,18 @@ SharedPreferences preferences;
                             Toast.makeText(getActivity(), delivery_charges, Toast.LENGTH_SHORT).show();
 
                         }else {
-                            Toast.makeText(getActivity(), "Spmething went wrong", Toast.LENGTH_SHORT).show();
+                            SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),1);
+                            alertDialog.setCancelable(false);
+                            alertDialog.setConfirmButton("OK", new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismiss();
+                                    getActivity().onBackPressed();
+                                }
+                            }).setConfirmButtonBackgroundColor(Color.RED);
+                            alertDialog.setTitleText("Delivery charges not added");
+                            alertDialog.show();
+//                            Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
 
                     }
