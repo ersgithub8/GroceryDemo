@@ -316,6 +316,7 @@ public class Product_fragment extends Fragment {
                 Log.d(TAG, response.toString());
 
                 try {
+                    progressDialog.dismiss();
                     Boolean status = response.getBoolean("responce");
                     if (status) {
 
@@ -341,6 +342,7 @@ public class Product_fragment extends Fragment {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    progressDialog.dismiss();
                     progressDialog.dismiss();
                     product_modelList.clear();
                 }
@@ -494,6 +496,7 @@ public class Product_fragment extends Fragment {
                 Log.d(TAG, response.toString());
 
                 try {
+                    progressdialog.dismiss();
                     Boolean status = response.getBoolean("responce");
                     if (status) {
                         product_modelList.clear();
@@ -514,6 +517,7 @@ public class Product_fragment extends Fragment {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    progressdialog.dismiss();
                 }
                 progressdialog.dismiss();
             }
@@ -586,10 +590,12 @@ public class Product_fragment extends Fragment {
                     }
                     else
                     {
+                        loading.dismiss();
                         product_modelList.clear();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
                     progressDialog.dismiss();
                 }
             }

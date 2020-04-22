@@ -138,7 +138,7 @@ public class Area extends Fragment {
         final AlertDialog loading=new ProgressDialog(getActivity());
         loading.setMessage("Loading...");
         loading.setCancelable(false);
-        loading.show();
+//        loading.show();
 
         String tag_json_obj = "json_product_req";
         Map<String, String> params = new HashMap<String, String>();
