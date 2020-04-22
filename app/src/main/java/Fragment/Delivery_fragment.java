@@ -558,7 +558,7 @@ String language;
                     Boolean status = response.getBoolean("responce");
                     if (status) {
 
-                        Toast.makeText(getActivity(), response+"abv", Toast.LENGTH_SHORT).show();
+
                         delivery_address_modelList.clear();
 
                         Gson gson = new Gson();
