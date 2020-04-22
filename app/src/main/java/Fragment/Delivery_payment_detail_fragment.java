@@ -318,7 +318,7 @@ SharedPreferences preferences;
                                     getActivity().onBackPressed();
                                 }
                             }).setConfirmButtonBackgroundColor(Color.RED);
-                            alertDialog.setTitleText("Delivery charges not added");
+                            alertDialog.setTitleText("Delivery not availible in this area.");
                             alertDialog.show();
 //                            Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
