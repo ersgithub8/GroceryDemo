@@ -216,20 +216,20 @@ public class Socity_fragment extends Fragment {
                 try {
 
                     Boolean status = response.getBoolean("response");
+                    if (status) {
+                        Gson gson = new Gson();
+                        Type listType = new TypeToken<List<Socity_model>>() {
+                        }.getType();
+
+                        socity_modelList = gson.fromJson(response.getString("data"), listType);
 
 
+                        adapter = new Socity_adapter(socity_modelList);
+                        rv_socity.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                    }else {
 
-                    Gson gson = new Gson();
-                    Type listType = new TypeToken<List<Socity_model>>() {
-                    }.getType();
-
-                    socity_modelList = gson.fromJson(response.getString("data"), listType);
-
-
-
-                    adapter = new Socity_adapter(socity_modelList);
-                    rv_socity.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
+                    }
 
                     if(socity_modelList.isEmpty()){
                         if(getActivity() != null) {
