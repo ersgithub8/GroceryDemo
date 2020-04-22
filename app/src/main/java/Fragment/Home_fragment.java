@@ -9,6 +9,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
@@ -78,6 +79,7 @@ import Model.My_Pending_order_model;
 import Model.Product_model;
 import Model.Store_model;
 import Model.Top_Selling_model;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.CustomSlider;
 import gogrocer.tcc.LoginActivity;
@@ -268,7 +270,11 @@ private Master_category_adapter master_adapter;
 
                 if (sessionManagement.isLoggedIn()){
                     if (status_member){
-                        Toast.makeText(getActivity(), "Membership Active", Toast.LENGTH_SHORT).show();
+                        SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),2);
+                        alertDialog.setTitleText("Membership already active");
+                        alertDialog.setConfirmButtonBackgroundColor(Color.GREEN);
+                        alertDialog.show();
+//                        Toast.makeText(getActivity(), "Membership Active", Toast.LENGTH_SHORT).show();
                     }else {
                         Fragment fm = new Membership_fragment();
                         FragmentManager fragmentManager = getFragmentManager();
