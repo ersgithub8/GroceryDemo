@@ -640,7 +640,6 @@ private Master_category_adapter master_adapter;
                         my_last_order_adapter.notifyDataSetChanged();
                     }else{
 
-                        Toast.makeText(getActivity(), "No record found", Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
@@ -933,7 +932,6 @@ private Master_category_adapter master_adapter;
                                 }
                             }
                         } else {
-                            Toast.makeText(getActivity(), "No Response", Toast.LENGTH_SHORT).show();
                         }
                     }
                 } catch (JSONException e) {

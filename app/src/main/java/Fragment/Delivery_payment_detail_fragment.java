@@ -147,7 +147,6 @@ SharedPreferences preferences;
         String city = preferences.getString("citid","");
         String area = preferences.getString("areid","");
         String apartm = preferences.getString("apartid", "");
-        Toast.makeText(getActivity(), city+"\n"+area+"\n"+apartm+"\n"+db_cart.getTotalAmount(), Toast.LENGTH_SHORT).show();
         deli_charges = Integer.parseInt(name);
         String getaddress = getArguments().getString("address");
         String newgetaddresss = getArguments().getString("newaddresss");
@@ -166,16 +165,6 @@ SharedPreferences preferences;
        // Toast.makeText(getActivity(), newgetaddresss, Toast.LENGTH_SHORT).show();
 
         tv_address.setText(getaddress);
-
-        total = Double.parseDouble(db_cart.getTotalAmount()) + Double.parseDouble(delivery_charges);
-
-        //tv_total.setText("" + db_cart.getTotalAmount());
-        //tv_item.setText("" + db_cart.getWishlistCount());
-        tv_total.setText(getResources().getString(R.string.tv_cart_item)+ db_cart.getCartCount() + "\n" +
-                getResources().getString(R.string.amount)+ db_cart.getTotalAmount() + "\n" +
-                getResources().getString(R.string.delivery_charge)+ delivery_charges + "\n" +
-                getResources().getString(R.string.total_amount) +
-                db_cart.getTotalAmount() + " + " + delivery_charges + " = " + total+ getResources().getString(R.string.currency));
 
 
         //Toast.makeText(getActivity(), String.valueOf(deli_charges), Toast.LENGTH_SHORT).show();
@@ -287,7 +276,7 @@ SharedPreferences preferences;
         params.put("area_id",area);
         params.put("apartment_id",appartment);
         params.put("order_amount",amount);
-        Toast.makeText(getActivity(), params+"", Toast.LENGTH_SHORT).show();
+
         /* if (parent_id != null && parent_id != "") {
         }*/
 
@@ -306,11 +295,21 @@ SharedPreferences preferences;
                         if (status) {
 
                              delivery_charges=response.getString("delivery_charges");
+                            total = Double.parseDouble(db_cart.getTotalAmount()) + Double.parseDouble(delivery_charges);
 
-                            Toast.makeText(getActivity(), delivery_charges, Toast.LENGTH_SHORT).show();
+                            //tv_total.setText("" + db_cart.getTotalAmount());
+                            //tv_item.setText("" + db_cart.getWishlistCount());
+                            tv_total.setText(getResources().getString(R.string.tv_cart_item)+ db_cart.getCartCount() + "\n" +
+                                    getResources().getString(R.string.amount)+ db_cart.getTotalAmount() + "\n" +
+                                    getResources().getString(R.string.delivery_charge)+ delivery_charges + "\n" +
+                                    getResources().getString(R.string.total_amount) +
+                                    db_cart.getTotalAmount() + " + " + delivery_charges + " = " + total+ getResources().getString(R.string.currency));
+
+
+
 
                         }else {
-                            delivery_charges="0";
+
                             SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),1);
                             alertDialog.setCancelable(false);
                             alertDialog.setConfirmButton("OK", new SweetAlertDialog.OnSweetClickListener() {
@@ -320,7 +319,7 @@ SharedPreferences preferences;
                                     getActivity().onBackPressed();
                                 }
                             }).setConfirmButtonBackgroundColor(Color.RED);
-                            alertDialog.setTitleText("Delivery charges not added");
+                            alertDialog.setTitleText("Delivery not availibke in this area.");
                             alertDialog.show();
 //                            Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
