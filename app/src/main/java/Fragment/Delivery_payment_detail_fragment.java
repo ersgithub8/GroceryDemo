@@ -144,7 +144,7 @@ SharedPreferences preferences;
         String city = preferences.getString("citid","");
         String area = preferences.getString("areid","");
         String apartm = preferences.getString("apartid", "");
-
+        Toast.makeText(getActivity(), city+"\n"+area+"\n"+apartm+"\n"+db_cart.getTotalAmount(), Toast.LENGTH_SHORT).show();
         deli_charges = Integer.parseInt(name);
         String getaddress = getArguments().getString("address");
         String newgetaddresss = getArguments().getString("newaddresss");

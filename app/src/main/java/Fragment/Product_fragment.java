@@ -139,11 +139,9 @@ public class Product_fragment extends Fragment {
 
         deals.setVisibility(View.INVISIBLE);
         product.setVisibility(View.VISIBLE);
-        if (category_id.equals("null")){
-            r1.setVisibility(View.GONE);
-        }else {
+
             getStore(category_id);
-        }
+        
    //     Toast.makeText(getActivity(), getcat_id, Toast.LENGTH_SHORT).show();
         Product_btn.setBackgroundResource(R.color.bg);
         Product_btn.setOnClickListener(new View.OnClickListener() {
