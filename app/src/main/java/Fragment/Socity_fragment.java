@@ -228,26 +228,26 @@ public class Socity_fragment extends Fragment {
                         rv_socity.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
                     }else {
-
-                    }
-
-                    if(socity_modelList.isEmpty()){
-                        if(getActivity() != null) {
+                        if(socity_modelList.isEmpty()){
+                            if(getActivity() != null) {
 //                            Toast.makeText(getActivity(), getResources().getString(R.string.no_rcord_found), Toast.LENGTH_SHORT).show();
-                            SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE);
-                            alertDialog.setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
-                                @Override
-                                public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                    sweetAlertDialog.dismiss();
-                                    getActivity().onBackPressed();
-                                }
-                            }).setTitleText("No data Found")
-                                    .setCancelable(false);
+                                SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE);
+                                alertDialog.setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                        sweetAlertDialog.dismiss();
+                                        getActivity().onBackPressed();
+                                    }
+                                }).setTitleText("No data Found")
+                                        .setCancelable(false);
 
-                            alertDialog.setConfirmButtonBackgroundColor(Color.RED);
-                            alertDialog.show();
+                                alertDialog.setConfirmButtonBackgroundColor(Color.RED);
+                                alertDialog.show();
+                            }
                         }
                     }
+
+
 ////
                 } catch (JSONException e) {
                     e.printStackTrace();
