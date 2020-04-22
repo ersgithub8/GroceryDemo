@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
@@ -38,6 +39,7 @@ import java.util.HashMap;
 
 import Adapter.Cart_adapter;
 import Config.BaseURL;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.LoginActivity;
 import gogrocer.tcc.MainActivity;
@@ -117,7 +119,20 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
             // showdialog
             showClearDialog();
         } else if (id == R.id.btn_cart_checkout) {
-
+            db = new DatabaseHandler(getActivity());
+            if(db.viewAll().getCount()==0){
+                SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),1).setTitleText("Cart is Empty")
+                        .setConfirmButton("OK", new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                sweetAlertDialog.dismiss();
+                                getActivity().onBackPressed();
+                            }
+                        }).setConfirmButtonBackgroundColor(Color.RED);
+                alertDialog.setCancelable(false);
+                alertDialog.show();
+                return;
+            }
             if (ConnectivityReceiver.isConnected()) {
 
                 makeGetLimiteRequest();

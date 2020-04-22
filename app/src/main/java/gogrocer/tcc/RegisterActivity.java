@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -45,12 +46,14 @@ public class RegisterActivity extends AppCompatActivity {
     CheckBox checkBox;
     String referal;
     public String otp;
+    int i=0,count=1;
+    Handler handler=new Handler();
     public String code="0";
     public String getphone;
     public String getname;
     public String getpassword;
     public String getemail;
-
+    SweetAlertDialog alertDialog;
     @Override
     protected void attachBaseContext(Context newBase) {
 
@@ -82,6 +85,16 @@ public class RegisterActivity extends AppCompatActivity {
         otp_et = (EditText)findViewById(R.id.otp_et);
         otp_tv=(TextView)findViewById(R.id.otp_tv);
 
+
+        alertDialog=new SweetAlertDialog(RegisterActivity.this,1);
+        alertDialog.setConfirmButtonBackgroundColor(Color.RED);
+        alertDialog.setConfirmButton("OK", new SweetAlertDialog.OnSweetClickListener() {
+            @Override
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                sweetAlertDialog.dismiss();
+            }
+        });
+
         terms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,8 +108,25 @@ public class RegisterActivity extends AppCompatActivity {
         otp_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!isPhoneValid(et_phone.getText().toString().trim())){
+                    new SweetAlertDialog(RegisterActivity.this,1)
+                            .setConfirmButtonBackgroundColor(Color.RED)
+                            .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismiss();
+                                }
+                            }).setTitleText("Enter a valid phone number").show();
 
+                    return;
+                }
+                if(i==0){
                 get_otp();
+                }else{
+                    alertDialog.show();
+                }
+
+
             }
         });
 
@@ -264,14 +294,18 @@ public class RegisterActivity extends AppCompatActivity {
                     if (status) {
 
                         code = response.getString("code");
-
+//                        otp_tv.setVisibility(View.GONE);
+                        i=1;
                         Toast.makeText(RegisterActivity.this, "Please Wait for otp" , Toast.LENGTH_SHORT).show();
+
+                        timer();
 
 
 
                     } else {
                         String error = response.getString("error");
                         btn_register.setEnabled(true);
+                        otp_tv.setVisibility(View.VISIBLE);
                         SweetAlertDialog alertDialog=new SweetAlertDialog(RegisterActivity.this,SweetAlertDialog.ERROR_TYPE);
                         alertDialog.setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
                             @Override
@@ -288,6 +322,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    otp_tv.setVisibility(View.VISIBLE);
                     loading.dismiss();
                 }
             }
@@ -385,6 +420,39 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+
+
+
+
+    public void timer(){
+        count=0;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (count<60)
+                {
+                    count++;
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+//                            pg.setProgress(count);
+                            alertDialog.setTitleText("An OTP already send to your number retry in "+(60-count)+" seconds.");
+                            if(count==60){
+                                alertDialog.dismiss();
+                                i=0;
+                            }
+                        }
+                    });
+                    try {
+                        Thread.sleep(1000);
+                    }catch (InterruptedException e){
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        }).start();
     }
 
 }
