@@ -152,6 +152,7 @@ SharedPreferences preferences;
         delivery_method = getArguments().getString("delivery_method");
         date = getArguments().getString("getdate");
         time = getArguments().getString("time");
+        deliverycaharges(city,area,apartm,db_cart.getTotalAmount());
 
         if (getdate.equals("")&&gettime.equals(""))
         {
