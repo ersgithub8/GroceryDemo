@@ -125,14 +125,14 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/slider_one_height"
-                android:layout_margin="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="@dimen/space_5"
                 android:elevation="0dp">
 
                 <com.daimajia.slider.library.SliderLayout
                     android:id="@+id/home_img_slider"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/space_5" />
+                    android:layout_height="match_parent"/>
 
                 <!--<com.daimajia.slider.library.Indicators.PagerIndicator-->
                 <!--android:id="@+id/custom_indicator"-->
@@ -144,7 +144,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/slider_one_height"
-                android:layout_margin="5dp"
+                android:layout_marginTop="@dimen/space_5"
+                android:layout_marginBottom="5dp"
                 android:elevation="0dp">
 
                 <ImageView
@@ -165,8 +166,8 @@
                 android:id="@+id/best_selling"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="@dimen/space_10"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="@dimen/space_5"
                 android:gravity="center"
                 android:text="Best Selling Products"
                 android:textColor="@color/white"
@@ -182,6 +183,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="@dimen/space_5"
                 android:layout_marginRight="3dp"
                 android:background="#FFA86F"
                 android:padding="3dp"
@@ -196,8 +199,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:layout_marginTop="@dimen/space_10"
-                    android:layout_marginBottom="@dimen/space_10"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="@dimen/space_5"
                     android:text="New Offers"
                     android:padding="@dimen/space_5"
                     android:textColor="@color/white"
@@ -212,7 +215,8 @@
                 android:layout_height="wrap_content"
 
                 android:layout_gravity="center"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="@dimen/space_5"
                 android:scrollbars="none"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
@@ -325,8 +329,8 @@
                 android:paddingTop="@dimen/space_5"
                 android:paddingBottom="@dimen/space_5"
                 android:text="Shop By Category"
-                android:layout_marginTop="@dimen/space_10"
-                android:layout_marginBottom="@dimen/space_10"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="@dimen/space_5"
                 android:background="@color/green"
                 android:textColor="@color/white"
                 android:textSize="@dimen/space_18"
@@ -347,7 +351,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/slider_two_height"
 
-                android:layout_margin="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="@dimen/space_5"
                 android:elevation="0dp">
 
                 <com.daimajia.slider.library.SliderLayout
@@ -360,8 +365,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="@dimen/space_5"
                 android:gravity="center_horizontal"
                 android:text="Previously Bought"
                 android:textColor="@color/white"
@@ -378,6 +383,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="3dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="@dimen/space_5"
                 android:scrollbars="none"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
@@ -386,8 +393,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="@dimen/space_5"
                 android:gravity="center_horizontal"
                 android:text="Recomended For You"
                 android:textColor="@color/white"
@@ -404,7 +411,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="@dimen/space_5"
                 android:background="#FFA86F"
 
                 android:padding="3dp"
@@ -589,7 +597,7 @@
                     android:layout_marginLeft="@dimen/space_5"
                     android:layout_marginTop="@dimen/space_5"
                     android:layout_marginRight="@dimen/space_5"
-                    android:layout_marginBottom="@dimen/space_5">
+                    android:layout_marginBottom="@dimen/space_10">
 
                 </com.daimajia.slider.library.SliderLayout>
             </LinearLayout>
