@@ -578,7 +578,13 @@ SharedPreferences sharedPreferences;
             b.putString("1","All");
             fm.setArguments(b);
         } else if (id == R.id.nav_my_profile) {
-            fm = new Edit_profile_fragment();
+            if (sessionManagement.isLoggedIn()) {
+                fm = new Edit_profile_fragment();
+            }else {
+                Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(i);
+                overridePendingTransition(0, 0);
+            }
         } else if (id == R.id.nav_support) {
             String smsNumber = "8769511100";
             Intent sendIntent = new Intent("android.intent.action.MAIN");
@@ -599,18 +605,31 @@ SharedPreferences sharedPreferences;
             Intent i=new Intent(MainActivity.this, About_us.class);
             startActivity(i);
         }else if (id == R.id.nav_refund) {
-            Intent i=new Intent(MainActivity.this, Need_help.class);
-            startActivity(i);
+            if (sessionManagement.isLoggedIn()) {
+                Intent i = new Intent(MainActivity.this, Need_help.class);
+                startActivity(i);
+            }
+            else {
+                Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(i);
+                overridePendingTransition(0, 0);
+            }
         } else if (id == R.id.nav_contact) {
             fm = new Contact_Us_fragment();
             args.putString("url", BaseURL.GET_SUPPORT_URL);
             args.putString("title", getResources().getString(R.string.nav_contact));
             fm.setArguments(args);
         } else if (id == R.id.nav_my_address) {
+            if (sessionManagement.isLoggedIn()){
                 fm = new Show_Address();
-
                 args.putString("title","All Addresses");
                 fm.setArguments(args);
+            }
+                else {
+                Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(i);
+                overridePendingTransition(0, 0);
+            }
         } else if (id == R.id.nav_share) {
             shareApp();
         } else if (id == R.id.nav_logout) {

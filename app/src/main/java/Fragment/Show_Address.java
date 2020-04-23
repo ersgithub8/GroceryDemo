@@ -2,6 +2,7 @@ package Fragment;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +54,7 @@ public class Show_Address extends Fragment {
     private Session_management sessionManagement;
     public Boolean status;
     TextView no_record;
+    RelativeLayout tv_add_adress;
     private View_address_adapter adapter;
     private List<Delivery_address_model> delivery_address_modelList = new ArrayList<>();
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,6 +64,7 @@ public class Show_Address extends Fragment {
         rv_address.setLayoutManager(new LinearLayoutManager(getActivity()));
         no_record=(TextView)view.findViewById(R.id.no_record);
 
+        tv_add_adress = (RelativeLayout) view.findViewById(R.id.tv_deli_add_address);
 
         if (ConnectivityReceiver.isConnected()) {
             sessionManagement=new Session_management(getActivity());
@@ -74,6 +78,20 @@ public class Show_Address extends Fragment {
         } else {
             ((MainActivity) getActivity()).onNetworkConnectionChanged(false);
         }
+
+        tv_add_adress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sessionManagement.updateSocity("", "");
+                Bundle args = new Bundle();
+                Fragment fm = new Add_delivery_address_fragment();
+
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
+            }
+        });
+
 
 
 
