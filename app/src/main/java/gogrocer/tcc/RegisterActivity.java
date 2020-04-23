@@ -296,8 +296,18 @@ public class RegisterActivity extends AppCompatActivity {
                         code = response.getString("code");
 //                        otp_tv.setVisibility(View.GONE);
                         i=1;
-                        Toast.makeText(RegisterActivity.this, "Please Wait for otp" , Toast.LENGTH_SHORT).show();
-
+//                        Toast.makeText(RegisterActivity.this, "Please Wait for otp" , Toast.LENGTH_SHORT).show();
+                        SweetAlertDialog alertDialog=new SweetAlertDialog(RegisterActivity.this,SweetAlertDialog.SUCCESS_TYPE);
+                        alertDialog.setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                sweetAlertDialog.dismiss();
+//                                onBackPressed();
+                            }
+                        }).setTitleText("An OTP send to your number. Please wait for OTP.")
+                                .setCancelable(false);
+                        alertDialog.setConfirmButtonBackgroundColor(Color.GREEN);
+                        alertDialog.show();
                         timer();
 
 
