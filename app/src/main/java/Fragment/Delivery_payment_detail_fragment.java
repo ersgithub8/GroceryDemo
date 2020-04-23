@@ -124,8 +124,9 @@ SharedPreferences preferences;
         });
 
         getdate = getArguments().getString("getdate");
-         String user_id=sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
-        membership(user_id);
+         String
+                 user_id=sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
+
 
         preferences = getActivity().getSharedPreferences("lan", MODE_PRIVATE);
         String language=preferences.getString("language","");
@@ -155,6 +156,8 @@ SharedPreferences preferences;
         date = getArguments().getString("getdate");
         time = getArguments().getString("time");
         deliverycaharges(city,area,apartm,db_cart.getTotalAmount());
+        membership(user_id);
+
 
         if (getdate.equals("")&&gettime.equals(""))
         {

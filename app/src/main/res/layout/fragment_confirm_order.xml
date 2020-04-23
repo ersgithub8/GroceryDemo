@@ -268,7 +268,7 @@
                             <Fonts.LatoBLack
                                 android:textColor="#000"
                                 android:id="@+id/txtgrandTotal"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/space_5"
                                 android:textStyle="bold" />
