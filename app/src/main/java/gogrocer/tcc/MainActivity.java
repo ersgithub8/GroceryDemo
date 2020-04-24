@@ -56,6 +56,7 @@ import Config.SharedPref;
 import Fonts.CustomTypefaceSpan;
 import Fragment.About_us_fragment;
 import Fragment.Cart_fragment;
+import Fragment.RatingDialogFragment;
 import Fragment.Contact_Us_fragment;
 import Fragment.Show_Address;
 import Fragment.Edit_profile_fragment;
@@ -495,8 +496,8 @@ SharedPreferences sharedPreferences;
             }
         });
 
-        final MenuItem item1 = menu.findItem(R.id.filter);
-        item.setVisible(true);
+//        final MenuItem item1 = menu.findItem(R.id.filter);
+//        item.setVisible(true);
 
 
 
@@ -509,7 +510,10 @@ SharedPreferences sharedPreferences;
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id==R.id.action_language){
-            openLanguageDialog();
+            Fragment fm = new RatingDialogFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                    .addToBackStack(null).commit();
         }
 
         if (id == R.id.action_cart) {

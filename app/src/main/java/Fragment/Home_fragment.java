@@ -168,7 +168,7 @@ private Master_category_adapter master_adapter;
         setHasOptionsMenu(true);
 
 
-        filter=view.findViewById(R.id.filter);
+//        filter=view.findViewById(R.id.filter);
         ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.app_name));
         ((MainActivity) getActivity()).updateHeader();
         membership_tv=view.findViewById(R.id.membership_tv);
@@ -194,15 +194,15 @@ private Master_category_adapter master_adapter;
 
 
 
-        filter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fm = new RatingDialogFragment();
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                        .addToBackStack(null).commit();
-            }
-        });
+//        filter.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Fragment fm = new RatingDialogFragment();
+//                FragmentManager fragmentManager = getFragmentManager();
+//                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+//                        .addToBackStack(null).commit();
+//            }
+//        });
         //Address
         if (ConnectivityReceiver.isConnected()) {
             sessionManagement=new Session_management(getActivity());
