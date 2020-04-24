@@ -540,7 +540,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 
 
                     } else {
-                        Toast.makeText(context, "you can only select product from one store at a time", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context.getApplicationContext(), "you can only select product from one store at a time", Toast.LENGTH_SHORT).show();
                     }
 
 

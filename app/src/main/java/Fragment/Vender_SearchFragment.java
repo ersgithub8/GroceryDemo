@@ -42,10 +42,12 @@ import java.util.Map;
 import Adapter.Area_Adapter;
 import Adapter.New_Adapter;
 import Adapter.New_search_Adapter;
+import Adapter.Product_adapter;
 import Adapter.Search_Vender_Adapter;
 import Adapter.Search_adapter;
 import Adapter.SuggestionAdapter;
 import Config.BaseURL;
+import Model.Product_model;
 import Model.Search_Store_Model;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.MainActivity;
@@ -68,13 +70,18 @@ public class Vender_SearchFragment extends android.app.Fragment {
 //            , "Toothpaste", "Mouthwash", "Hair oil", "Shampoo", "Pure & pomace olive", "ICE cream", "Theme Egg", "Amul Milk", "AMul Milk Pack power", "kaju pista dd"};
     private AutoCompleteTextView acTextView;
 
-    private RecyclerView rv_search;
+    private RecyclerView rv_search,rv_searchp;
     EditText et_search;
    public Boolean status;
     private static String TAG = Area.class.getSimpleName();
 
     private List<Search_Store_Model> product_modelList = new ArrayList<>();
     private New_Adapter adapter_product;
+
+
+
+    private List<Product_model> product_modelListp = new ArrayList<>();
+    private Search_adapter adapter_productp;
 
     public Vender_SearchFragment() {
         // Required empty public constructor
@@ -100,10 +107,17 @@ public class Vender_SearchFragment extends android.app.Fragment {
 
         rv_search = (RecyclerView) view.findViewById(R.id.rv_searchs);
         rv_search.setLayoutManager(new LinearLayoutManager(getActivity()));
-        makeGetcity();
+//        makeGetcity();
+        rv_searchp = (RecyclerView) view.findViewById(R.id.rv_searchp);
+        rv_searchp.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-        rv_search.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rv_search, new RecyclerTouchListener.OnItemClickListener() {
+
+
+
+
+        rv_search.addOnItemTouchListener(new RecyclerTouchListener(getActivity(),
+                rv_search, new RecyclerTouchListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 String getid = product_modelList.get(position).getUser_id();
@@ -130,6 +144,41 @@ public class Vender_SearchFragment extends android.app.Fragment {
             }
 
         }));
+
+
+        rv_searchp.addOnItemTouchListener(new RecyclerTouchListener(getActivity(),
+                rv_searchp, new RecyclerTouchListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                String getid = product_modelListp.get(position).getStoreid();
+
+//               String getid = category_modelList.get(position).getId();
+//               String getcat_title = category_modelList.get(position).getTitle();
+
+                //  Toast.makeText(getActivity(), getid, Toast.LENGTH_SHORT).show();
+
+                Bundle args = new Bundle();
+                android.app.Fragment fm = new Product_fragment();
+                args.putString("Store_id", getid);
+                args.putString("category_id","all");
+                fm.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
+
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+
+        }));
+
+
+
+
+
         et_search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -138,18 +187,19 @@ public class Vender_SearchFragment extends android.app.Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(status){
-
-                   adapter_product.getFilter().filter(charSequence);
-                }else
-                {
-                   // no_record.setVisibility(View.VISIBLE);
-                }
+//                if(status){
+//
+//                   adapter_product.getFilter().filter(charSequence);
+//                }else
+//                {
+//                   // no_record.setVisibility(View.VISIBLE);
+//                }
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                makeGetcity(et_search.getText().toString());
+//                makeGetProductRequest("%"+et_search.getText().toString()+"%");
             }
         });
         return view;
@@ -208,7 +258,7 @@ public class Vender_SearchFragment extends android.app.Fragment {
 //        // Adding request to request queue
 //        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 //    }
-    private void makeGetcity()
+    private void makeGetcity(String name)
     {
         final AlertDialog loading=new ProgressDialog(getActivity());
         loading.setMessage("Loading...");
@@ -217,6 +267,7 @@ public class Vender_SearchFragment extends android.app.Fragment {
         String tag_json_obj = "json_product_req";
         Map<String, String> params = new HashMap<String, String>();
         params.put("city",cityname);
+        params.put("name",name);
         // Toast.makeText(getActivity(), Store_id, Toast.LENGTH_SHORT).show();
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
@@ -243,6 +294,18 @@ public class Vender_SearchFragment extends android.app.Fragment {
                         adapter_product = new New_Adapter(product_modelList);
                         rv_search.setAdapter(adapter_product);
                         adapter_product.notifyDataSetChanged();
+
+
+                        Gson gson1 = new Gson();
+                        Type listTypep = new TypeToken<List<Product_model>>() {
+                        }.getType();
+
+                        product_modelListp = gson1.fromJson(response.getString("products"), listTypep);
+
+
+                        adapter_productp = new Search_adapter(product_modelListp,getActivity());
+                        rv_searchp.setAdapter(adapter_productp);
+                        adapter_productp.notifyDataSetChanged();
                     }else{
                         Session_management sessionManagement = new Session_management(getActivity());
                         String area_name="choose area";
@@ -273,9 +336,91 @@ public class Vender_SearchFragment extends android.app.Fragment {
 //                    progressDialog.dismiss();
                     loading.dismiss();
                 }
+                loading.dismiss();
             }
         });
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
+
+
+    private void makeGetProductRequest(String search_text) {
+
+        // Tag used to cancel the request
+        String tag_json_obj = "json_product_req";
+
+
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("search", search_text);
+//        String Storeid = getArguments().getString("Store_id_S");
+//        params.put("storeid",Storeid);
+//        if(min.getText().toString().isEmpty()){
+//            mins="";
+//        }else{
+//            mins=min.getText().toString();
+//        }
+//        if(max.getText().toString().isEmpty()){
+//            maxs="";
+//        }else{
+//            maxs=min.getText().toString();
+//        }
+
+//        params.put("min",mins);
+//        params.put("max",maxs);
+        final AlertDialog loading=new ProgressDialog(getActivity());
+        loading.setMessage("Loading...");
+        loading.setCancelable(false);
+        loading.show();
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.GET_PRODUCT_URL, params, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, response.toString());
+
+                try {
+                    loading.dismiss();
+                    Boolean status = response.getBoolean("responce");
+                    if (status) {
+
+                        Gson gson = new Gson();
+                        Type listType = new TypeToken<List<Product_model>>() {
+                        }.getType();
+
+                        product_modelListp = gson.fromJson(response.getString("data"), listType);
+
+                        Product_adapter adapter_product = new Product_adapter(product_modelListp, getActivity());
+                        rv_searchp.setAdapter(adapter_product);
+                        adapter_product.notifyDataSetChanged();
+
+
+                        if (getActivity() != null) {
+                            if (product_modelList.isEmpty()) {
+                                Toast.makeText(getActivity(), getResources().getString(R.string.no_rcord_found), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    loading.dismiss();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    loading.dismiss();
+                }
+            }
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+
 
 }

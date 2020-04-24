@@ -124,7 +124,7 @@ public class StoreFragment extends Fragment {
                 args.putString("Store_id", getid);
                 args.putString("store_name",getname);
                 args.putString("store_image",getimg);
-                args.putString("category_id",cat_id);
+                args.putString("category_id","all");
 
                 fm.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
@@ -202,20 +202,20 @@ public class StoreFragment extends Fragment {
         loading.setCancelable(false);
         loading.show();
         Map<String, String> params = new HashMap<String, String>();
-        params.put("subCat_id", cat_id);
+        params.put("rating", cat_id);
 
        /* if (parent_id != null && parent_id != "") {
         }*/
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
-                BaseURL.GET_Store_URLA, params, new Response.Listener<JSONObject>() {
+                BaseURL.GET_Stores, params, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
                 Log.d("Cat", response.toString());
                 try {
 //
-                    Boolean status = response.getBoolean("response");
+                    Boolean status = response.getBoolean("responce");
                     if (status) {
 
                         loading.dismiss();

@@ -45,7 +45,6 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.swipe.util.Attributes;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -67,12 +66,10 @@ import Adapter.Master_category_adapter;
 import Adapter.Product_adapter;
 import Adapter.Stores_adapter;
 import Adapter.Top_Selling_Adapter;
-import Adapter.View_address_adapter;
 import Adapter.my_last_order_adapter;
 import Config.BaseURL;
 import Model.Category_model;
 import Model.Deal_Of_Day_model;
-import Model.Delivery_address_model;
 import Model.Home_Icon_model;
 import Model.Master_category;
 import Model.My_Pending_order_model;
@@ -86,6 +83,7 @@ import gogrocer.tcc.LoginActivity;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.My_Order_activity;
 import gogrocer.tcc.R;
+//import RatingDialogFragment;
 import util.ConnectivityReceiver;
 import util.CustomVolleyJsonRequest;
 import util.RecyclerTouchListener;
@@ -109,6 +107,7 @@ public class Home_fragment extends Fragment {
     private Session_management sessionManagement;
     String getid,cat_id;
     String storename;
+    ImageView filter;
     Boolean status_member=false;
     String storeimg;
     String getcat_title;
@@ -167,6 +166,9 @@ private Master_category_adapter master_adapter;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
         setHasOptionsMenu(true);
+
+
+        filter=view.findViewById(R.id.filter);
         ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.app_name));
         ((MainActivity) getActivity()).updateHeader();
         membership_tv=view.findViewById(R.id.membership_tv);
@@ -191,6 +193,16 @@ private Master_category_adapter master_adapter;
 
 
 
+
+        filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fm = new RatingDialogFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
+            }
+        });
         //Address
         if (ConnectivityReceiver.isConnected()) {
             sessionManagement=new Session_management(getActivity());

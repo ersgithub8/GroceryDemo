@@ -2,6 +2,7 @@ package Adapter;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Paint;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,8 @@ import android.view.WindowManager;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -40,9 +43,10 @@ public class Search_adapter extends RecyclerView.Adapter<Search_adapter.MyViewHo
     private DatabaseHandler dbcart;
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView tv_title, tv_price, tv_reward, tv_total, tv_contetiy, tv_add;
+        public TextView tv_title, tv_price, tv_reward, tv_total, tv_contetiy, tv_add,tv_disc;
         public ImageView iv_logo, iv_plus, iv_minus, iv_remove;
-
+        LinearLayout ll,ll2,ll3;
+        RelativeLayout rl;
         public MyViewHolder(View view) {
             super(view);
             tv_title = (TextView) view.findViewById(R.id.tv_subcat_title);
@@ -54,6 +58,11 @@ public class Search_adapter extends RecyclerView.Adapter<Search_adapter.MyViewHo
             iv_logo = (ImageView) view.findViewById(R.id.iv_subcat_img);
             iv_plus = (ImageView) view.findViewById(R.id.iv_subcat_plus);
             iv_minus = (ImageView) view.findViewById(R.id.iv_subcat_minus);
+            ll=(LinearLayout)view.findViewById(R.id.pll);
+            ll2=(LinearLayout)view.findViewById(R.id.pll2);
+            ll3=(LinearLayout)view.findViewById(R.id.pll3);
+            rl=(RelativeLayout)view.findViewById(R.id.rl2);
+            tv_disc = (TextView) view.findViewById(R.id.disc);
             iv_remove = (ImageView) view.findViewById(R.id.iv_subcat_remove);
 
             iv_remove.setVisibility(View.GONE);
@@ -62,6 +71,8 @@ public class Search_adapter extends RecyclerView.Adapter<Search_adapter.MyViewHo
             iv_plus.setOnClickListener(this);
             tv_add.setOnClickListener(this);
             iv_logo.setOnClickListener(this);
+            iv_minus.setVisibility(View.GONE);
+            iv_plus.setVisibility(View.GONE);
 
             CardView cardView = (CardView) view.findViewById(R.id.card_view);
             cardView.setOnClickListener(this);
@@ -183,6 +194,13 @@ public class Search_adapter extends RecyclerView.Adapter<Search_adapter.MyViewHo
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()
                 .into(holder.iv_logo);
+
+        holder.ll.setVisibility(View.GONE);
+        holder.ll2.setVisibility(View.GONE);
+        holder.tv_disc.setVisibility(View.GONE);
+        holder.ll3.setVisibility(View.GONE);
+        holder.rl.setVisibility(View.GONE);
+        holder.tv_contetiy.setVisibility(View.GONE);
 
         holder.tv_title.setText(mList.getProduct_name());
         holder.tv_reward.setText(mList.getRewards());

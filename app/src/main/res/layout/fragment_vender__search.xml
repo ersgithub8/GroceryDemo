@@ -92,12 +92,50 @@
                 android:hint="Search For Store"
 
                 android:textSize="@dimen/space_14" />
-
-            <android.support.v7.widget.RecyclerView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Stores"
+                    android:gravity="center"
+                    android:layout_marginBottom="@dimen/space_5"
+                    android:textSize="@dimen/space_20"
+                    android:background="@color/green"
+                    android:textColor="@color/white"
+                    android:padding="@dimen/space_5"/>
+                <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_searchs"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="200dp" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Products"
+                    android:gravity="center"
+                    android:layout_marginBottom="@dimen/space_5"
+                    android:textSize="@dimen/space_20"
+                    android:background="@color/green"
+                    android:textColor="@color/white"
+                    android:padding="@dimen/space_5"/>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_searchp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+
+            </LinearLayout>
 
         </LinearLayout>
+
     </ScrollView>
 </LinearLayout>

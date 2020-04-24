@@ -495,6 +495,12 @@ SharedPreferences sharedPreferences;
             }
         });
 
+        final MenuItem item1 = menu.findItem(R.id.filter);
+        item.setVisible(true);
+
+
+
+
         totalBudgetCount = (TextView) count.findViewById(R.id.actionbar_notifcation_textview);
         totalBudgetCount.setText("" + dbcart.getCartCount());
         return true;
@@ -521,6 +527,7 @@ SharedPreferences sharedPreferences;
             }
             return true;
         }
+
 
 
         return super.onOptionsItemSelected(item);

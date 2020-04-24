@@ -101,7 +101,7 @@ public class BaseURL {
     public static String GET_NEW_PRODUCT_URL = BASE_URL + "index.php/api/get_stores_products";
     public static String GET_STORE_SEARCH = BASE_URL + "index.php/api/get_storess";
     public static String GET_DEALS_PRODUCT_URL = BASE_URL + "index.php/api/get_deals_products";
-
+    public static String GET_Stores=BASE_URL+"index.php/api/get_stores_from_rating";
     public static String GET_store_product_URL = BASE_URL + "index.php/api/get_store_products?store_id=";
     public static String GET_ABOUT_URL = BASE_URL + "index.php/api/aboutus";
 

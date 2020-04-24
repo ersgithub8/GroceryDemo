@@ -10,6 +10,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:visibility="gone"
         android:background="@color/colorPrimary"
         android:id="@+id/rl_address">
@@ -35,7 +39,14 @@
 
             android:text="Delivery Address"/>
     </RelativeLayout>
-
+        <ImageView
+            android:id="@+id/filter"
+            android:layout_width="25dp"
+            android:layout_marginRight="@dimen/space_10"
+            android:layout_height="25dp"
+            android:src="@drawable/filter"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
     <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"

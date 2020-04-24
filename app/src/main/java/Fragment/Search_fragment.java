@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -58,7 +60,9 @@ public class Search_fragment extends Fragment {
     private AutoCompleteTextView acTextView;
     private RelativeLayout btn_search;
     private RecyclerView rv_search;
-
+    Button search;
+    String mins,maxs;
+    EditText min,max;
     private List<Product_model> product_modelList = new ArrayList<>();
     private Search_adapter adapter_product;
 
@@ -79,6 +83,10 @@ public class Search_fragment extends Fragment {
 
         acTextView = (AutoCompleteTextView) view.findViewById(R.id.et_search);
 
+        min=view.findViewById(R.id.min);
+        max=view.findViewById(R.id.max);
+
+        search=view.findViewById(R.id.searchp);
 
         acTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,25 +108,32 @@ public class Search_fragment extends Fragment {
 
         String Storeid = getArguments().getString("Store_id_S");
        // Toast.makeText(getActivity(), Storeid, Toast.LENGTH_SHORT).show();
-        acTextView.addTextChangedListener(new TextWatcher() {
+//        acTextView.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//                String get_search_txt ="%"+ acTextView.getText().toString() +"%";
+//                makeGetProductRequest(get_search_txt);
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
+
+        search.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+            public void onClick(View v) {
                 String get_search_txt ="%"+ acTextView.getText().toString() +"%";
                 makeGetProductRequest(get_search_txt);
             }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
         });
-
 
 //        btn_search.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -148,11 +163,25 @@ public class Search_fragment extends Fragment {
         // Tag used to cancel the request
         String tag_json_obj = "json_product_req";
 
+
+
         Map<String, String> params = new HashMap<String, String>();
         params.put("search", search_text);
-        String Storeid = getArguments().getString("Store_id_S");
-        params.put("storeid",Storeid);
+//        String Storeid = getArguments().getString("Store_id_S");
+//        params.put("storeid",Storeid);
+        if(min.getText().toString().isEmpty()){
+            mins="";
+        }else{
+            mins=min.getText().toString();
+        }
+        if(max.getText().toString().isEmpty()){
+            maxs="";
+        }else{
+            maxs=min.getText().toString();
+        }
 
+        params.put("min",mins);
+        params.put("max",maxs);
         final AlertDialog loading=new ProgressDialog(getActivity());
         loading.setMessage("Loading...");
         loading.setCancelable(false);

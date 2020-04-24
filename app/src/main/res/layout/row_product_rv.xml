@@ -24,7 +24,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_bias="0.168"
+            app:layout_constraintVertical_bias="0.483"
 
             card_view:layout_constraintLeft_toLeftOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
@@ -58,7 +58,7 @@
             app:layout_constraintBottom_toTopOf="@+id/iv_subcat_plus"
             android:layout_marginRight="20dp"
             android:id="@+id/price_mrp"
-            android:text="20"
+            android:text=""
             />
 
         <LinearLayout
@@ -68,6 +68,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:orientation="vertical"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintLeft_toRightOf="@+id/iv_subcat_img"
             app:layout_constraintRight_toLeftOf="@+id/iv_subcat_minus"
             app:layout_constraintTop_toTopOf="@+id/iv_subcat_img">
@@ -83,6 +84,7 @@
                 android:textStyle="bold" />
 
             <LinearLayout
+                android:id="@+id/pll2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -116,18 +118,18 @@
                     android:id="@+id/tv_subcat_currency"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
                     android:layout_marginLeft="@dimen/space_10"
+                    android:text=""
                     android:textColor="#000"
                     android:textSize="@dimen/text_size_X_small" />
             </LinearLayout>
 
 
             <LinearLayout
+                android:id="@+id/pll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:id="@+id/pll"
                 android:layout_marginBottom="@dimen/space_3"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -161,6 +163,7 @@
             </LinearLayout>
 
             <RelativeLayout
+                android:id="@+id/rl2"
                 android:layout_width="130dp"
                 android:layout_height="25dp"
                 android:layout_marginTop="@dimen/space_4"
@@ -192,6 +195,7 @@
             </RelativeLayout>
 
             <LinearLayout
+                android:id="@+id/pll3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
@@ -362,12 +366,11 @@
             class="android.support.v7.widget.ActionMenuView"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/gray"
             android:layout_marginBottom="4dp"
+            android:background="@color/gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
+            app:layout_constraintTop_toBottomOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>
