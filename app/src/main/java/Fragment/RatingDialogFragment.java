@@ -14,13 +14,15 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.R;
 
 public class RatingDialogFragment extends Fragment {
     ListView listView;
     Fragment fm;
     String[] imgid={
-            "★★★★★ Star","★★★★ Star",
+            "★★★★★ Stars","★★★★ Stars",
             "★★★ Stars","★★ Stars",
             "★ Star",
     };
@@ -29,6 +31,7 @@ public class RatingDialogFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_rating_store,container,false);
 
+        ((MainActivity) getActivity()).setTitle("Filter");
 //        MyListAdapter adapter=new MyListAdapter(getActivity(),imgid);
         listView=view.findViewById(R.id.lv);
         fm =new StoreFragment();

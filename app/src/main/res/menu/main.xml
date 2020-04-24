@@ -17,7 +17,7 @@
         android:id="@+id/action_language"
         android:title="Language"
         android:visible="false"
-        android:icon="@drawable/language"
+        android:icon="@drawable/filter1"
         app:showAsAction="ifRoom"
         />
 
