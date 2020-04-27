@@ -125,6 +125,7 @@ SharedPreferences preferences;
 
         getdate = getArguments().getString("getdate");
          String
+
                  user_id=sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
 
 

@@ -181,6 +181,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Apartment:"
+                android:visibility="gone"
                 android:textColor="#000"
                 android:textSize="14sp" />
 
@@ -189,6 +190,7 @@
             <Fonts.LatoBLack
                 android:id="@+id/btn_apartment"
                 android:layout_width="match_parent"
+                android:visibility="gone"
 
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_4"

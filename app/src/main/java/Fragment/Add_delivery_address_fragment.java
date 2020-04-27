@@ -141,9 +141,9 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
         String getsocity_name = sessionManagement.getUserDetails().get(BaseURL.KEY_SOCITY_NAME);
         getarea_name = sessionManagement.getUserDetails().get(BaseURL.KEY_AREA_NAME);
 
-        String getapartment_name = sessionManagement.getUserDetails().get(BaseURL.KEY_APARTMENT_NAME);
+//        String getapartment_name = sessionManagement.getUserDetails().get(BaseURL.KEY_APARTMENT_NAME);
         String getarea_id = sessionManagement.getUserDetails().get(BaseURL.AREA_ID);
-        String getapartment_id = sessionManagement.getUserDetails().get(BaseURL.APARTMENT_ID);
+//        String getapartment_id = sessionManagement.getUserDetails().get(BaseURL.APARTMENT_ID);
         String getsocity_id = sessionManagement.getUserDetails().get(BaseURL.KEY_SOCITY_ID);
 
         Bundle args = getArguments();
@@ -157,7 +157,7 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
             String get_socity_name = getArguments().getString("socity_name");
             String get_house = getArguments().getString("house");
             String get_area = getArguments().getString("area_name");
-            String get_apartment = getArguments().getString("apartment_name");
+//            String get_apartment = getArguments().getString("apartment_name");
 
             String get_flat = getArguments().getString("flat_no");
             String get_floor = getArguments().getString("floor");
@@ -180,10 +180,12 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
             }else  if (TextUtils.isEmpty(get_area) && get_area == null) {
                 isEdit = false;
 
-            }else  if (TextUtils.isEmpty(get_apartment) && get_apartment == null) {
-                isEdit = false;
-
             }
+//            else
+//                if (TextUtils.isEmpty(get_apartment) && get_apartment == null) {
+//                isEdit = true;
+//
+//            }
             else {
                 isEdit = true;
 
@@ -198,11 +200,11 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
                 //et_house.setText(get_house);
                 btn_socity.setText(get_socity_name);
                 tv_area.setText(getarea_name);
-                tv_apartment.setText(getapartment_name);
+//                tv_apartment.setText(getapartment_name);
 
                 sessionManagement.updateSocity(get_socity_name, get_socity_id);
                 sessionManagement.updateArea(getarea_name, getarea_id);
-                sessionManagement.updateApartment(getapartment_name, getapartment_id);
+//                sessionManagement.updateApartment(getapartment_name, getapartment_id);
             }
         }
         if (TextUtils.isEmpty(getsocity_name)) {
@@ -213,7 +215,7 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
 
             btn_socity.setText(getsocity_name);
             tv_area.setText(getarea_name);
-            tv_apartment.setText(getapartment_name);
+//            tv_apartment.setText(getapartment_name);
 
 
 
@@ -350,8 +352,8 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
       //  Toast.makeText(getActivity(), gethouse, Toast.LENGTH_SHORT).show();
         String getsocity = sessionManagement.getUserDetails().get(BaseURL.KEY_SOCITY_ID);
         String getarea = sessionManagement.getUserDetails().get(BaseURL.AREA_ID);
-        String getapartment="";
-                getapartment = sessionManagement.getUserDetails().get(BaseURL.APARTMENT_ID);
+        String getapartment="all";
+//                getapartment = sessionManagement.getUserDetails().get(BaseURL.APARTMENT_ID);
 
         boolean cancel = false;
         View focusView = null;
@@ -414,15 +416,15 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
             focusView = tv_area;
             cancel = true;
         }
-        if (TextUtils.isEmpty(getapartment)
-        //        && getapartment == null
-        ) {
-//            tv_socity.setTextColor(getResources().getColor(R.color.colorPrimary));
-//            focusView = tv_apartment;
-
-//            getapartment="";
-            cancel = true;
-        }
+//        if (TextUtils.isEmpty(getapartment)
+//        //        && getapartment == null
+//        ) {
+////            tv_socity.setTextColor(getResources().getColor(R.color.colorPrimary));
+////            focusView = tv_apartment;
+//
+////            getapartment="";
+//            cancel = false;
+//        }
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
