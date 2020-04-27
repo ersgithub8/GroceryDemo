@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
 
@@ -20,55 +21,61 @@
         android:visibility="gone"
         android:layout_height="match_parent"
         android:id="@+id/rv_times"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:textColor="#000000"
+        android:layout_margin="5dp"
+        android:text="Please select any one time slot for delivery."/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="2"
         android:layout_margin="5dp"
         android:padding="5dp"
         android:id="@+id/layout1"
         >
         <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Morning Time:"
+            android:text="Morning Time:    "
             android:textColor="#000000"
             android:textSize="20sp"
             android:fontFamily="@font/r8"
             android:padding="4dp"
             />
         <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/morning_time"
             android:text=""
+            android:layout_marginLeft="5dp"
             android:textColor="#000000"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:fontFamily="@font/r8"
             android:padding="4dp"
             />
 
 
-
-
-
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"
+        android:layout_margin="5dp"
+    />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="2"
         android:layout_margin="5dp"
         android:padding="5dp"
         android:id="@+id/layout2"
         >
         <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="AfterNoon Time:"
             android:textColor="#000000"
@@ -77,49 +84,50 @@
             android:padding="4dp"
             />
         <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/noon_time"
             android:text=""
+            android:layout_marginLeft="5dp"
             android:textColor="#000000"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:fontFamily="@font/r8"
             android:padding="4dp"
             />
 
-
-
-
-
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"
+        android:layout_margin="5dp"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="2"
         android:layout_margin="5dp"
         android:padding="5dp"
         android:id="@+id/layout3"
         >
         <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
+
             android:layout_height="wrap_content"
-            android:text="Night Time:"
+            android:text="Night Time:        "
             android:textColor="#000000"
             android:textSize="20sp"
             android:fontFamily="@font/r8"
             android:padding="4dp"
             />
         <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/night_time"
+            android:layout_marginLeft="5dp"
             android:text=""
             android:textColor="#000000"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:fontFamily="@font/r8"
             android:padding="4dp"
             />

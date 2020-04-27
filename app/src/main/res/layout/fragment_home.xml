@@ -164,7 +164,6 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/membershipbanner"
                     android:id="@+id/membership_tv"
-
                     android:gravity="center" />
 
 
