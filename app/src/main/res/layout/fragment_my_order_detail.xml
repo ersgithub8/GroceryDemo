@@ -53,13 +53,17 @@
 
          />
     <EditText
+        android:layout_margin="@dimen/space_3"
         android:gravity="left"
+        android:paddingLeft="@dimen/space_4"
+        android:paddingTop="@dimen/space_4"
         android:hint="Enter Your Reason To Cancel"
         android:id="@+id/cancel_reason"
         android:layout_below="@+id/rv_order_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textDateTimeView"></EditText>
+        android:layout_above="@+id/textDateTimeView"
+        android:background="@drawable/etbg1"></EditText>
 
     <LinearLayout
         android:id="@+id/textDateTimeView"

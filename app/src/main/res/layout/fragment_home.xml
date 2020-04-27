@@ -360,7 +360,7 @@
             <RelativeLayout
 
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/slider_two_height"
+                android:layout_height="@dimen/slider_one_height"
 
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="@dimen/space_5"
@@ -597,7 +597,7 @@
             <LinearLayout
 
                 android:layout_width="match_parent"
-                android:layout_height="150dp">
+                android:layout_height="200dp">
 
                 <com.daimajia.slider.library.SliderLayout
                     android:id="@+id/relative_banner"

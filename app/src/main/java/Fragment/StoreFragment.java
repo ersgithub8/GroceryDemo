@@ -215,6 +215,7 @@ public class StoreFragment extends Fragment {
                 Log.d("Cat", response.toString());
                 try {
 //
+                    loading.dismiss();
                     Boolean status = response.getBoolean("responce");
                     if (status) {
 
@@ -257,9 +258,9 @@ public class StoreFragment extends Fragment {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
-
+                loading.dismiss();
                 }
-//                loading.dismiss();
+                loading.dismiss();
 
             }
         });

@@ -132,6 +132,9 @@ public class Product_fragment extends Fragment {
         String get_top_sale_id = getArguments().getString("cat_top_selling");
         String getcat_title = getArguments().getString("cat_title");
         String category_id=getArguments().getString("category_id");
+        if(category_id==null){
+            category_id="all";
+        }
         progressDialog = new ProgressDialog(getActivity());
         ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.tv_product_name));
 
@@ -605,6 +608,7 @@ public class Product_fragment extends Fragment {
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
+                    loading.dismiss();
                 }
             }
         });
