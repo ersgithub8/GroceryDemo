@@ -154,7 +154,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/slider_one_height"
+                android:layout_height="200dp"
                 android:layout_marginTop="@dimen/space_5"
                 android:layout_marginBottom="5dp"
                 android:elevation="0dp">
