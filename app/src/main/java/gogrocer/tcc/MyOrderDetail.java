@@ -108,8 +108,10 @@ public class MyOrderDetail extends AppCompatActivity {
 
         if (status.equals("0")) {
             btn_cancle.setVisibility(View.VISIBLE);
+            Cancel_reason.setVisibility(View.VISIBLE);
         } else {
             btn_cancle.setVisibility(View.GONE);
+            Cancel_reason.setVisibility(View.GONE);
         }
 
         tv_total.setText(total_rs);
@@ -244,6 +246,12 @@ public class MyOrderDetail extends AppCompatActivity {
      */
     private void makeDeleteOrderRequest(String sale_id, String user_id) {
 
+
+        final android.app.AlertDialog alertDialog=new ProgressDialog(MyOrderDetail.this);
+        alertDialog.setCancelable(false);
+        alertDialog.setMessage("Loading");
+        alertDialog.show();
+
         // Tag used to cancel the request
         String tag_json_obj = "json_delete_order_req";
 
@@ -262,6 +270,7 @@ public class MyOrderDetail extends AppCompatActivity {
                 Log.d(TAG, response.toString());
 
                 try {
+                    alertDialog.dismiss();
                     Boolean status = response.getBoolean("responce");
                     if (status) {
 
@@ -278,6 +287,7 @@ public class MyOrderDetail extends AppCompatActivity {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    alertDialog.dismiss();
                 }
             }
         }, new Response.ErrorListener() {
@@ -285,7 +295,9 @@ public class MyOrderDetail extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
+                alertDialog.dismiss();
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+
                     Toast.makeText(MyOrderDetail.this, getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }

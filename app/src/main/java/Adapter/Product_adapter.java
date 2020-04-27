@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -158,8 +159,12 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
             holder.tv_add.setTextColor(context.getResources().getColor(R.color.black));
             holder.tv_add.setBackgroundColor(context.getResources().getColor(R.color.gray));
             holder.tv_add.setEnabled(false);
+//            holder.tv_add.setBackgroundColor(Color.GRAY);
             holder.iv_minus.setEnabled(false);
+            holder.iv_minus.setBackgroundColor(Color.GRAY);
             holder.iv_plus.setEnabled(false);
+            holder.iv_plus.setBackgroundColor(Color.GRAY);
+
         } else if (dbcart.isInCart(mList.getProduct_id())) {
             holder.tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
             holder.tv_contetiy.setText(dbcart.getCartItemQty(mList.getCart_id()));
