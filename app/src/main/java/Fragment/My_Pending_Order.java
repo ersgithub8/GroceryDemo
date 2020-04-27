@@ -129,8 +129,14 @@ public class My_Pending_Order extends Fragment {
                 intent.putExtra("status", status);
                 intent.putExtra("deli_charge", deli_charge);
                 intent.putExtra("userid",user_id);
-                startActivity(intent);
-            }
+//                Toast.makeText(getActivity(), status, Toast.LENGTH_SHORT).show();
+                if(status.equalsIgnoreCase("5")) {
+                    return;
+                }else {
+                    startActivity(intent);
+
+                }
+             }
 
             @Override
             public void onLongItemClick(View view, int position) {

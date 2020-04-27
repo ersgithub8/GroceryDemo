@@ -408,7 +408,7 @@ String language;
                         .setConfirmButtonBackgroundColor(Color.RED)
                         .show();
                 cancel = true;
-            }
+            }else
             if (TextUtils.isEmpty(time)) {
 //                Toast.makeText(getActivity(), "Select Time Slot", Toast.LENGTH_SHORT).show();
                 new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE)

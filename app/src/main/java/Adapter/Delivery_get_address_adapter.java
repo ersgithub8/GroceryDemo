@@ -247,23 +247,7 @@ public class Delivery_get_address_adapter extends RecyclerSwipeAdapter<Delivery_
         String delivery_limit=mList.getFree_delivery_order_value();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         String name = preferences.getString("total_amount_ofdelivery", "");
-        int a=Integer.parseInt(name.toString());
 
-//        Toast.makeText(context, a+"", Toast.LENGTH_SHORT).show();
-        int b=Integer.parseInt(delivery_limit.toString());
-//                Toast.makeText(context, b+"", Toast.LENGTH_SHORT).show();
-
-
-
-        if(a>=b){
-            holder.tv_charges.setText("0"+context.getResources().getString(R.string.currency));
-            charge="0";
-
-        }else {
-            holder.tv_charges.setText(mList.getDelivery_charge()+context.getResources().getString(R.string.currency));
-
-            charge=mList.getDelivery_charge();
-        }
         holder.et_address.setText(mList.getAddress());
 
         holder.rb_select.setChecked(mList.getIscheckd());

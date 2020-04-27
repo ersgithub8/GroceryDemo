@@ -145,11 +145,11 @@ SharedPreferences preferences;
         getstore_id = getArguments().getString("storeid");
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String name = preferences.getString("delivery_charges", "");
+
         String city = preferences.getString("citid","");
         String area = preferences.getString("areid","");
         String apartm = preferences.getString("apartid", "");
-        deli_charges = Integer.parseInt(name);
+
         String getaddress = getArguments().getString("address");
         String newgetaddresss = getArguments().getString("newaddresss");
         final String house_no=getArguments().getString("house_no");
