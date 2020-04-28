@@ -116,7 +116,6 @@
             android:textSize="14sp" />
 
         <RelativeLayout
-            android:focusableInTouchMode="true"
             android:id="@+id/btnContinue"
             android:layout_width="match_parent"
             android:layout_height="45dp"
