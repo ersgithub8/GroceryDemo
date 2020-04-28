@@ -357,12 +357,12 @@ String language;
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
 
-                        getdate = "" + year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                        getdate = "" + dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
 
                         tv_date.setText(getResources().getString(R.string.delivery_date) + getdate);
 
                         try {
-                            String inputPattern = "yyyy-MM-dd";
+                            String inputPattern = "dd-MM-yyyy";
                             String outputPattern = "dd-MM-yyyy";
                             SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
                             SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
