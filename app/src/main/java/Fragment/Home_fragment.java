@@ -1165,7 +1165,6 @@ private void make_Recomended_selling() {
 
     // Adding request to request queue
     AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-
 }
 
     private void make_menu_items() {
