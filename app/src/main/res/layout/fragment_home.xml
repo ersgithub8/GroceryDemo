@@ -162,7 +162,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/membershipbanner"
+                    android:background="@drawable/banner"
                     android:id="@+id/membership_tv"
                     android:gravity="center" />
 
