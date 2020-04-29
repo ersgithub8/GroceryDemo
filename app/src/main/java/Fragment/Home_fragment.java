@@ -654,8 +654,13 @@ private Master_category_adapter master_adapter;
 
                         my_order_modelList = gson.fromJson(response.getString("data"), listType);
                         my_last_order_adapter my_last_order_adapter = new my_last_order_adapter(my_order_modelList);
+                    String statuss=    my_order_modelList.get(0).getStatus();
+                    if (statuss.equals("4")||statuss.equals("5")){
+                        last_order_rv.setVisibility(View.GONE);
+                    }else {
                         last_order_rv.setAdapter(my_last_order_adapter);
                         my_last_order_adapter.notifyDataSetChanged();
+                    }
                     }else{
 
                     }
