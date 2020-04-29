@@ -286,7 +286,7 @@ public class Payment_fragment extends Fragment {
                 if(isChecked){
                     if (rb_Store.isChecked() || checkBox_coupon.isChecked() || rb_card.isChecked() || rb_Netbanking.isChecked() || rb_paytm.isChecked()) {
                         rb_Store.setChecked(false);
-//                        rb_Cod.setChecked(false);
+                        rb_Cod.setChecked(true);
                         checkBox_coupon.setChecked(false);
                         rb_card.setChecked(false);
                         rb_Netbanking.setChecked(false);

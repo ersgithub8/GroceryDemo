@@ -248,6 +248,7 @@ String language;
         btn_checkout.setOnClickListener(this);
 
         String date = sessionManagement.getdatetime().get(BaseURL.KEY_DATE);
+
          time = sessionManagement.getdatetime().get(BaseURL.KEY_TIME);
 
 
@@ -266,7 +267,7 @@ String language;
                 Date date1 = inputFormat.parse(getdate);
                 String str = outputFormat.format(date1);
 
-                tv_date.setText(getResources().getString(R.string.delivery_date) + str);
+                tv_date.setText(getResources().getString(R.string.delivery_date) + getdate);
 
             } catch (ParseException e) {
                 e.printStackTrace();
