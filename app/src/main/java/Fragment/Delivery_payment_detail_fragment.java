@@ -69,6 +69,7 @@ public class Delivery_payment_detail_fragment extends Fragment {
     String time;
     String date;
     Double total,a;
+    String user_id;
     LinearLayout layout1,layout2;
 SharedPreferences preferences;
     String unit;
@@ -124,9 +125,9 @@ SharedPreferences preferences;
         });
 
         getdate = getArguments().getString("getdate");
-         String
 
-                 user_id=sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
+
+         user_id=sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
 
 
         preferences = getActivity().getSharedPreferences("lan", MODE_PRIVATE);
@@ -145,10 +146,10 @@ SharedPreferences preferences;
         getstore_id = getArguments().getString("storeid");
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
-        String city = preferences.getString("citid","");
-        String area = preferences.getString("areid","");
-        String apartm = preferences.getString("apartid", "");
+        String city,area,apartm;
+        city = preferences.getString("citid","");
+        area = preferences.getString("areid","");
+        apartm = preferences.getString("apartid", "");
 
         String getaddress = getArguments().getString("address");
         String newgetaddresss = getArguments().getString("newaddresss");
@@ -157,7 +158,7 @@ SharedPreferences preferences;
         date = getArguments().getString("getdate");
         time = getArguments().getString("time");
         deliverycaharges(city,area,apartm,db_cart.getTotalAmount());
-        membership(user_id);
+//        membership(user_id);
 
 
         if (getdate.equals("")&&gettime.equals(""))
@@ -191,7 +192,7 @@ SharedPreferences preferences;
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
                             .addToBackStack(null).commit();
-                    SharedPref.putString(getActivity(),BaseURL.TOTAL_AMOUNT, String.valueOf(total));
+                    SharedPref.putString(getActivity(),BaseURL.TOTAL_AMOUNT, String.valueOf(a));
                 } else {
                     ((MainActivity) getActivity()).onNetworkConnectionChanged(false);
                 }
@@ -236,7 +237,7 @@ SharedPreferences preferences;
                                tv_grandtotal.setText("Grand Total : "+total+" - "+discount+" = "+a+getResources().getString(R.string.currency));
 
 
-                            }
+                                }
 
 
                         }else {
@@ -311,7 +312,7 @@ SharedPreferences preferences;
 
 
 
-
+                            membership(user_id);
                         }else {
 
                             SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),1);
@@ -323,7 +324,7 @@ SharedPreferences preferences;
                                     getActivity().onBackPressed();
                                 }
                             }).setConfirmButtonBackgroundColor(Color.RED);
-                            alertDialog.setTitleText("Delivery not availibke in this area.");
+                            alertDialog.setTitleText("Delivery not availible in this area.");
                             alertDialog.show();
 //                            Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
                         }

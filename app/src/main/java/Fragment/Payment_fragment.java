@@ -56,6 +56,7 @@ import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.PaymentGatWay;
 import gogrocer.tcc.Paytm;
 import gogrocer.tcc.R;
+import gogrocer.tcc.ThanksActivity;
 import gogrocer.tcc.networkconnectivity.NetworkConnection;
 import gogrocer.tcc.networkconnectivity.NetworkError;
 import util.ConnectivityReceiver;
@@ -438,14 +439,18 @@ public class Payment_fragment extends Fragment {
 
                         editors.putString("rating","null");
 
-                        Bundle args = new Bundle();
-                        Fragment fm = new Thanks_fragment();
-                        args.putString("msg", msg);
-//                        args.putString("msgarb",msg_arb);
-                        fm.setArguments(args);
-                        FragmentManager fragmentManager = getFragmentManager();
-                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                                .addToBackStack(null).commit();
+//                        Bundle args = new Bundle();
+//                        Fragment fm = new Thanks_fragment();
+//                        args.putString("msg", msg);
+////                        args.putString("msgarb",msg_arb);
+//                        fm.setArguments(args);
+//                        FragmentManager fragmentManager = getFragmentManager();
+//                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+//                                .addToBackStack(null).commit();
+
+
+                        startActivity(new Intent(getActivity(), ThanksActivity.class));
+                        getActivity().finishAffinity();
 //
                     }else{
                         Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
@@ -481,7 +486,7 @@ public class Payment_fragment extends Fragment {
         final AlertDialog loading=new ProgressDialog(getActivity());
         loading.setMessage("Loading...");
         loading.setCancelable(false);
-        loading.show();
+//        loading.show();
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.Wallet_CHECKOUT, params, new Response.Listener<JSONObject>() {
             @Override
@@ -813,13 +818,17 @@ public class Payment_fragment extends Fragment {
 
 
 
-                        Fragment fm = new Thanks_fragment();
+//                        Fragment fm = new Thanks_fragment();
 //                        args.putString("msg", msg);
 //                        args.putString("msgarb",msg_arb);
 //                        fm.setArguments(args);
-                        FragmentManager fragmentManager = getFragmentManager();
-                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                                .addToBackStack(null).commit();
+//                        FragmentManager fragmentManager = getFragmentManager();
+//                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+//                                .addToBackStack(null).commit();
+
+                    startActivity(new Intent(getActivity(), ThanksActivity.class));
+                    getActivity().finishAffinity();
+
 //                        }else {
 //                        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
 //                    }

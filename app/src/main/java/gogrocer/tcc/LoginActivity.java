@@ -17,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -53,7 +54,8 @@ import util.Session_management;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static String TAG = LoginActivity.class.getSimpleName();
-    private RelativeLayout btn_continue, btn_register;
+    private RelativeLayout btn_continue;
+            RelativeLayout btn_register;
     private EditText et_password, et_email;
     private TextView tv_password, tv_email, btn_forgot;
     private Session_management sessionManagement;
