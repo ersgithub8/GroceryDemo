@@ -178,6 +178,11 @@ SharedPreferences preferences;
             @Override
             public void onClick(View view) {
                 if (ConnectivityReceiver.isConnected()) {
+                    if(String.valueOf(a)==null){
+                        Toast.makeText(getActivity(), "Something went wrong try again later.", Toast.LENGTH_SHORT).show();
+                        getActivity().onBackPressed();
+                        return;
+                    }
                     Fragment fm = new Payment_fragment();
                     Bundle args = new Bundle();
                     args.putString("total", String.valueOf(a));

@@ -279,6 +279,23 @@ public class Payment_fragment extends Fragment {
                 }
             }
         });
+
+        rb_Cod.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    if (rb_Store.isChecked() || checkBox_coupon.isChecked() || rb_card.isChecked() || rb_Netbanking.isChecked() || rb_paytm.isChecked()) {
+                        rb_Store.setChecked(false);
+//                        rb_Cod.setChecked(false);
+                        checkBox_coupon.setChecked(false);
+                        rb_card.setChecked(false);
+                        rb_Netbanking.setChecked(false);
+                        rb_paytm.setChecked(false);
+                    }
+                }
+            }
+        });
+
         checkBox_coupon.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
 
         {
@@ -312,7 +329,7 @@ public class Payment_fragment extends Fragment {
             public void onClick(View v) {
                 if (ConnectivityReceiver.isConnected()) {
 
-                    confirm.setEnabled(false);
+//                    confirm.setEnabled(false);
                     if (checkBox_Wallet.isChecked()){
                         getuser_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
 
