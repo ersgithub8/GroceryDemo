@@ -316,6 +316,7 @@ public class Payment_fragment extends Fragment {
                     et_Coupon.setText("");
                     Relative_used_coupon.setVisibility(View.GONE);
                     Promo_code_layout.setVisibility(View.GONE);
+                    rb_Cod.setChecked(true);
                 }
             }
         });

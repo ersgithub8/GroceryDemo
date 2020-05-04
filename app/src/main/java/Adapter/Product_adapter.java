@@ -80,9 +80,14 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 
         String mrp=mList.getMrp();
         holder.tv_mrp.setText(mrp+context.getResources().getString(R.string.currency)+"mrp");
-        int dis=((Integer.parseInt(mList.getMrp())-Integer.parseInt(mList.getPrice()))*100)/Integer.parseInt(mList.getMrp());
+        if (mrp.equals("0")||mrp.equals("null")){
+            holder.tv_disc.setVisibility(View.GONE);
 
+        }else {
+        int dis=((Integer.parseInt(mList.getMrp())-Integer.parseInt(mList.getPrice()))*100)/Integer.parseInt(mList.getMrp());
+//
         holder.tv_disc.setText(dis+"%OFF");
+    }
         Glide.with(context)
                 .load(BaseURL.IMG_PRODUCT_URL + mList.getProduct_image())
                 .centerCrop()
