@@ -79,8 +79,9 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
         Product_model mList = modelList.get(position);
 
         String mrp=mList.getMrp();
-        holder.tv_mrp.setText(mrp+context.getResources().getString(R.string.currency)+"mrp");
+
         if (mrp.equals("0")||mrp.equals("null")){
+            holder.tv_mrp.setText(mrp+context.getResources().getString(R.string.currency)+"mrp");
             holder.tv_disc.setVisibility(View.GONE);
 
         }else {
