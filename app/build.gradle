@@ -90,7 +90,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
-
+    implementation 'com.facebook.shimmer:shimmer:0.1.0'
     implementation 'com.github.f0ris.sweetalert:library:1.6.2'
 
 //    implementation "com.github.skydoves:elasticviews:2.0.7"

@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.SyncStateContract;
@@ -82,6 +83,7 @@ public class Product_fragment extends Fragment {
     private static String TAG = Product_fragment.class.getSimpleName();
     private RecyclerView rv_cat;
     private TabLayout tab_cat;
+    private ShimmerFrameLayout mShimmerViewContainer;
     String Storeid;
     TextView storename;
     private  View product,deals;
@@ -118,6 +120,8 @@ public class Product_fragment extends Fragment {
         store=view.findViewById(R.id.spinnerstore);
         product=view.findViewById(R.id.pview);
         deals=view.findViewById(R.id.dview);
+        mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
+
         r1=(RelativeLayout) view.findViewById(R.id.rl1);
         storename=view.findViewById(R.id.sn);
         tab_cat = (TabLayout) view.findViewById(R.id.tab_cat);
@@ -317,6 +321,8 @@ public class Product_fragment extends Fragment {
                 Log.d(TAG, response.toString());
 
                 try {
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
                     progressDialog.dismiss();
                     Boolean status = response.getBoolean("responce");
                     if (status) {
@@ -343,6 +349,8 @@ public class Product_fragment extends Fragment {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
                     progressDialog.dismiss();
                     progressDialog.dismiss();
                     product_modelList.clear();
@@ -354,7 +362,10 @@ public class Product_fragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+
                     progressDialog.dismiss();
                     product_modelList.clear();
                 }
@@ -432,6 +443,8 @@ public class Product_fragment extends Fragment {
                 Log.d(TAG, response.toString());
 
                 try {
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
                     Boolean status = response.getBoolean("responce");
                     if (status) {
 
@@ -497,6 +510,8 @@ public class Product_fragment extends Fragment {
                 Log.d(TAG, response.toString());
 
                 try {
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
                     progressdialog.dismiss();
                     Boolean status = response.getBoolean("responce");
                     if (status) {
@@ -517,6 +532,8 @@ public class Product_fragment extends Fragment {
 
                     }
                 } catch (JSONException e) {
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
                     e.printStackTrace();
                     progressdialog.dismiss();
                 }
@@ -526,6 +543,8 @@ public class Product_fragment extends Fragment {
 
             @Override
             public void onErrorResponse(VolleyError error) {
+                mShimmerViewContainer.stopShimmerAnimation();
+                mShimmerViewContainer.setVisibility(View.GONE);
                 progressdialog.dismiss();
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
@@ -537,9 +556,9 @@ public class Product_fragment extends Fragment {
     }
     private void makeGetProductRequest(String Store_id)
     {
-        final AlertDialog loading=new ProgressDialog(getActivity());
-        loading.setMessage("Loading...");
-        loading.show();
+//        final AlertDialog loading=new ProgressDialog(getActivity());
+//        loading.setMessage("Loading...");
+//        loading.show();
 
         String tag_json_obj = "json_product_req";
         Map<String, String> params = new HashMap<String, String>();
@@ -555,10 +574,11 @@ public class Product_fragment extends Fragment {
                 Log.d(TAG, response.toString());
 
                 try {
-
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
                     Boolean status = response.getBoolean("responce");
                     if (status) {
-                        loading.dismiss();
+//                        loading.dismiss();
                         Gson gson = new Gson();
                         product_modelList.clear();
                         Type listType = new TypeToken<List<Product_model>>() {
@@ -585,18 +605,22 @@ public class Product_fragment extends Fragment {
 
                             storename.setText(abc);
                         }
+                        mShimmerViewContainer.stopShimmerAnimation();
+                        mShimmerViewContainer.setVisibility(View.GONE);
                         progressDialog.dismiss();
 
 
                     }
                     else
                     {
-                        loading.dismiss();
+//                        loading.dismiss();
                         product_modelList.clear();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    loading.dismiss();
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
+//                    loading.dismiss();
                     progressDialog.dismiss();
                 }
             }
@@ -608,7 +632,7 @@ public class Product_fragment extends Fragment {
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
-                    loading.dismiss();
+//                    loading.dismiss();
                 }
             }
         });
@@ -850,19 +874,19 @@ public class Product_fragment extends Fragment {
 
 public void getStore(String catid){
     final AlertDialog loading=new ProgressDialog(getActivity());
-    loading.setMessage("Loading...");
-    loading.setCancelable(false);
-    loading.show();
+//    loading.setMessage("Loading...");
+//    loading.setCancelable(false);
+//    loading.show();
 
     Map<String,String> params=new Hashtable<String, String>();
-    params.put("subCat_id",catid);
+    params.put("subCat_id","all");
 
     CustomVolleyJsonRequest jsonObjectRequest=new CustomVolleyJsonRequest(Request.Method.POST
             , BaseURL.GET_Store_URL
             , params, new Response.Listener<JSONObject>() {
         @Override
         public void onResponse(JSONObject response) {
-            loading.dismiss();
+//            loading.dismiss();
 
             Boolean status = null;
             try{
@@ -912,7 +936,7 @@ public void getStore(String catid){
             , new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
-            loading.dismiss();
+//            loading.dismiss();
             Toast.makeText(getActivity(),error+"",Toast.LENGTH_SHORT).show();
 
         }
@@ -948,6 +972,17 @@ public boolean search(String name1){
         }
         return true;
 }
+    @Override
+    public void onResume() {
+        super.onResume();
+        mShimmerViewContainer.startShimmerAnimation();
+    }
+
+    @Override
+    public void onPause() {
+        mShimmerViewContainer.stopShimmerAnimation();
+        super.onPause();
+    }
 
 }
 

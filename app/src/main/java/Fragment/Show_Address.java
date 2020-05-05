@@ -24,6 +24,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.daimajia.swipe.util.Attributes;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -53,6 +54,7 @@ public class Show_Address extends Fragment {
     private static String TAG = Show_Address.class.getSimpleName();
     private Session_management sessionManagement;
     public Boolean status;
+    private ShimmerFrameLayout mShimmerViewContainer;
     TextView no_record;
     RelativeLayout tv_add_adress;
     private View_address_adapter adapter;
@@ -63,6 +65,7 @@ public class Show_Address extends Fragment {
         rv_address = (RecyclerView) view.findViewById(R.id.rv_deli_address);
         rv_address.setLayoutManager(new LinearLayoutManager(getActivity()));
         no_record=(TextView)view.findViewById(R.id.no_record);
+        mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
 
         tv_add_adress = (RelativeLayout) view.findViewById(R.id.tv_deli_add_address);
 
@@ -98,10 +101,10 @@ public class Show_Address extends Fragment {
         return view;
     }
     private void makeGetAddressRequest(String user_id) {
-        final AlertDialog loading=new ProgressDialog(getActivity());
-        loading.setMessage("Loading...");
-        loading.setCancelable(false);
-        loading.show();
+//        final AlertDialog loading=new ProgressDialog(getActivity());
+//        loading.setMessage("Loading...");
+//        loading.setCancelable(false);
+//        loading.show();
         // Tag used to cancel the request
         String tag_json_obj = "json_get_address_req";
 
@@ -117,7 +120,9 @@ public class Show_Address extends Fragment {
                 Log.d(TAG, response.toString());
 
                 try {
-                    loading.dismiss();
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
+//                    loading.dismiss();
                      status = response.getBoolean("responce");
                     if (status) {
 
@@ -171,7 +176,9 @@ public class Show_Address extends Fragment {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    loading.dismiss();
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
+//                    loading.dismiss();
                 }
             }
         }, new Response.ErrorListener() {
@@ -182,7 +189,9 @@ public class Show_Address extends Fragment {
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     if (getActivity() != null) {
                         Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
-                        loading.dismiss();
+//                        loading.dismiss();
+                        mShimmerViewContainer.stopShimmerAnimation();
+                        mShimmerViewContainer.setVisibility(View.GONE);
                     }
                 }
             }
@@ -190,6 +199,17 @@ public class Show_Address extends Fragment {
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        mShimmerViewContainer.startShimmerAnimation();
+    }
+
+    @Override
+    public void onPause() {
+        mShimmerViewContainer.stopShimmerAnimation();
+        super.onPause();
     }
 
 }

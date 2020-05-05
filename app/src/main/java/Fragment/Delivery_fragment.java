@@ -34,6 +34,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.daimajia.swipe.util.Attributes;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -101,6 +102,7 @@ SharedPreferences preferences;
 
     public RadioButton FastRadioBtn,CustomRadioBtn;
     public TextView nextdaytext;
+    private ShimmerFrameLayout mShimmerViewContainer;
     public String tomorrowAsString;
 
     private String deli_charges;
@@ -129,6 +131,7 @@ String language;
 //        String name = prefs.getString("name", "No name defined");
        // store_id = SharedPref.getString(getActivity(), BaseURL.STORE_ID);
         store_id=getArguments().getString("storeid");
+        mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         preferences = getActivity().getSharedPreferences("lan", MODE_PRIVATE);
 
         tv_date = (TextView) view.findViewById(R.id.tv_deli_date);
@@ -556,6 +559,8 @@ String language;
                 Log.d(TAG, response.toString());
 
                 try {
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
                     Boolean status = response.getBoolean("responce");
                     if (status) {
 
@@ -607,6 +612,7 @@ String language;
     public void onPause() {
         super.onPause();
         // unregister reciver
+        mShimmerViewContainer.stopShimmerAnimation();
         getActivity().unregisterReceiver(mCart);
     }
 
@@ -614,6 +620,7 @@ String language;
     public void onResume() {
         super.onResume();
         // register reciver
+        mShimmerViewContainer.startShimmerAnimation();
         getActivity().registerReceiver(mCart, new IntentFilter("Grocery_delivery_charge"));
     }
 
@@ -646,10 +653,10 @@ String language;
 
     private void makeslotrequest(String storeid)
     {
-        final AlertDialog loading=new ProgressDialog(getActivity());
-        loading.setMessage("Loading...");
-        loading.setCancelable(false);
-        loading.show();
+//        final AlertDialog loading=new ProgressDialog(getActivity());
+//        loading.setMessage("Loading...");
+//        loading.setCancelable(false);
+//        loading.show();
 
         String tag_json_obj = "json_product_req";
         Map<String, String> params = new HashMap<String, String>();
@@ -665,7 +672,7 @@ String language;
                 Log.d(TAG, response.toString());
 
                 try {
-                    loading.dismiss();
+//                    loading.dismiss();
 
                     Boolean status = response.getBoolean("responce");
                     //      Toast.makeText(getActivity(), String.valueOf(status), Toast.LENGTH_SHORT).show();
@@ -693,7 +700,7 @@ String language;
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    loading.dismiss();
+//                    loading.dismiss();
 //                    progressDialog.dismiss();
                 }
             }
@@ -705,10 +712,12 @@ String language;
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
 //                    progressDialog.dismiss();
-                    loading.dismiss();
+//                    loading.dismiss();
                 }
             }
         });
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
+
 }
+

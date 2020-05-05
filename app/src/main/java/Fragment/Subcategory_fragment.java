@@ -32,6 +32,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -68,6 +69,7 @@ public class Subcategory_fragment extends Fragment {
     private Master_Subcat master_subcat_adapter;
     private static String TAG = Subcategory_fragment.class.getSimpleName();
     private List<Sub_Categories> subcat_models = new ArrayList<>();
+    private ShimmerFrameLayout mShimmerViewContainer;
     RecyclerView rv_subcategories;
     private SliderLayout imgSlider;
     @Override
@@ -76,6 +78,8 @@ public class Subcategory_fragment extends Fragment {
         View view = inflater.inflate(R.layout.ew, container, false);
 
         rv_subcategories=view.findViewById(R.id.subcat_id);
+        mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
+
 
         imgSlider = (SliderLayout) view.findViewById(R.id.home_img_slider2);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
@@ -124,10 +128,10 @@ public class Subcategory_fragment extends Fragment {
 
        /* if (parent_id != null && parent_id != "") {
         }*/
-        final AlertDialog loading=new ProgressDialog(getActivity());
-        loading.setMessage("Loading...");
-        loading.setCancelable(false);
-        loading.show();
+//        final AlertDialog loading=new ProgressDialog(getActivity());
+//        loading.setMessage("Loading...");
+//        loading.setCancelable(false);
+//        loading.show();
 
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
@@ -137,8 +141,10 @@ public class Subcategory_fragment extends Fragment {
             public void onResponse(JSONObject response) {
                 Log.d("Cat", response.toString());
                 try {
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
 //
-                    loading.dismiss();
+//                    loading.dismiss();
                     Boolean status = response.getBoolean("response");
                    // Toast.makeText(getActivity(), String.valueOf(status), Toast.LENGTH_SHORT).show();
                     if (status) {
@@ -169,7 +175,9 @@ public class Subcategory_fragment extends Fragment {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    loading.dismiss();
+//                    loading.dismiss();
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
                     Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -179,6 +187,8 @@ public class Subcategory_fragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
 //                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -248,5 +258,16 @@ public class Subcategory_fragment extends Fragment {
         });
         AppController.getInstance().addToRequestQueue(req);
 
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        mShimmerViewContainer.startShimmerAnimation();
+    }
+
+    @Override
+    public void onPause() {
+        mShimmerViewContainer.stopShimmerAnimation();
+        super.onPause();
     }
 }

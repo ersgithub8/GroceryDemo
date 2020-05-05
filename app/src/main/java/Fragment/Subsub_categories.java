@@ -24,6 +24,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -55,7 +56,7 @@ public class Subsub_categories extends Fragment {
     private static String TAG = Subcategory_fragment.class.getSimpleName();
     private List<Sub_Categories> subcat_models = new ArrayList<>();
     private Stores_adapter store_adapter;
-
+    private ShimmerFrameLayout mShimmerViewContainer;
     private List<Store_model> store_models = new ArrayList<>();
     Fragment fm = null;
     String s_id;
@@ -67,6 +68,7 @@ public class Subsub_categories extends Fragment {
         View view = inflater.inflate(R.layout.subsub_categories, container, false);
 
         rv_subsubcategories=view.findViewById(R.id.subsubcat_id);
+        mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
 
         imgSlider = (SliderLayout) view.findViewById(R.id.home_img_slider1);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
@@ -113,10 +115,10 @@ public class Subsub_categories extends Fragment {
 
        /* if (parent_id != null && parent_id != "") {
         }*/
-        final AlertDialog loading=new ProgressDialog(getActivity());
-        loading.setMessage("Loading...");
-        loading.setCancelable(false);
-        loading.show();
+//        final AlertDialog loading=new ProgressDialog(getActivity());
+//        loading.setMessage("Loading...");
+//        loading.setCancelable(false);
+//        loading.show();
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.GET_SUBSUB_CATEGORY_URL, params, new Response.Listener<JSONObject>() {
 
@@ -127,7 +129,9 @@ public class Subsub_categories extends Fragment {
 
 
                 try {
-                    loading.dismiss();
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
+//                    loading.dismiss();
                      Boolean status = response.getBoolean("response");
 //                    Toast.makeText(getActivity(), String.valueOf(status), Toast.LENGTH_SHORT).show();
                     if (status) {
@@ -157,8 +161,9 @@ public class Subsub_categories extends Fragment {
 //
                 } catch (JSONException e) {
                     e.printStackTrace();
-
-                    loading.dismiss();
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
+//                    loading.dismiss();
 //                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -168,8 +173,9 @@ public class Subsub_categories extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-
-                    loading.dismiss();
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
+//                    loading.dismiss();
 //                    Toast.makeText(getParentFragment().getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -308,5 +314,16 @@ public class Subsub_categories extends Fragment {
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        mShimmerViewContainer.startShimmerAnimation();
+    }
+
+    @Override
+    public void onPause() {
+        mShimmerViewContainer.stopShimmerAnimation();
+        super.onPause();
     }
 }
